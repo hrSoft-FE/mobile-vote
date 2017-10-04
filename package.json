@@ -1,0 +1,63 @@
+{
+  "name": "mobile-vote",
+  "description": "> based on [dva.js](\"https://github.com/dvajs/dva\")",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "roadhog build",
+    "precommit": "npm run lint",
+    "lint": "eslint --ext .js src test",
+    "start": "roadhog server",
+    "push": "git add . && git commit && git push origin master"
+  },
+  "dependencies": {
+    "antd-mobile": "^1.6.5",
+    "axios": "^0.16.2",
+    "babel-polyfill": "^6.26.0",
+    "dva": "^1.2.1",
+    "dva-loading": "^0.2.1",
+    "flex.css": "^1.1.7",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "nprogress": "^0.2.0",
+    "path-to-regexp": "^2.0.0",
+    "prop-types": "^15.5.10",
+    "qs": "^6.5.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-dva-hmr": "^0.3.2",
+    "babel-plugin-import": "^1.6.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-runtime": "^6.26.0",
+    "eslint": "^4.5.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard-jsx": "^4.0.2",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^4.2.3",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.3.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "expect": "^1.20.2",
+    "postcss-pxtorem": "^4.0.1",
+    "redbox-react": "^1.5.0",
+    "roadhog": "^1.1.2",
+    "svg-sprite-loader": "^3.2.6"
+  },
+  "engines": {
+    "install-node": "6.x"
+  },
+  "private": true,
+  "main": ".roadhogrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrSoft-FE/mobile-vote.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hrSoft-FE/mobile-vote/issues"
+  },
+  "homepage": "https://github.com/hrSoft-FE/mobile-vote#readme"
+}

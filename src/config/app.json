@@ -1,0 +1,16 @@
+{
+  "name": "Vote-mobile",
+  "footerText": "",
+  "headerText": [
+    "报名流程",
+    "返回主页",
+    "高级管理"
+  ],
+  "iconFontCSS": "/app/iconfont.css",
+  "iconFontJS": "/app/iconfont.js",
+  "logoSrc": "/app/favicon.ico",
+  "baseName": "vote",
+  "baseURL": "http://localhost:8080/api/votes",
+  "testToken": "dfb448b3eacdeb53bd3208047f092170",
+  "testCompetitionBingId": 1
+}

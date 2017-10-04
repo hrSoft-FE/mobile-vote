@@ -1,0 +1,21 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "amd": true,
+    "es6": true
+  },
+  "extends": [
+    "standard",
+    "standard-jsx"
+  ],
+  // 在webstorm中可以配置使用文件中的eslint规则，0代表本条规则会被禁用
+  "rules": {
+    "no-unused-vars": 0,
+    "semi": 0,
+    "semi-spacing": 0,
+    "react/jsx-tag-spacing": 0,
+    "jsx-quotes": 0
+  }
+}

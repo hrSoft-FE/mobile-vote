@@ -1,16 +1,16 @@
 import pathToRegexp from 'path-to-regexp'
-import { verify, login, register, getUserInfo } from './service'
+import { userLogin, register } from './service'
 
 export default {
-  namespace: 'info',
+  namespace: 'login',
   state: {
     contests: [],
     query: {}
   },
   subscriptions: {
-    infoSubscriber ({dispatch, history}) {
+    voteSubscriber ({dispatch, history}) {
       return history.listen(({pathname, query}) => {
-        const match = pathToRegexp('/user/info')
+        const match = pathToRegexp('/login')
         if (match) {
           dispatch({type: 'initQuery'})
         }

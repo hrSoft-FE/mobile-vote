@@ -474,7 +474,7 @@
 
             for(var j = 0; j < elementIds.length; j++) {
                 var elementId = elementIds[j];
-                // Need new scope for elementId and info
+                // Need new scope for elementId and user
                 (function(elementId, stateInfo) {
                     _addAnimation(elementId, queueTypes.setState, function() {
                         var stateNumber = stateInfo.stateNumber;
@@ -589,7 +589,7 @@
 
             for(var j = 0; j < elementIds.length; j++) {
                 var elementId = elementIds[j];
-                // Need new scope for elementId and info
+                // Need new scope for elementId and user
                 (function(elementId, fadeInfo) {
                     _addAnimation(elementId, queueTypes.fade, function() {
                         if(fadeInfo.fadeType == "hide") {
@@ -1167,7 +1167,7 @@
         _dispatchAction(eventInfo, actions, index + 1);
     };
 
-    // Move info undefined unless this move/resize actions are being merged
+    // Move user undefined unless this move/resize actions are being merged
     var _addResize = function(elementId, eventInfo, resizeInfo, options, moveInfo, rotateInfo) {
         var axObject = $obj(elementId);
         resizeInfo = $ax.deepCopy(resizeInfo);
@@ -1347,7 +1347,7 @@
                         }
                     } else _moveSingleWidget(elementId, delta, options);
 
-                    // Have to do it down here to make sure move info is registered
+                    // Have to do it down here to make sure move user is registered
                     if(moveInfo) $ax.event.raiseSyntheticEvent(elementId, 'onMove');
 
                     //$ax.event.raiseSyntheticEvent(elementId, 'onResize');

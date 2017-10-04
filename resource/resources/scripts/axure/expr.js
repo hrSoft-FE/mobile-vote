@@ -171,7 +171,7 @@ $axure.internal(function($ax) {
             // Go backwards so retval is the first item.
             for(i = targets.length - 1; i >= 0; i--) {
                 var args = fcallArgs[i];
-                // Add event info to the end
+                // Add event user to the end
                 args[args.length] = eventInfo;
                 retval = _exprFunctions[expr.functionName].apply(this, args);
             }
@@ -208,7 +208,7 @@ $axure.internal(function($ax) {
             scope[varName] = $ax.expr.evaluateExpr(expr.localVariables[varName], eventInfo);
         }
 
-        // TODO: [ben] Date and data object (obj with info for url or image) both need to return non-strings.
+        // TODO: [ben] Date and data object (obj with user for url or image) both need to return non-strings.
         var i = 0;
         var retval;
         var retvalString = expr.value.replace(/\[\[(?!\[)(.*?)\]\](?=\]*)/g, function(match) {

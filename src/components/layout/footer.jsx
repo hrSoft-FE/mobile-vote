@@ -39,8 +39,8 @@ function Footer ({dispatch, childrens, location}) {
           key="我"
           icon={{uri: 'https://zos.alipayobjects.com/rmsportal/WdEuTLJOVzeABZlKYLmJ.png'}}
           selectedIcon={{uri: 'https://zos.alipayobjects.com/rmsportal/sRkvMgIGXERtyRVyAsXP.png'}}
-          selected={location.pathname === '/info'}
-          onPress={() => dispatch(routerRedux.push('/info'))}
+          selected={location.pathname === '/user'}
+          onPress={() => dispatch(routerRedux.push('/user'))}
         >
           {childrens}
         </TabBar.Item>

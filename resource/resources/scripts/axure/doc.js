@@ -264,7 +264,7 @@
                 $ax.event.updateMouseLocation(mouseEvent);
             }
 
-            // Always set event info about cursor
+            // Always set event user about cursor
             var _cursor = eventInfo.cursor = {};
             _cursor.x = $ax.mouseLocation.x;
             _cursor.y = $ax.mouseLocation.y;

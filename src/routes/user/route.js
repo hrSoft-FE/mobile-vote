@@ -1,5 +1,5 @@
 module.exports = {
-  path: 'info',
+  path: 'user',
   childRoutes: [],
   getComponents (nextState, callback) {
     require.ensure([], () => {

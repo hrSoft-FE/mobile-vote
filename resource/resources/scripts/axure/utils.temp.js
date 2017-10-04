@@ -16,7 +16,7 @@ $axure.internal(function($ax) {
     };
     $ax.deepCopy = _deepCopy;
 
-    // Hacky way to copy event info. Copying dragInfo causes major issues due to infinite loops
+    // Hacky way to copy event user. Copying dragInfo causes major issues due to infinite loops
     // Hashmap doesn't map objects well. It just toStrings them, making them all the same key. This has to be slow...
     var _originalToCopy = [];
     var _getCopyIndex = function(original) {

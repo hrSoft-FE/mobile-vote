@@ -112,7 +112,7 @@ $axure.internal(function($ax) {
     };
 
     // Info if the one line touches the other (even barely), false otherwise
-    // Info includes point, if l1 is entering or exiting l2, and any ties that happened, or parallel info
+    // Info includes point, if l1 is entering or exiting l2, and any ties that happened, or parallel user
     var linesIntersect = function(l1, l2) {
         var retval = {};
         var ties = {};

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'dva'
 import './index.less'
 
-const Info = ({location, app, children, info}) => {
+const User = ({location, app, children, info}) => {
   return (
     <div>
       <div>
@@ -12,4 +12,4 @@ const Info = ({location, app, children, info}) => {
   )
 }
 
-export default connect(({app, info}) => ({app, info}))(Info)
+export default connect(({app, user}) => ({app, user}))(User)

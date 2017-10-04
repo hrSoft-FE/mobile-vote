@@ -38,7 +38,7 @@
             if (to) vertY = y - $(window).height() / 2;
         }
 
-        //todo currently this always save the info, which is not needed for compound vector children and maybe some other cases
+        //todo currently this always save the user, which is not needed for compound vector children and maybe some other cases
         //let's optimize it later, only register if registerid is valid..
         widgetMoveInfo[id] = {
             x: horzX,

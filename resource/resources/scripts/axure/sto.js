@@ -112,7 +112,7 @@ $axure.internal(function($ax) {
         return retVal;
     };
 
-    //TODO: Perhaps repeaterId can be detirmined at generation, and stored in the sto info.
+    //TODO: Perhaps repeaterId can be detirmined at generation, and stored in the sto user.
     _stoHandlers.item = function(sto, scope, eventInfo, prop) {
         prop = prop || (eventInfo.data ? 'data' : eventInfo.link ? 'url' : eventInfo.image ? 'img' : 'text');
         var id = sto.isTarget || !$ax.repeater.hasData(eventInfo.srcElement, sto.name) ? eventInfo.targetElement : eventInfo.srcElement;

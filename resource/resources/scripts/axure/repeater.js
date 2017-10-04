@@ -10,7 +10,7 @@ $axure.internal(function($ax) {
     var repeaterToFilters = {};
     // This is a mapping of current sorts
     var repeaterToSorts = {};
-    // This is a mapping of repeater page info
+    // This is a mapping of repeater page user
     var repeaterToPageInfo = {};
 
     //Hopefully this can be simplified, but for now I think 3 are needed.

@@ -55,8 +55,7 @@ class Login extends Component {
     let errors
     const userLogin = () => {
       this.props.form.validateFields((error, value) => {
-        error = getFieldError('phone')
-        console.log(error, value)
+        if (error) {console.log(error)} else {console.log(value)}
       })
     }
     return (
@@ -68,17 +67,17 @@ class Login extends Component {
               onTabClick={handleTabClick} destroyInactiveTabPane={false}>
           <TabPane tab="登录" key="1">
             <div className={style.login}>
-              <List key="login" index={1} style={{width: '80%'}}>
+              <List key="login" style={{width: '80%'}}>
                 <WhiteSpace size="xl"/>
                 <WhiteSpace size="xl"/>
-                {getFieldDecorator('phone', {
+                {getFieldDecorator('loginPhone', {
                     rules: [
-                      {required: true, minLength: 11, message: '请输入手机号码'},
-                      {length: 11, message: '手机号码应该是11位'}
+                      {len: 11, message: '手机号码应该是11位'},
+                      {required: true, message: '请输入手机号码'}
                     ]
                   }
                 )(<InputItem
-                  // type="phone"
+                  type="number"
                   labelNumber={2}
                   style={{marginTop: '0rem', border: 'none', borderBottom: '2px solid #666'}}
                   placeholder="请输入手机号"
@@ -90,12 +89,17 @@ class Login extends Component {
                     width: '0.44rem'
                   }}/>
                 </InputItem>)}
-                <div style={{color: 'red'}}>
-                  {(getFieldError('phone') || []).join(', ')}
+                <div style={{color: 'red', fontWeight: '100', fontSize: '30px'}}>
+                  {(getFieldError('loginPhone') || []).join(', ')}
                 </div>
                 <WhiteSpace size="xl"/>
-                <InputItem
-                  {...getFieldProps('loginPassword')}
+                {getFieldDecorator('loginPassword', {
+                    rules: [
+                      {len: 11, message: '手机号码应该是11位'},
+                      {required: true, message: '请输入手机号码'}
+                    ]
+                  }
+                )(<InputItem
                   placeholder="请输入密码"
                   style={{border: 'none', borderBottom: '2px solid #666'}}
                   type="password"
@@ -107,22 +111,29 @@ class Login extends Component {
                     height: '0.44rem',
                     width: '0.44rem'
                   }}/>
-                </InputItem>
+                </InputItem>)}
+                <div style={{color: 'red', fontWeight: '100', fontSize: '30px'}}>
+                  {(getFieldError('loginPassword') || []).join(', ')}
+                </div>
                 <WhiteSpace size="xl"/>
                 <WhiteSpace size="lg"/>
-                {(errors = getFieldError('required')) ? errors.join(',') : null}
                 <Button className="btn" type="primary" onClick={userLogin}>确认登录</Button>
               </List>
             </div>
           </TabPane>
           <TabPane tab="注册" key="2">
             <div className={style.register}>
-              <List key='register' index={2} style={{width: '80%'}}>
+              <List key='register' style={{width: '80%'}}>
                 <WhiteSpace size="xl"/>
                 <WhiteSpace size="xl"/>
-                <InputItem
-                  {...getFieldProps('registerPhone')}
-                  type="phone"
+                {getFieldDecorator('registerPhone', {
+                    rules: [
+                      {len: 11, message: '手机号码应该是11位'},
+                      {required: true, message: '请输入手机号码'}
+                    ]
+                  }
+                )(<InputItem
+                  type="number"
                   labelNumber={2}
                   style={{marginTop: '0rem', border: 'none', borderBottom: '2px solid #666'}}
                   placeholder="请输入手机号"
@@ -133,7 +144,10 @@ class Login extends Component {
                     height: '0.44rem',
                     width: '0.44rem'
                   }}/>
-                </InputItem>
+                </InputItem>)}
+                <div style={{color: 'red', fontWeight: '100', fontSize: '30px'}}>
+                  {(getFieldError('registerPhone') || []).join(', ')}
+                </div>
                 <WhiteSpace size="xl"/>
                 <InputItem
                   {...getFieldProps('registerPassword')}

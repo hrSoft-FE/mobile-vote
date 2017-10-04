@@ -17,8 +17,8 @@ function Footer ({dispatch, childrens, location}) {
         <TabBar.Item
           title="投票"
           key="投票"
-          icon={{uri: 'https://zos.alipayobjects.com/rmsportal/cKhfyLTszUeFARPgfokz.png'}}
-          selectedIcon={{uri: 'https://zos.alipayobjects.com/rmsportal/bqUXyjiOyKrXRfiIZVsZ.png'}}
+          icon={<Icon type={require('../../icons/static/survey.svg')}/>}
+          selectedIcon={<Icon type={require('../../icons/static/survey.svg')}/>}
           selected={location.pathname === '/vote'}
           onPress={() => dispatch(routerRedux.push('/vote'))}
         >
@@ -27,8 +27,8 @@ function Footer ({dispatch, childrens, location}) {
         <TabBar.Item
           title="搜索"
           key="搜索"
-          icon={<Icon type="koubei-o" size="md" />}
-          selectedIcon={<Icon type="koubei" size="md" />}
+          icon={<Icon type="search"/>}
+          selectedIcon={<Icon type="search"/>}
           selected={location.pathname === '/search'}
           onPress={() => dispatch(routerRedux.push('/search'))}
         >

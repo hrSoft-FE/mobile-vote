@@ -1,6 +1,5 @@
-// import Path from 'path';
+import path from 'path'
 import PxToRem from 'postcss-pxtorem'
-
 export default {
   hash: true,
   entry: 'src/index.js',
@@ -12,8 +11,8 @@ export default {
     ]
   },
   svgSpriteLoaderDirs: [
-    require.resolve('antd-mobile').replace(/warn\.js$/, '') // antd-mobile 内置svg
-    // path.resolve(__dirname, 'src/my-project-svg-foler') // 业务代码本地私有 svg 存放目录
+    require.resolve('antd-mobile').replace(/warn\.js$/, ''), // antd-mobile 内置svg
+    path.resolve(__dirname, 'src/icons') // 业务代码本地私有 svg 存放目录
   ],
   extraPostCSSPlugins: [
     PxToRem({

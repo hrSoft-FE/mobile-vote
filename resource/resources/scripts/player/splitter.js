@@ -73,7 +73,7 @@ $.fn.splitter = function(args){
          newPos = Math.max(A._min, splitter._DA - B._max,
                Math.min(newPos, A._max, splitter._DA - bar._DA - B._min));
          // Resize/position the two panes
-         bar._DA = bar[0][opts.pxSplit];      // bar size may change during dock
+         bar._DA = bar[0][opts.pxSplit];      // bar size may update during dock
 
          var posOffset = bar.is(':visible') ? bar._DA - 1 : 0;
 

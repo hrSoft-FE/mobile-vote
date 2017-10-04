@@ -16,6 +16,8 @@
     "semi": 0,
     "semi-spacing": 0,
     "react/jsx-tag-spacing": 0,
-    "jsx-quotes": 0
+    "react/jsx-indent-props": 0,
+    "jsx-quotes": 0,
+    "indent": 0
   }
 }

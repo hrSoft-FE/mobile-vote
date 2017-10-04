@@ -709,7 +709,7 @@
         var jobj = $jobj(id);
         var container = $ax.visibility.applyWidgetContainer(id, true);
 
-        // If layer is at bottom or right of page, unwrapping could change scroll by temporarily reducting page size.
+        // If layer is at bottom or right of page, unwrapping could update scroll by temporarily reducting page size.
         //  To avoid this, we let container persist on page, with the size it is at this point, and don't remove container completely
         //  until the children are back to their proper locations.
         var size = $ax('#' + id);
@@ -803,7 +803,7 @@
     }
 
     //use this to save & restore DP's scroll position when show/hide
-    //key => dp's id (not state's id, because it seems we can change state while hiding)
+    //key => dp's id (not state's id, because it seems we can update state while hiding)
     //value => first state's id & scroll position
     //we only need to store one scroll position for one DP, and remove the key after shown.
     var DPStateAndScroll = {}

@@ -1243,7 +1243,7 @@
 
             var completeCount = childrenIds.length*2; // Because there is a resize and move complete, it needs to be doubled
             for(var idIndex = 0; idIndex < childrenIds.length; idIndex++) {
-                // Need to use scoping trick here to make sure childId doesn't change on next loop
+                // Need to use scoping trick here to make sure childId doesn't update on next loop
                 (function(childId) {
                     //use ax obj to get width and height, jquery css give us the value without border
                     var isLayer = $ax.public.fn.IsLayer($obj(childId).type);
@@ -1398,7 +1398,7 @@
     //    }
 
     //    var size = _getSizeFromInfo(resizeInfo, eventInfo, oldHeight, oldWidth, elementId);
-    //    return { oldWidth: oldWidth, oldHeight: oldHeight, newWidth: size.width, newHeight: size.height, change: oldWidth != size.width || oldHeight != size.height };
+    //    return { oldWidth: oldWidth, oldHeight: oldHeight, newWidth: size.width, newHeight: size.height, update: oldWidth != size.width || oldHeight != size.height };
     //}
 
     var _getSizeFromInfo = function(resizeInfo, eventInfo, oldWidth, oldHeight, targetElement) {
@@ -1457,7 +1457,7 @@
         css.height = oldHeight + deltaHeight;
 
         var obj = $obj(elementId);
-        //if it's 100% width, don't change its width
+        //if it's 100% width, don't update its width
         if($ax.dynamicPanelManager.isPercentWidthPanel(obj)) var is100Dp = true;
         else css.width = oldWidth + deltaWidth;
 
@@ -1522,7 +1522,7 @@
         css.height = newHeight;
 
         var obj = $obj(elementId);
-        //if it's 100% width, don't change its width and left
+        //if it's 100% width, don't update its width and left
         var changeLeft = true;
         if($ax.dynamicPanelManager.isPercentWidthPanel(obj)) changeLeft = false;
         else css.width = newWidth;

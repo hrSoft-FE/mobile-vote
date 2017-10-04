@@ -22,6 +22,7 @@
     "path-to-regexp": "^2.0.0",
     "prop-types": "^15.5.10",
     "qs": "^6.5.0",
+    "rc-form": "^1.4.8",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   },
@@ -43,7 +44,8 @@
     "postcss-pxtorem": "^4.0.1",
     "redbox-react": "^1.5.0",
     "roadhog": "^1.1.2",
-    "svg-sprite-loader": "^3.2.6"
+    "svg-sprite-loader": "^3.2.6",
+    "webpack": "^3.6.0"
   },
   "engines": {
     "install-node": "6.x"

@@ -133,7 +133,7 @@ $axure.internal(function($ax) {
             if ($ax.public.fn.IsDynamicPanel($ax.getTypeFromElementId(elementId))) {
                 var stateName = $ax.visibility.GetPanelStateId(elementId, Number(stateNumber) - 1);
                 var wasVisible = $ax.visibility.IsIdVisible(elementId);
-                // If compressing because you are fit to content and the change of state may change size, must be before the change.
+                // If compressing because you are fit to content and the update of state may update size, must be before the update.
                 if(options.compress && $ax.dynamicPanelManager.isIdFitToContent(elementId) && wasVisible) {
                     $ax.dynamicPanelManager.compressDelta(elementId, $ax.visibility.GetPanelState(elementId), stateName, options.vertical, options.compressEasing, options.compressDuration);
                 }
@@ -513,7 +513,7 @@ $axure.internal(function($ax) {
                     var textChildCss = { width: newTextWidth };
 
                     var textStepFunction = function() {
-                        //change the width of the text div may effect the height
+                        //update the width of the text div may effect the height
                         //var currentTextHeight = Number($(textChildren.children('p')[0]).css('height').replace('px', ''));
                         //textChildren.css('height', currentTextHeight);
                         var display = $ax.public.fn.displayHackStart(document.getElementById(textDivId));

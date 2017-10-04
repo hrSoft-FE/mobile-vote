@@ -693,7 +693,7 @@ $axure.internal(function($ax) {
             };
 
             // Initialize Placeholders. Right now this is text boxes and text areas.
-            // Also, the assuption is being made that these widgets with the placeholder, have no other styles (this may change...)
+            // Also, the assuption is being made that these widgets with the placeholder, have no other styles (this may update...)
             var hasPlaceholder = dObj.placeholderText == '' ? true : Boolean(dObj.placeholderText);
             if (($ax.public.fn.IsTextArea(dObj.type) || $ax.public.fn.IsTextBox(dObj.type)) && hasPlaceholder) {
                 // This is needed to initialize the placeholder state
@@ -1469,7 +1469,7 @@ $axure.internal(function($ax) {
             } else {
                 var last = $ax.updateRadioButtonSelected($jobj($ax.INPUT(elementId)).attr('name'), elementId);
 
-                // If no change, this should not fire
+                // If no update, this should not fire
                 if(last == elementId) return;
 
                 // Initially selecting one, last may be undefined

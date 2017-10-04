@@ -324,7 +324,7 @@ $axure.internal(function($ax) {
 
         $ax.dynamicPanelManager.fitParentPanel(repeaterId);
 
-        // Right now we assume only one refresh at a time. If we can manually trigger refreshes, that may possibly change.
+        // Right now we assume only one refresh at a time. If we can manually trigger refreshes, that may possibly update.
         $ax.action.refreshEnd();
     };
     _repeaterManager.refreshRepeater = _refreshRepeater;
@@ -1042,7 +1042,7 @@ $axure.internal(function($ax) {
         }
         // Default to obj with text as empty string, as we don't generate the data for empty props
         var data = row[propName] || { text: '' };
-        //For now text is always the default. May change this to depend on context.
+        //For now text is always the default. May update this to depend on context.
         return type == 'data' && data.type != 'text' ? data : (type && data[type]) || data['text'];
     };
     _repeaterManager.getData = _getDataFromDataSet;
@@ -1773,7 +1773,7 @@ $axure.internal(function($ax) {
     };
 
     // Show isn't necessary if this is always done before toggling (which is currently true), but I don't want that
-    //  change (if it happened) to break this.
+    //  update (if it happened) to break this.
     var _compressToggle = function (id, vert, show, easing, duration) {
         var layer = $ax.getTypeFromElementId(id) == $ax.constants.LAYER_TYPE;
         var locProp = vert ? 'top' : 'left';

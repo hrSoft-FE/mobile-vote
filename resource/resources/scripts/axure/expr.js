@@ -154,7 +154,7 @@ $axure.internal(function($ax) {
             }
 
             // We do support null exprArgs...
-            // TODO: This makes 2 assumptions that may change in the future. 1. The pathLiteral is the always the first arg. 2. there is always only 1 pathLiteral
+            // TODO: This makes 2 assumptions that may update in the future. 1. The pathLiteral is the always the first arg. 2. there is always only 1 pathLiteral
             if(exprArg && exprArg.exprType == 'pathLiteral') {
                 targets = fcallArg;
 

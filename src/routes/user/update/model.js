@@ -2,7 +2,7 @@ import pathToRegexp from 'path-to-regexp'
 import { userLogin, register } from './service'
 
 export default {
-  namespace: 'login',
+  namespace: 'forget',
   state: {
     contests: [],
     query: {}
@@ -11,8 +11,8 @@ export default {
     voteSubscriber ({dispatch, history}) {
       return history.listen(({pathname, query}) => {
         console.log(pathname)
-        // const match = pathToRegexp('/user/login')
-        if (pathname === '/user/login') {
+        const match = pathToRegexp('/user/login')
+        if (match) {
           dispatch({type: 'initQuery'})
         }
       })

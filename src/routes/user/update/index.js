@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'dva'
 import { Link } from 'dva/router'
 import PropTypes from 'prop-types'
-import { verify } from '../../../utils'
-import './index.less'
+import { verify } from '../../../utils/index'
+import '../login/index.less'
 import { Button, Form, Icon, Input } from 'antd'
 
 const FormItem = Form.Item

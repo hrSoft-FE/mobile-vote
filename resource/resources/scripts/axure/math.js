@@ -253,7 +253,7 @@
     };
 
     var _displayHackStart = $ax.public.fn.displayHackStart = function (element) {
-        // TODO: Options: 1) stop setting display none. Big change for this late in the game. 2) Implement our own bounding.
+        // TODO: Options: 1) stop setting display none. Big update for this late in the game. 2) Implement our own bounding.
         // TODO:  3) Current method is look for any parents that are set to none, and and temporarily unblock. Don't like it, but it works.
         var parent = element;
         var displays = [];

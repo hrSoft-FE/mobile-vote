@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'dva'
 import { Link } from 'dva/router'
 import PropTypes from 'prop-types'
-import { verify } from '../../../utils'
-import './index.less'
+import { verify } from '../../../utils/index'
+import '../login/index.less'
 import { Button, Form, Icon, Input } from 'antd'
 
 const FormItem = Form.Item
@@ -53,14 +53,6 @@ const Login = ({login, dispatch, form: {getFieldDecorator, validateFieldsAndScro
             登录
           </Button>
         </Form>
-        {/*<div className='login-footer'>*/}
-        {/*<Link to={'/register'}>*/}
-        {/*<span>注册账号</span>*/}
-        {/*</Link>*/}
-        {/*<Link to={'/forget'}>*/}
-        {/*<span className='login-form-forgot'>忘记密码</span>*/}
-        {/*</Link>*/}
-        {/*</div>*/}
       </div>
     </div>
   )

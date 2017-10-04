@@ -2,7 +2,12 @@ import React from 'react'
 import { TabBar, Icon } from 'antd-mobile'
 import { connect } from 'dva'
 import { routerRedux } from 'dva/router'
-
+import searchIconActive from './search-active.png'
+import searchIcon from './search.png'
+import voteIcon from './survey.png'
+import voteIconActive from './survey-active.png'
+import accountIcon from './account.png'
+import accountIconActive from './account-active.png'
 import styles from './footer.less'
 
 function Footer ({dispatch, childrens, location}) {
@@ -17,8 +22,8 @@ function Footer ({dispatch, childrens, location}) {
         <TabBar.Item
           title="投票"
           key="投票"
-          icon={<Icon type="koubei-o"/>}
-          selectedIcon={<Icon type="koubei"/>}
+          icon={{uri: voteIcon}}
+          selectedIcon={{uri: voteIconActive}}
           selected={location.pathname === '/vote'}
           onPress={() => dispatch(routerRedux.push('/vote'))}
         >
@@ -27,8 +32,8 @@ function Footer ({dispatch, childrens, location}) {
         <TabBar.Item
           title="搜索"
           key="搜索"
-          icon={<Icon type="search"/>}
-          selectedIcon={<Icon type="search"/>}
+          icon={{uri: searchIcon}}
+          selectedIcon={{uri: searchIconActive}}
           selected={location.pathname === '/search'}
           onPress={() => dispatch(routerRedux.push('/search'))}
         >
@@ -37,9 +42,9 @@ function Footer ({dispatch, childrens, location}) {
         <TabBar.Item
           title="我"
           key="我"
-          icon={{uri: 'https://zos.alipayobjects.com/rmsportal/WdEuTLJOVzeABZlKYLmJ.png'}}
-          selectedIcon={{uri: 'https://zos.alipayobjects.com/rmsportal/sRkvMgIGXERtyRVyAsXP.png'}}
-          selected={location.pathname === '/user'}
+          icon={{uri: accountIcon}}
+          selectedIcon={{uri: accountIconActive}}
+          selected={location.pathname === '/user/login'}
           onPress={() => dispatch(routerRedux.push('/user'))}
         >
           {childrens}

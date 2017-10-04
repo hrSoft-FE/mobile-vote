@@ -187,7 +187,7 @@
 
     $ax.style.SetWidgetSelected = function(id, value, alwaysApply) {
         if(_isWidgetDisabled(id)) return;
-        //NOTE: not firing select events if state didn't change
+        //NOTE: not firing select events if state didn't update
         var raiseSelectedEvents = $ax.style.IsWidgetSelected(id) != value;
 
         if(value) {
@@ -274,7 +274,7 @@
         var height = document.getElementById(inputId).style['height'];
         var width = document.getElementById(inputId).style['width'];
         obj.attr('style', '');
-        //removing all styles, but now we can change the size, so we should add them back
+        //removing all styles, but now we can update the size, so we should add them back
         //this is more like a quick hack
         if (height) obj.css('height', height);
         if (width) obj.css('width', width);

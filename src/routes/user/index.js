@@ -5,10 +5,8 @@ import './index.less'
 const User = ({location, app, children, info}) => {
   console.log(children)
   return (
-    <div>
-      <div>
-        {children || '暂无数据'}
-      </div>
+    <div className="user" style={{height: '100%'}}>
+      {children}
     </div>
   )
 }

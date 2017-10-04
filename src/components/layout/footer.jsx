@@ -17,8 +17,8 @@ function Footer ({dispatch, childrens, location}) {
         <TabBar.Item
           title="投票"
           key="投票"
-          icon={<Icon type={require('../../icons/static/survey.svg')}/>}
-          selectedIcon={<Icon type={require('../../icons/static/survey.svg')}/>}
+          icon={<Icon type="koubei-o"/>}
+          selectedIcon={<Icon type="koubei"/>}
           selected={location.pathname === '/vote'}
           onPress={() => dispatch(routerRedux.push('/vote'))}
         >

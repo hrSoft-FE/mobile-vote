@@ -7,8 +7,7 @@ const User = ({location, app, children, info}) => {
   return (
     <div>
       <div>
-        login
-        {children}
+        {children || '暂无数据'}
       </div>
     </div>
   )

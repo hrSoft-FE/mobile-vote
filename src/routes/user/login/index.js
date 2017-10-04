@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'dva'
 import { Link } from 'dva/router'
 import PropTypes from 'prop-types'
-import { verify } from '../../utils'
+import { verify } from '../../../utils/index'
 import './index.less'
 import { Button, Icon } from 'antd-mobile'
 
@@ -11,8 +11,8 @@ const Login = ({login, dispatch}) => {
   console.log('test')
   return (
     <div className='login-title'>
-      <span className='login-title-main'>CCPC竞赛</span>
-      <span className='login-title-sub'>^_^老王管理端-_-|</span>
+      <div className='login-title-main'>CCPC竞赛</div>
+      <div className='login-title-sub'>^_^老王管理端-_-|</div>
     </div>)
 }
 Login.propTypes = {

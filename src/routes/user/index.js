@@ -3,10 +3,12 @@ import { connect } from 'dva'
 import './index.less'
 
 const User = ({location, app, children, info}) => {
+  console.log(children)
   return (
     <div>
       <div>
-        info
+        login
+        {children}
       </div>
     </div>
   )

@@ -8,8 +8,9 @@ import styles from './main.less'
 function Main ({children, location}) {
   return (
     <div className={styles.normal}>
-      <Header location={location} />
-      <Footer location={location} childrens={children} />
+      <Header location={location}/>
+      {children}
+      <Footer location={location}/>
     </div>
   )
 }

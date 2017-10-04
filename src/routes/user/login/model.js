@@ -10,7 +10,8 @@ export default {
   subscriptions: {
     voteSubscriber ({dispatch, history}) {
       return history.listen(({pathname, query}) => {
-        const match = pathToRegexp('/login')
+        console.log(pathname)
+        const match = pathToRegexp('/user/login')
         if (match) {
           dispatch({type: 'initQuery'})
         }
@@ -19,6 +20,7 @@ export default {
   },
   effects: {
     * initQuery ({payload}, {call, select, put}) {
+      console.log(10086)
     }
   },
   reducers: {

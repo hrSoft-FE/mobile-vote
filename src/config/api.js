@@ -1,14 +1,13 @@
-const baseURL = 'http://localhost:3000/'
-const prefix = `votes/`
-const apiMaker = path => `${baseURL}${prefix}${path}`
+const prefix = `api/votes/`
+const apiMaker = path => `${prefix}${path}`
 
 export default {
   userInfo: apiMaker('user'),
   login: apiMaker('login'),
   register: apiMaker('register'),
-  unstart: apiMaker('unstart'),
-  past: apiMaker('past'),
-  curr: apiMaker('curr'),
+  will: apiMaker('will'),
+  done: apiMaker('done'),
+  doing: apiMaker('doing'),
   content: apiMaker('content/:id'),
   voted: apiMaker('voted'),
   submit: apiMaker('submit'),

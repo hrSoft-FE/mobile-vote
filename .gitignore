@@ -16,3 +16,4 @@ npm-debug.log*
 
 # remove the package-lock file
 package-lock.json
+yarn.lock

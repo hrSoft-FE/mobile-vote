@@ -4,18 +4,18 @@ const verify = async () => request({
   url: API.verify,
   method: 'get'
 })
-const getUnStartVotes = async () => request({
-  url: API.unstart,
+const getWillVotes = async () => request({
+  url: API.will,
   method: 'get',
   token: false
 })
-const getPastVotes = async () => request({
-  url: API.past,
+const getDoneVotes = async () => request({
+  url: API.done,
   method: 'get',
   token: false
 })
-const getCurrentVotes = async () => request({
-  url: API.curr,
+const getDoingVotes = async () => request({
+  url: API.doing,
   method: 'get',
   token: false
 })
@@ -36,9 +36,9 @@ const submitVoteRes = async (data) => request({
 })
 export {
   verify,
-  getUnStartVotes,
-  getPastVotes,
-  getCurrentVotes,
+  getWillVotes,
+  getDoneVotes,
+  getDoingVotes,
   getVotedVotes,
   getVotesDetail,
   submitVoteRes

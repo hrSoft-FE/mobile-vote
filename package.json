@@ -3,7 +3,7 @@
   "description": "> based on [dva.js](\"https://github.com/dvajs/dva\")",
   "version": "1.0.0",
   "scripts": {
-    "build": "roadhog build",
+    "build": "roadhog build --analyze",
     "precommit": "npm run lint",
     "lint": "eslint --ext .js src test",
     "start": "roadhog server",

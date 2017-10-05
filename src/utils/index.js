@@ -4,6 +4,7 @@ import { dateFormat, newDate } from './dateAbout'
 import config from './config'
 import { goto, queryURL, sleep, urlEncode, windowScroll } from './routerAbout'
 import { arrayToTree, queryArray, withInArray } from './arrayAbout'
+import { toastFormMessage } from './toastFormMesage'
 import API from '../config/api'
 import verify from './verify'
 import codeHelper from './codeHelper'
@@ -24,5 +25,6 @@ export {
   codeHelper,
   sleep,
   verify,
-  urlEncode
+  urlEncode,
+  toastFormMessage
 }

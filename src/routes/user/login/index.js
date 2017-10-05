@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'dva'
 import { Link } from 'dva/router'
 import PropTypes from 'prop-types'
-import { verify } from '../../../utils/index'
+import { verify, toastFormMessage } from '../../../utils'
 import avatar from '../../../assets/avatar.jpeg'
 import style from './index.less'
 import { Tabs, WhiteSpace, InputItem, Icon, List, Button, Toast } from 'antd-mobile'
@@ -55,7 +55,11 @@ class Login extends Component {
     let errors
     const userLogin = () => {
       this.props.form.validateFields((error, value) => {
-        if (error) {console.log(error)} else {console.log(value)}
+        const {loginPhone, loginPassword} = value
+        const errRes = toastFormMessage(error, false, ['loginPhone', 'loginPassword'])
+        console.log(errRes)
+        if (errRes) return
+        dispatch({type: 'login/login', payload: {phone: loginPhone, password: loginPassword}})
       })
     }
     return (
@@ -74,7 +78,8 @@ class Login extends Component {
                     rules: [
                       {len: 11, message: '手机号码应该是11位'},
                       {required: true, message: '请输入手机号码'}
-                    ]
+                    ],
+                    initialValue: 15033517219
                   }
                 )(<InputItem
                   type="number"
@@ -89,15 +94,13 @@ class Login extends Component {
                     width: '0.44rem'
                   }}/>
                 </InputItem>)}
-                <div style={{color: 'red', fontWeight: '100', fontSize: '30px'}}>
-                  {(getFieldError('loginPhone') || []).join(', ')}
-                </div>
                 <WhiteSpace size="xl"/>
                 {getFieldDecorator('loginPassword', {
                     rules: [
-                      {len: 11, message: '手机号码应该是11位'},
-                      {required: true, message: '请输入手机号码'}
-                    ]
+                      {min: 6, message: '密码最少是6位'},
+                      {required: true, message: '请输入密码'}
+                    ],
+                    initialValue: 15033517219
                   }
                 )(<InputItem
                   placeholder="请输入密码"
@@ -112,9 +115,6 @@ class Login extends Component {
                     width: '0.44rem'
                   }}/>
                 </InputItem>)}
-                <div style={{color: 'red', fontWeight: '100', fontSize: '30px'}}>
-                  {(getFieldError('loginPassword') || []).join(', ')}
-                </div>
                 <WhiteSpace size="xl"/>
                 <WhiteSpace size="lg"/>
                 <Button className="btn" type="primary" onClick={userLogin}>确认登录</Button>
@@ -145,9 +145,6 @@ class Login extends Component {
                     width: '0.44rem'
                   }}/>
                 </InputItem>)}
-                <div style={{color: 'red', fontWeight: '100', fontSize: '30px'}}>
-                  {(getFieldError('registerPhone') || []).join(', ')}
-                </div>
                 <WhiteSpace size="xl"/>
                 <InputItem
                   {...getFieldProps('registerPassword')}

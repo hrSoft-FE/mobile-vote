@@ -21,6 +21,9 @@ export default {
   effects: {
     * initQuery ({payload}, {call, select, put}) {
       console.log(10086)
+    },
+    * login ({payload}, {call, select, put}) {
+      console.log(payload)
     }
   },
   reducers: {

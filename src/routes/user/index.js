@@ -3,7 +3,6 @@ import { connect } from 'dva'
 import './index.less'
 
 const User = ({location, app, children, info}) => {
-  console.log(children)
   return (
     <div className="user" style={{height: '100%'}}>
       {children}

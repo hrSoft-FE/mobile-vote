@@ -12,7 +12,7 @@ export default {
       'email': 'zhoubao@hrsoft.net'
     }
   },
-  'POST /api/votes/register': (req, res) => {
+  '/api/votes/register': (req, res) => {
     res.json(
       {
         'code': 0,
@@ -20,7 +20,7 @@ export default {
       }
     )
   },
-  'POST /api/votes/login': (req, res) => {
+  '/api/votes/login': (req, res) => {
     res.json(
       {
         'code': 0,

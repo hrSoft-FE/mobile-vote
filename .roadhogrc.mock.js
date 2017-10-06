@@ -69,26 +69,76 @@ export default {
     'data': {
       'votes': [
         {
-          id: 1,
+          id: 11,
           start_time: 1507123590000,
           end_time: 1507123635000,
           title: 'Meet hotel',
           des: '不是所有的兼职汪都需要风吹日晒'
         },
         {
-          id: 2,
+          id: 12,
           start_time: 1507123590000,
           end_time: 1507123635000,
           title: 'McDonald\'s invites you',
           des: '不是所有的兼职汪都需要风吹日晒'
         },
         {
-          id: 3,
+          id: 13,
+          start_time: 1507123590000,
+          end_time: 1507123635000,
+          title: 'Eat the week',
+          des: '不是所有的兼职汪都需要风吹日晒'
+        },
+        {
+          id: 14,
+          start_time: 1507123590000,
+          end_time: 1507123635000,
+          title: 'Meet hotel',
+          des: '不是所有的兼职汪都需要风吹日晒'
+        },
+        {
+          id: 15,
+          start_time: 1507123590000,
+          end_time: 1507123635000,
+          title: 'McDonald\'s invites you',
+          des: '不是所有的兼职汪都需要风吹日晒'
+        },
+        {
+          id: 16,
+          start_time: 1507123590000,
+          end_time: 1507123635000,
+          title: 'Eat the week',
+          des: '不是所有的兼职汪都需要风吹日晒'
+        },
+        {
+          id: 17,
+          start_time: 1507123590000,
+          end_time: 1507123635000,
+          title: 'Meet hotel',
+          des: '不是所有的兼职汪都需要风吹日晒'
+        },
+        {
+          id: 18,
+          start_time: 1507123590000,
+          end_time: 1507123635000,
+          title: 'McDonald\'s invites you',
+          des: '不是所有的兼职汪都需要风吹日晒'
+        },
+        {
+          id: 19,
+          start_time: 1507123590000,
+          end_time: 1507123635000,
+          title: 'Eat the week',
+          des: '不是所有的兼职汪都需要风吹日晒'
+        },
+        {
+          id: 20,
           start_time: 1507123590000,
           end_time: 1507123635000,
           title: 'Eat the week',
           des: '不是所有的兼职汪都需要风吹日晒'
         }
+
       ],
       'totalCount': 10
     }
@@ -162,76 +212,6 @@ export default {
         },
         {
           id: 10,
-          start_time: 1507123590000,
-          end_time: 1507123635000,
-          title: 'Meet hotel',
-          des: '不是所有的兼职汪都需要风吹日晒'
-        },
-        {
-          id: 11,
-          start_time: 1507123590000,
-          end_time: 1507123635000,
-          title: 'Meet hotel',
-          des: '不是所有的兼职汪都需要风吹日晒'
-        },
-        {
-          id: 12,
-          start_time: 1507123590000,
-          end_time: 1507123635000,
-          title: 'McDonald\'s invites you',
-          des: '不是所有的兼职汪都需要风吹日晒'
-        },
-        {
-          id: 13,
-          start_time: 1507123590000,
-          end_time: 1507123635000,
-          title: 'Eat the week',
-          des: '不是所有的兼职汪都需要风吹日晒'
-        },
-        {
-          id: 14,
-          start_time: 1507123590000,
-          end_time: 1507123635000,
-          title: 'Meet hotel',
-          des: '不是所有的兼职汪都需要风吹日晒'
-        },
-        {
-          id: 15,
-          start_time: 1507123590000,
-          end_time: 1507123635000,
-          title: 'McDonald\'s invites you',
-          des: '不是所有的兼职汪都需要风吹日晒'
-        },
-        {
-          id: 16,
-          start_time: 1507123590000,
-          end_time: 1507123635000,
-          title: 'Eat the week',
-          des: '不是所有的兼职汪都需要风吹日晒'
-        },
-        {
-          id: 17,
-          start_time: 1507123590000,
-          end_time: 1507123635000,
-          title: 'Meet hotel',
-          des: '不是所有的兼职汪都需要风吹日晒'
-        },
-        {
-          id: 18,
-          start_time: 1507123590000,
-          end_time: 1507123635000,
-          title: 'McDonald\'s invites you',
-          des: '不是所有的兼职汪都需要风吹日晒'
-        },
-        {
-          id: 19,
-          start_time: 1507123590000,
-          end_time: 1507123635000,
-          title: 'Eat the week',
-          des: '不是所有的兼职汪都需要风吹日晒'
-        },
-        {
-          id: 20,
           start_time: 1507123590000,
           end_time: 1507123635000,
           title: 'Meet hotel',

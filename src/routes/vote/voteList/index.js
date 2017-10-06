@@ -5,7 +5,7 @@ import { routerRedux } from 'dva/router'
 import { RefreshControl, ListView } from 'antd-mobile'
 import './index.less'
 
-const NUM_ROWS = 10
+const NUM_ROWS = 20
 let pageIndex = 0
 
 function genData (pIndex = 0) {
@@ -25,19 +25,9 @@ class VoteList extends Component {
 
     this.state = {
       dataSource,
-      refreshing: true,
       height: document.documentElement.clientHeight
     }
   }
-
-  // If you use redux, the data maybe at props, you need use `componentWillReceiveProps`
-  // componentWillReceiveProps (nextProps) {
-  //   if (nextProps.dataSource !== this.props.dataSource) {
-  //     this.setState({
-  //       dataSource: this.state.dataSource.cloneWithRows(nextProps.dataSource)
-  //     })
-  //   }
-  // }
 
   componentDidMount () {
     // Set the appropriate height
@@ -75,7 +65,7 @@ class VoteList extends Component {
   onRefresh = () => {
     console.log('onRefresh')
     if (!this.manuallyRefresh) {
-      this.setState({refreshing: true})
+      this.props.dispatch({type: 'vote/saveRefreshing', payload: true})
     } else {
       this.manuallyRefresh = false
     }
@@ -85,9 +75,10 @@ class VoteList extends Component {
       this.rData = genData()
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(this.rData),
-        refreshing: false,
         showFinishTxt: true
       })
+      this.props.dispatch({type: 'vote/saveRefreshing', payload: false})
+      this.props.dispatch({type: 'vote/updateVote'})
       if (this.domScroller) {
         this.domScroller.scroller.options.animationDuration = 500
       }
@@ -131,8 +122,8 @@ class VoteList extends Component {
 
   render () {
     const {vote} = this.props
-    const {voteList = [], index, max, page} = vote
-    const data = voteList
+    const {voteList = [], refreshing} = vote
+    let index = voteList.length - 1
     const separator = (sectionID, rowID) => (
       <div
         key={`${sectionID}-${rowID}`}
@@ -145,56 +136,44 @@ class VoteList extends Component {
       />
     )
     const row = (rowData, sectionID, rowID) => {
-      if (index > max) {
-        let payload = {
-          'index': index,
-          'max': max + 10,
-          'page': page + 1
-        }
-        this.props.dispatch({type: 'vote/savePage', payload})
+      if (index < 0) {
         this.props.dispatch({type: 'vote/fetchNextVote'})
-      } else {
-        let payload = {
-          'index': index,
-          'max': max,
-          'page': page
-        }
-        console.log('listData', payload)
-        const obj = data[index]
-        return (
-          <div
-            key={rowID}
-            style={{padding: '0 0.3rem', backgroundColor: 'white'}}
-            onClick={() => this.props.dispatch(routerRedux.push(`/vote/content?id=${obj.id}`))}
-          >
-            <div style={{
-              height: '1rem',
-              lineHeight: '1rem',
-              color: '#888',
-              fontSize: '0.36rem',
-              borderBottom: '1px solid #ddd'
-            }}>
-              {obj.title}
-            </div>
-            <div style={{display: '-webkit-box', display: 'flex', padding: '0.3rem'}}>
-              <div style={{display: 'inline-block'}}>
-                <div style={{
-                  marginBottom: '0.16rem',
-                  color: '#000',
-                  fontSize: '0.32rem',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
-                  maxWidth: '5rem'
-                }}>{obj.des}-{rowData}</div>
-                <div style={{fontSize: '0.32rem'}}><span style={{fontSize: '0.6rem', color: '#FF6E27'}}>{obj.id}</span>
-                  元/任务
-                </div>
+        index = voteList.length - 1
+      }
+      const obj = voteList[index--]
+      return (
+        <div
+          key={rowID}
+          style={{padding: '0 0.3rem', backgroundColor: 'white'}}
+          onClick={() => this.props.dispatch(routerRedux.push(`/vote/content?id=${obj.id}`))}
+        >
+          <div style={{
+            height: '1rem',
+            lineHeight: '1rem',
+            color: '#888',
+            fontSize: '0.36rem',
+            borderBottom: '1px solid #ddd'
+          }}>
+            {obj.title}
+          </div>
+          <div style={{display: '-webkit-box', display: 'flex', padding: '0.3rem'}}>
+            <div style={{display: 'inline-block'}}>
+              <div style={{
+                marginBottom: '0.16rem',
+                color: '#000',
+                fontSize: '0.32rem',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                maxWidth: '5rem'
+              }}>{obj.des}-{rowData}</div>
+              <div style={{fontSize: '0.32rem'}}><span style={{fontSize: '0.6rem', color: '#FF6E27'}}>{obj.id}</span>
+                元/任务
               </div>
             </div>
           </div>
-        )
-      }
+        </div>
+      )
     }
     return (
       <ListView
@@ -205,8 +184,8 @@ class VoteList extends Component {
         </div>)}
         renderRow={row}
         renderSeparator={separator}
-        initialListSize={5}
-        pageSize={5}
+        initialListSize={0}
+        pageSize={10}
         style={{
           height: this.state.height,
           border: '1px solid #ddd',
@@ -214,7 +193,7 @@ class VoteList extends Component {
         }}
         scrollerOptions={{scrollbars: true, scrollingComplete: this.scrollingComplete}}
         refreshControl={<RefreshControl
-          refreshing={this.state.refreshing}
+          refreshing={refreshing}
           onRefresh={this.onRefresh}
           icon={this.renderCustomIcon()}
         />}

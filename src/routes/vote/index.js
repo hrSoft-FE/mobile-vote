@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'dva'
+import { routerRedux } from 'dva/router'
 import { Tabs, WhiteSpace, Badge, SegmentedControl, WingBlank } from 'antd-mobile'
 import VoteList from './voteList'
 import './index.less'
-
-// const TabPane = Tabs.TabPane
 
 class Vote extends Component {
   onChange = (e) => {
@@ -22,27 +21,29 @@ class Vote extends Component {
       default:
         value = ''
     }
-    this.props.dispatch({type: 'upDateList', payload: value})
+    // this.props.dispatch(routerRedux.push(`/vote/${value}`))
+    // this.props.dispatch({type: 'upDateList', payload: value})
+    console.log(value)
   }
 
   render () {
     const {app, vote, children, location} = this.props
-    const route = ['/vote', '/search', '/info']
+    const route = ['/vote/doing', '/vote/done', '/vote/will']
     return (
       <div>
         <WhiteSpace />
-        {
-          route.indexOf(location.pathname) !== -1 && <WingBlank>
+        <WingBlank>
+          {
+            route.indexOf(location.pathname) !== -1 &&
             <SegmentedControl
               values={['进行中', '未开始', '已结束']}
               onChange={this.onChange}
             />
-            <VoteList />
-          </WingBlank>
-        }
-        {
-          children
-        }
+          }
+          {
+            children
+          }
+        </WingBlank>
       </div>
     )
   }

@@ -10,7 +10,7 @@ export default {
       return history.listen(({pathname, query}) => {
         const match = pathname === '/'
         if (match) {
-          dispatch(routerRedux.push('/vote'))
+          dispatch(routerRedux.push('/vote/doing'))
         }
       })
     }

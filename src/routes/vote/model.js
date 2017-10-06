@@ -13,14 +13,12 @@ export default {
   namespace: 'vote',
   state: {
     voteList: [],
-    index: 0,
-    max: 10,
-    page: 1
+    refreshing: true
   },
   subscriptions: {
     voteSubscriber ({dispatch, history}) {
       return history.listen(({pathname, query}) => {
-        const match = pathToRegexp('/vote')
+        const match = pathToRegexp('/vote/doing')
         if (match) {
           dispatch({type: 'upDateList'})
         }
@@ -45,17 +43,16 @@ export default {
           data = ''
       }
       const list = data.data.votes
+      console.log('firstList', list)
       yield put({type: 'saveList', payload: list})
       yield put({type: 'saveStatus', payload: status})
     },
     * fetchNextVote ({payload}, {call, select, put}) {
-      const {status, voteList, index, page, max} = yield select(({vote}) => vote)
-      let body = {'index': index, 'max': max, 'page': page}
-      console.log('later', body)
+      const {status} = yield select(({vote}) => vote)
       let data = ''
       switch (status) {
         case 'doing':
-          data = yield call(getDoingVotes)
+          data = yield call(getDoneVotes) // 记得改回来
           break
         case 'done':
           data = yield call(getDoneVotes)
@@ -67,8 +64,8 @@ export default {
           data = ''
       }
       const list = data.data.votes
-      const newList = list.concat(voteList)
-      yield put({type: 'saveList', payload: newList})
+      console.log('secondList', list)
+      yield put({type: 'saveList', payload: list})
       console.log('hi')
     }
   },
@@ -83,6 +80,12 @@ export default {
       return {
         ...state,
         status: payload
+      }
+    },
+    saveRefreshing (state, {payload}) {
+      return {
+        ...state,
+        refreshing: payload
       }
     },
     savePage (state, {payload}) {

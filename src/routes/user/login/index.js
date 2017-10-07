@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'dva'
-import { Link } from 'dva/router'
+import { routerRedux } from 'dva/router'
 import PropTypes from 'prop-types'
 import { verify, toastFormMessage } from '../../../utils'
 import avatar from '../../../assets/avatar.jpeg'
 import style from './index.less'
-import { Tabs, WhiteSpace, InputItem, Icon, List, Button, Toast } from 'antd-mobile'
+import { Tabs, WhiteSpace, InputItem, Icon, List, Button, Toast, Flex } from 'antd-mobile'
 import { createForm } from 'rc-form'
 import mobileIcon from './Mobile-phone.png'
 import passwordIcon from './password.png'
 import confirmIcon from './confirm.png'
 import mailIcon from './mail.png'
+import verifyIcon from './verify.png'
 
 const TabPane = Tabs.TabPane
 
@@ -32,7 +33,9 @@ class Login extends Component {
 
   render () {
     const {login, dispatch, form: {getFieldProps, getFieldError, getFieldDecorator}} = this.props
-    let errors
+    const forgetPassword = () => {
+      dispatch(routerRedux.push('/user/forget'))
+    }
     const userLogin = () => {
       this.props.form.validateFields((error, value) => {
         const {loginPhone, loginPassword} = value
@@ -64,12 +67,15 @@ class Login extends Component {
         }
       })
     }
+    const sendVerify = () => {
+      dispatch({type: 'user/getVerifyCode', payload: {}})
+    }
     return (
       <div>
         <div className={style.banner}>
           <img src={avatar} alt="" className={style.img}/>
         </div>
-        <Tabs style={{height: '100%'}} defaultActiveKey="1" animated={false} onChange={callback}
+        <Tabs style={{height: '100%'}} defaultActiveKey="2" animated={false} onChange={callback}
               onTabClick={handleTabClick} destroyInactiveTabPane={false}>
           <TabPane tab="登录" key="1">
             <div className={style.login}>
@@ -118,7 +124,10 @@ class Login extends Component {
                     width: '0.44rem'
                   }}/>
                 </InputItem>)}
-                <WhiteSpace size="xl"/>
+                <WhiteSpace size="md"/>
+                <div className={style.forgetWrapper}>
+                  <div onClick={forgetPassword} className={style.forget}>忘记密码</div>
+                </div>
                 <WhiteSpace size="lg"/>
                 <Button className="btn" type="primary" onClick={userLogin}>确认登录</Button>
               </List>
@@ -191,6 +200,28 @@ class Login extends Component {
                   }}/>
                 </InputItem>)}
                 <WhiteSpace size="xl"/>
+                {getFieldDecorator('registerVerify', {
+                    rules: [
+                      {required: true, message: '请输入验证码'}
+                    ],
+                    initialValue: 12345
+                  }
+                )(<Flex justify="between"><InputItem
+                  placeholder="请输入验证码"
+                  className={style.verify}
+                  style={{border: 'none', borderBottom: '2px solid #666'}}
+                  type="password"
+                  labelNumber={2}
+                >
+                  <div style={{
+                    backgroundImage: `url(${verifyIcon})`,
+                    backgroundSize: 'cover',
+                    height: '0.44rem',
+                    width: '0.44rem'
+                  }}/>
+                </InputItem>
+                  <Button className={style.verifyBtn} onClick={sendVerify}>发送验证码</Button>
+                </Flex>)}
                 <WhiteSpace size="xl"/>
                 <WhiteSpace size="lg"/>
                 <Button className="btn" type="primary" onClick={userRegister}>注册账号</Button>
@@ -198,7 +229,6 @@ class Login extends Component {
             </div>
           </TabPane>
         </Tabs>
-        <WhiteSpace size="xl"/>
         <WhiteSpace size="xl"/>
         <WhiteSpace size="xl"/>
       </div>

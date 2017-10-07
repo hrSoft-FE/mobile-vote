@@ -3,14 +3,14 @@ import { Toast } from 'antd-mobile'
 /**
  * Toast 错误信息
  * @param {object} error error对象，由this.props.form.validateFields 提供
- * @param {[string]} itemArr field名称构成的数组
+ * @param {[string]} itemArr field名称构成的数组,默认为空
  * @param {boolean} singleModel 是否只toast一条信息，默认为 true
  * @param {boolean} all 是否处理全部的error信息，默认为 false,此时itemArr失效
  * @param {number} time toast默认时间为1s
  * @return {boolean} 是否有错误
  * @constructor
  */
-export const toastFormMessage = (error, all = true, itemArr, singleModel = true, time = 1) => {
+export const toastFormMessage = (error, all = true, itemArr = [], singleModel = true, time = 1) => {
   if (error) {
     let errorKeyArr = itemArr
     if (all) {

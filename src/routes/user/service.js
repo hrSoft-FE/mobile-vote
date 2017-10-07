@@ -11,4 +11,11 @@ const getUserInfo = async () => {
     token: true
   })
 }
-export { verify, getUserInfo }
+const getVerifyCode = async () => {
+  return request({
+    url: API.verifyCode,
+    method: 'get',
+    token: false
+  })
+}
+export { verify, getUserInfo, getVerifyCode }

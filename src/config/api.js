@@ -1,4 +1,4 @@
-const prefix = `api/votes/`
+const prefix = `http://localhost:3000/votes/`
 const apiMaker = path => `${prefix}${path}`
 
 export default {
@@ -12,5 +12,6 @@ export default {
   voted: apiMaker('voted'),
   submit: apiMaker('submit'),
   search: apiMaker('search'),
-  verify: apiMaker('verify')
+  verify: apiMaker('verify'),
+  verifyCode: apiMaker('verify-code')
 }

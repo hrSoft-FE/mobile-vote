@@ -1,5 +1,5 @@
 import pathToRegexp from 'path-to-regexp'
-import {} from './service'
+import { getVoteContent } from './service'
 import { queryURL } from '../../../utils'
 
 export default {
@@ -12,25 +12,27 @@ export default {
     contentSubscriber ({dispatch, history}) {
       return history.listen((props) => {
         const {pathname, query} = props
-        console.log(props)
         const match = pathToRegexp('/vote/content')
         if (match) {
-          console.log('id', query.id)
-
-          // this.props.dispatch({type: 'fetchVoteContent', payload: id})
+          dispatch({type: 'fetchVoteContent', payload: query.id})
         }
       })
     }
   },
   effects: {
     * initQuery ({payload}, {call, select, put}) {
+    },
+    * fetchVoteContent ({payload}, {call, select, put}) {
+      const data = yield call(getVoteContent)
+      console.log(data)
+      yield put({type: 'saveContent', payload: data.data.content})
     }
   },
   reducers: {
-    hi (state, {payload}) {
+    saveContent (state, {payload}) {
       return {
         ...state,
-        contests: payload
+        vote: payload
       }
     }
   }

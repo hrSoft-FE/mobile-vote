@@ -198,7 +198,7 @@ export default {
       'totalCount': 10
     }
   },
-  'GET /api/votes/content': {
+  '/api/votes/content': {
     'code': 0,
     'data':
       {

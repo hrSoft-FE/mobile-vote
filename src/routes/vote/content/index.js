@@ -27,6 +27,7 @@ class Content extends Component {
     const {app, content, children, location} = this.props
     const {getFieldProps} = this.props.form
     const {vote} = content
+    console.log(vote)
     const data = [
       {value: 0, label: 'Doctor'},
       {value: 1, label: 'Bachelor'}

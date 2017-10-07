@@ -3,11 +3,15 @@ import { connect } from 'dva'
 import ReactDOM from 'react-dom'
 import { routerRedux } from 'dva/router'
 import { RefreshControl, ListView } from 'antd-mobile'
+import { newDate } from '../../../utils/dateAbout'
 import './index.less'
 
 const NUM_ROWS = 20
 let pageIndex = 0
 
+function getLocalTime (nS) {
+  return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ')
+}
 function genData (pIndex = 0) {
   const dataArr = []
   for (let i = 0; i < NUM_ROWS; i++) {
@@ -25,6 +29,7 @@ class VoteList extends Component {
 
     this.state = {
       dataSource,
+      refreshing: true,
       height: document.documentElement.clientHeight
     }
   }
@@ -44,7 +49,7 @@ class VoteList extends Component {
     this.lv.getInnerViewNode().addEventListener('touchmove', this.tm = (e) => {
       this.tmPageY = e.touches[0].pageY
       if (this.tmPageY > this.tsPageY && this.scrollerTop <= 0 && scrollNode.scrollTop > 0) {
-        console.log('start pull to refresh')
+        console.log('下拉刷新')
         this.domScroller.options.preventDefaultOnTouchMove = false
       } else {
         this.domScroller.options.preventDefaultOnTouchMove = undefined
@@ -65,7 +70,7 @@ class VoteList extends Component {
   onRefresh = () => {
     console.log('onRefresh')
     if (!this.manuallyRefresh) {
-      this.props.dispatch({type: 'vote/saveRefreshing', payload: true})
+      this.setState({refreshing: true})
     } else {
       this.manuallyRefresh = false
     }
@@ -75,6 +80,7 @@ class VoteList extends Component {
       this.rData = genData()
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(this.rData),
+        refreshing: false,
         showFinishTxt: true
       })
       this.props.dispatch({type: 'vote/saveRefreshing', payload: false})
@@ -122,7 +128,7 @@ class VoteList extends Component {
 
   render () {
     const {vote} = this.props
-    const {voteList = [], refreshing} = vote
+    const {voteList = []} = vote
     let index = voteList.length - 1
     const separator = (sectionID, rowID) => (
       <div
@@ -147,29 +153,19 @@ class VoteList extends Component {
           style={{padding: '0 0.3rem', backgroundColor: 'white'}}
           onClick={() => this.props.dispatch(routerRedux.push(`/vote/content?id=${obj.id}`))}
         >
-          <div style={{
-            height: '1rem',
-            lineHeight: '1rem',
-            color: '#888',
-            fontSize: '0.36rem',
-            borderBottom: '1px solid #ddd'
-          }}>
-            {obj.title}
-          </div>
           <div style={{display: '-webkit-box', display: 'flex', padding: '0.3rem'}}>
             <div style={{display: 'inline-block'}}>
               <div style={{
-                marginBottom: '0.16rem',
-                color: '#000',
-                fontSize: '0.32rem',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-                maxWidth: '5rem'
-              }}>{obj.des}-{rowData}</div>
-              <div style={{fontSize: '0.32rem'}}><span style={{fontSize: '0.6rem', color: '#FF6E27'}}>{obj.id}</span>
+                fontSize: '0.36rem',
+                marginBottom: '30px'
+              }}>{obj.title}</div>
+              <div style={{fontSize: '0.32rem', marginBottom: '30px'}}><span
+                style={{fontSize: '0.6rem', color: '#FF6E27'}}>{obj.id}</span>
                 元/任务
               </div>
+              <div style={{fontSize: '0.32rem', color: '#969696'}}>结束时间：{getLocalTime(obj.end_time / 1000)}</div>
             </div>
           </div>
         </div>
@@ -193,7 +189,7 @@ class VoteList extends Component {
         }}
         scrollerOptions={{scrollbars: true, scrollingComplete: this.scrollingComplete}}
         refreshControl={<RefreshControl
-          refreshing={refreshing}
+          refreshing={this.state.refreshing}
           onRefresh={this.onRefresh}
           icon={this.renderCustomIcon()}
         />}

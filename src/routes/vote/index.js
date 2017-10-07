@@ -2,28 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'dva'
 import { routerRedux } from 'dva/router'
 import { Tabs, WhiteSpace, Badge, SegmentedControl, WingBlank } from 'antd-mobile'
-import VoteList from './voteList'
 import './index.less'
 
+const TabPane = Tabs.TabPane
+
 class Vote extends Component {
-  onChange = (e) => {
-    let value = ''
-    switch (e.nativeEvent.selectedSegmentIndex) {
-      case 0:
-        value = 'doing'
-        break
-      case 1:
-        value = 'will'
-        break
-      case 2:
-        value = 'done'
-        break
-      default:
-        value = ''
-    }
-    // this.props.dispatch(routerRedux.push(`/vote/${value}`))
-    // this.props.dispatch({type: 'upDateList', payload: value})
-    console.log(value)
+  handleTabClick = (key) => {
+    console.log('onTabClick', key)
+    this.props.dispatch(routerRedux.push(`/vote/${key}`))
+    this.props.dispatch({type: 'saveStatus', payload: key})
   }
 
   render () {
@@ -35,10 +22,13 @@ class Vote extends Component {
         <WingBlank>
           {
             route.indexOf(location.pathname) !== -1 &&
-            <SegmentedControl
-              values={['进行中', '未开始', '已结束']}
-              onChange={this.onChange}
-            />
+            <div>
+              <Tabs defaultActiveKey="doing" onTabClick={this.handleTabClick}>
+                <TabPane tab={<Badge>进行中</Badge>} key="doing" />
+                <TabPane tab={<Badge>未开始</Badge>} key="will" />
+                <TabPane tab={<Badge>已结束</Badge>} key="done" />
+              </Tabs>
+            </div>
           }
           {
             children

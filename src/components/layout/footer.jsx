@@ -11,7 +11,8 @@ import accountIconActive from './account-active.png'
 import styles from './footer.less'
 
 function Footer ({dispatch, childrens, location}) {
-  const route = ['/vote/doing', '/vote/done', '/vote/will', '/search', '/info']
+  const route = ['/vote/doing', '/vote/done', '/vote/will', '/search', '/user']
+  const need = ['/vote/doing', '/vote/done', '/vote/will']
   return (
     <div>
       {
@@ -27,7 +28,7 @@ function Footer ({dispatch, childrens, location}) {
               key="投票"
               icon={{uri: voteIcon}}
               selectedIcon={{uri: voteIconActive}}
-              selected={route.indexOf(location.pathname) !== -1}
+              selected={need.indexOf(location.pathname) !== -1}
               onPress={() => dispatch(routerRedux.push('/vote/doing'))}
             >
               {childrens}

@@ -16,4 +16,4 @@ class Done extends Component {
   }
 }
 
-export default connect(({app, vote}) => ({app, vote}))(Done)
+export default connect(({app, vote, done}) => ({app, vote, done}))(Done)

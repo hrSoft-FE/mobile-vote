@@ -7,7 +7,7 @@ import './index.less'
 const RadioItem = Radio.RadioItem
 const CheckboxItem = Checkbox.CheckboxItem
 
-class VoteContent extends Component {
+class Content extends Component {
   state = {
     value: 0,
     value2: 0,
@@ -24,7 +24,9 @@ class VoteContent extends Component {
   }
 
   render () {
+    const {app, content, children, location} = this.props
     const {getFieldProps} = this.props.form
+    const {vote} = content
     const data = [
       {value: 0, label: 'Doctor'},
       {value: 1, label: 'Bachelor'}
@@ -33,7 +35,7 @@ class VoteContent extends Component {
     return (
       <div>
         <WingBlank>
-          <p className="title">Basic Range</p>
+          <p className="title">hihi{vote}</p>
         </WingBlank>
         <List renderHeader={() => '单选'}>
           {data.map(i => (
@@ -81,4 +83,4 @@ class VoteContent extends Component {
   }
 }
 
-export default connect(({app, content}) => ({app, content}))(createForm()(VoteContent))
+export default connect(({app, content}) => ({app, content}))(createForm()(Content))

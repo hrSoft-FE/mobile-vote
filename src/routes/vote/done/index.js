@@ -9,7 +9,6 @@ class Done extends Component {
     const {} = this.props
     return (
       <div>
-        Done
         <VoteList />
       </div>
     )

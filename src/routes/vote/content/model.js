@@ -1,26 +1,23 @@
 import pathToRegexp from 'path-to-regexp'
-import {
-  verify,
-  getUnStartVotes,
-  getPastVotes,
-  getCurrentVotes,
-  getVotedVotes,
-  getVotesDetail,
-  submitVoteRes
-} from './service'
+import {} from './service'
+import { queryURL } from '../../../utils'
 
 export default {
   namespace: 'content',
   state: {
-    contests: [],
+    vote: [],
     query: {}
   },
   subscriptions: {
-    voteSubscriber ({dispatch, history}) {
-      return history.listen(({pathname, query}) => {
+    contentSubscriber ({dispatch, history}) {
+      return history.listen((props) => {
+        const {pathname, query} = props
+        console.log(props)
         const match = pathToRegexp('/vote/content')
         if (match) {
-          dispatch({type: 'initQuery'})
+          console.log('id', query.id)
+
+          // this.props.dispatch({type: 'fetchVoteContent', payload: id})
         }
       })
     }

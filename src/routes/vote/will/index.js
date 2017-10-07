@@ -9,7 +9,6 @@ class Will extends Component {
     const {} = this.props
     return (
       <div>
-        will
         <VoteList />
       </div>
     )

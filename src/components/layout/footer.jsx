@@ -11,7 +11,7 @@ import accountIconActive from './account-active.png'
 import styles from './footer.less'
 
 function Footer ({dispatch, childrens, location}) {
-  const route = ['/vote/doing', '/vote/done', '/vote/will', '/search', '/user']
+  const route = ['/vote/doing', '/vote/done', '/vote/will', '/search', '/user', '/user/login']
   const need = ['/vote/doing', '/vote/done', '/vote/will']
   return (
     <div>

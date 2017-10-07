@@ -198,47 +198,14 @@ export default {
       'totalCount': 10
     }
   },
-  'GET /api/votes/content/:id': (req, res) => {
-    const params = req.params || ''
-    const query = req.query || ''
-    if (params.id && (query.type === 1)) {
-      res.json({
-        'code': 0,
-        'data': {
-          'id': params.id,// the item id
-          'type': query.type, // the type of this item.
-          'content': [
-            {
-              'desc': 'this is the test item0',
-              'startTime': '2017-09-08 12:00:00',
-              'endTime': '2018-09-11 12:00:00'
-            }, {
-              'desc': 'this is the test item1',
-              'startTime': '2017-09-08 12:00:00',
-              'endTime': '2018-09-11 12:00:00'
-            }
-          ]
-        }
-      })
-    }
-    else if (params.id && (query.type === 2)) {
-      res.json({
-        'id': params.id,// the item id
-        'type': query.type, // the type of this item.
-        'dec': 1,// 1-十分制，2-百分制
-        'content': [
-          {
-            'desc': 'this is the score item0',
-            'startTime': '2017-09-08 12:00:00',
-            'endTime': '2018-09-11 12:00:00'
-          }, {
-            'desc': 'this is the test item1',
-            'startTime': '2017-09-08 12:00:00',
-            'endTime': '2018-09-11 12:00:00'
-          }
-        ]
-      })
-    }
+  'GET /api/votes/content': {
+    'code': 0,
+    'data':
+      {
+        'type': 0, // the type of this item.
+        'content':
+          ['this is the test item0', '2017-09-08 12:00:00', '2018-09-11 12:00:00']
+      }
   },
   'POST /api/votes/submit': (req, res) => {
     res.json({

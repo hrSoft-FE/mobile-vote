@@ -1,7 +1,7 @@
 module.exports = {
   path: 'vote',
   childRoutes: [
-    require('./voteContent/route'),
+    require('./content/route'),
     require('./doing/route'),
     require('./will/route'),
     require('./done/route')

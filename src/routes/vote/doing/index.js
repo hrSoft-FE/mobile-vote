@@ -9,7 +9,6 @@ class Doing extends Component {
     const {} = this.props
     return (
       <div>
-        Doing
         <VoteList />
       </div>
     )

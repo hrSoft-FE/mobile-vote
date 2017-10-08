@@ -9,7 +9,7 @@ const fetch = options => {
     url,
     token = false
   } = options
-  const header = token ? {'token': window.localStorage.getItem('nuedcToken')} : {}
+  const header = token ? {'token': window.localStorage.getItem('token')} : {}
   const myAxios = axios.create({
     timeout: 15000,
     headers: header

@@ -28,7 +28,7 @@ class Update extends Component {
     }
     const userUpdate = () => {
       this.props.form.validateFields((error, value) => {
-        const {password, confirm, phone} = value
+        const {newPassword, confirm, oldPassword} = value
         const errRes = toastFormMessage(error)
         console.log(errRes)
         if (errRes) return
@@ -36,7 +36,7 @@ class Update extends Component {
           try {
             dispatch({
               type: 'user/update',
-              payload: value
+              payload: {}
             })
             // dispatch(routerRedux.push('/user/login'))
           } catch (e) {}
@@ -54,32 +54,32 @@ class Update extends Component {
           <List key='register' style={{width: '80%'}}>
             <WhiteSpace size="xl"/>
             <WhiteSpace size="xl"/>
-            {getFieldDecorator('phone', {
+            {getFieldDecorator('oldPassword', {
                 rules: [
-                  {len: 11, message: '手机号码应该是11位'},
-                  {required: true, message: '请输入手机号码'}
-                ],
+                  {min: 6, message: '密码最少是6位'},
+                  {required: true, message: '请输入旧密码'}
+                ]
                 // initialValue: 15033517219
               }
             )(<InputItem
-              type="number"
+              placeholder="请输入旧密码"
+              style={{border: 'none', borderBottom: '2px solid #666'}}
+              type="password"
               labelNumber={2}
-              style={{marginTop: '0rem', border: 'none', borderBottom: '2px solid #666'}}
-              placeholder="请输入手机号"
             >
               <div style={{
-                backgroundImage: `url(${mobileIcon})`,
+                backgroundImage: `url(${passwordIcon})`,
                 backgroundSize: 'cover',
                 height: '0.44rem',
                 width: '0.44rem'
               }}/>
             </InputItem>)}
             <WhiteSpace size="xl"/>
-            {getFieldDecorator('password', {
+            {getFieldDecorator('newPassword', {
                 rules: [
                   {min: 6, message: '密码最少是6位'},
                   {required: true, message: '请输入新密码'}
-                ],
+                ]
                 // initialValue: 15033517219
               }
             )(<InputItem
@@ -98,8 +98,8 @@ class Update extends Component {
             <WhiteSpace size="xl"/>
             {getFieldDecorator('confirm', {
                 rules: [
-                  {required: true, message: '请再次输入密码'}
-                ],
+                  {required: true, message: '请再次输入新密码'}
+                ]
                 // initialValue: 15033517219
               }
             )(<InputItem

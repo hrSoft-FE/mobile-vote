@@ -34,27 +34,34 @@ export default {
         const response = yield call(userLogin, payload)
         const {code, data} = response
         if (code === ERR_OK) {
-          yield put({type: 'saveUserInfo', payload: data})
+          const {user, token} = data
+          yield put({type: 'saveUserInfo', payload: user})
+          yield put({type: 'saveToken', payload: token})
+          window.localStorage.setItem('token', token)
           Toast.success('登录成功', 1)
           yield put(routerRedux.push('/user'))
         } else {
-          Modal.alert('登录失败', `大概是密码错误`, [
+          Modal.alert('登录失败', `可能是密码错误`, [
             {text: '确定', onPress: () => {}}
           ])
         }
       } catch (e) {
-        Toast.fail('登录失败')
+        Modal.alert('登录失败', `未知原因`, [
+          {text: '确定', onPress: () => {}}
+        ])
       }
     },
     * register ({payload}, {call, select, put}) {
+      console.log(payload)
       try {
         const response = yield call(register, payload)
         const {code, data} = response
         if (code === ERR_OK) {
           yield put({type: 'saveRegisterField', payload: data})
           Toast.success('注册成功', 2)
+          yield put(routerRedux.push('/user'))
         } else {
-          Modal.alert('注册失败', `我也不知道为什么`, [
+          Modal.alert('注册失败', `${data}`, [
             {text: 'OK', onPress: () => {}}
           ])
         }
@@ -76,6 +83,12 @@ export default {
       return {
         ...state,
         userInfo: payload
+      }
+    },
+    saveToken (state, {payload}) {
+      return {
+        ...state,
+        token: payload
       }
     },
     saveRegisterField (state, {payload}) {

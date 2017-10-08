@@ -8,7 +8,8 @@ export default {
   namespace: 'user',
   state: {
     contests: [],
-    query: {}
+    query: {},
+    token: {}
   },
   subscriptions: {
     infoSubscriber ({dispatch, history}) {

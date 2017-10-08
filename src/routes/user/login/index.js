@@ -12,6 +12,7 @@ import passwordIcon from '../icon/password.png'
 import confirmIcon from '../icon/confirm.png'
 import mailIcon from '../icon/mail.png'
 import verifyIcon from '../icon/verify.png'
+import nameIcon from '../icon/name.png'
 
 const TabPane = Tabs.TabPane
 
@@ -32,40 +33,36 @@ class Login extends Component {
   }
 
   render () {
-    const {login, dispatch, form: {getFieldProps, getFieldError, getFieldDecorator}} = this.props
+    const {login, dispatch, form: {getFieldDecorator}} = this.props
     const forgetPassword = (e) => {
       e.preventDefault()
       dispatch(routerRedux.push('/user/forget'))
     }
     const userLogin = () => {
       this.props.form.validateFields((error, value) => {
-        const {loginPhone, loginPassword} = value
-        const errRes = toastFormMessage(error, false, ['loginPhone', 'loginPassword'])
+        const {identifier, loginPassword} = value
+        const errRes = toastFormMessage(error, false, ['identifier', 'loginPassword'])
         console.log(errRes)
         if (errRes) return
-        dispatch({type: 'login/login', payload: {phone: loginPhone, password: loginPassword}})
-        Toast.loading('登录中', 2, () => {
-          console.log('登录成功 !!!')
-        })
+        // use the default client
+        dispatch({type: 'login/login', payload: {identifier: identifier, password: loginPassword, client: 1}})
       })
     }
     const userRegister = () => {
       this.props.form.validateFields((error, value) => {
-        const {registerPhone, registerPassword, registerConfirm, registerVerify} = value
-        const errRes = toastFormMessage(error, false, ['registerPhone', 'registerPassword', 'registerConfirm', 'registerVerify'])
+        // const {registerPhone, registerPassword, registerConfirm, registerVerify} = value
+        const {registerPhone, registerPassword, registerConfirm, name} = value
+        const errRes = toastFormMessage(error, false, ['registerPhone', 'registerPassword', 'registerConfirm', 'name'])
         console.log(errRes)
         if (errRes) return
         if (registerPassword === registerConfirm) {
-          Toast.loading('Loading...', 1, () => {
-            console.log('Load complete !!!')
-          })
           dispatch({
             type: 'login/register',
             payload: {
-              phone: registerPhone,
+              mobile: registerPhone,
               password: registerPassword,
-              confirm: registerConfirm,
-              verify: registerVerify
+              // confirm: registerConfirm,
+              name: name
             }
           })
         } else {
@@ -81,14 +78,14 @@ class Login extends Component {
         <div className={style.banner}>
           <img src={avatar} alt="" className={style.img}/>
         </div>
-        <Tabs style={{height: '100%'}} defaultActiveKey="2" animated={false} onChange={callback}
+        <Tabs style={{height: '100%'}} defaultActiveKey="1" animated={false} onChange={callback}
               onTabClick={handleTabClick} destroyInactiveTabPane={false}>
           <TabPane tab="登录" key="1">
             <div className={style.login}>
               <List key="login" style={{width: '80%'}}>
                 <WhiteSpace size="xl"/>
                 <WhiteSpace size="xl"/>
-                {getFieldDecorator('loginPhone', {
+                {getFieldDecorator('identifier', {
                     rules: [
                       {len: 11, message: '手机号码应该是11位'},
                       {required: true, message: '请输入手机号码'}
@@ -143,6 +140,26 @@ class Login extends Component {
             <div className={style.register}>
               <List key='register' style={{width: '80%'}}>
                 <WhiteSpace size="xl"/>
+                <WhiteSpace size="xl"/>
+                {getFieldDecorator('name', {
+                    rules: [
+                      {required: true, message: '请输入用户名称'}
+                    ]
+                    // initialValue: 15033517219
+                  }
+                )(<InputItem
+                  type="string"
+                  labelNumber={2}
+                  style={{marginTop: '0rem', border: 'none', borderBottom: '2px solid #666'}}
+                  placeholder="请输入用户名"
+                >
+                  <div style={{
+                    backgroundImage: `url(${nameIcon})`,
+                    backgroundSize: 'cover',
+                    height: '0.44rem',
+                    width: '0.44rem'
+                  }}/>
+                </InputItem>)}
                 <WhiteSpace size="xl"/>
                 {getFieldDecorator('registerPhone', {
                     rules: [
@@ -205,29 +222,29 @@ class Login extends Component {
                     width: '0.44rem'
                   }}/>
                 </InputItem>)}
-                <WhiteSpace size="xl"/>
-                {getFieldDecorator('registerVerify', {
-                    rules: [
-                      {required: true, message: '请输入验证码'}
-                    ]
-                    // initialValue: 12345
-                  }
-                )(<Flex justify="between"><InputItem
-                  placeholder="请输入验证码"
-                  className={style.verify}
-                  style={{border: 'none', borderBottom: '2px solid #666'}}
-                  type="password"
-                  labelNumber={2}
-                >
-                  <div style={{
-                    backgroundImage: `url(${verifyIcon})`,
-                    backgroundSize: 'cover',
-                    height: '0.44rem',
-                    width: '0.44rem'
-                  }}/>
-                </InputItem>
-                  <Button className={style.verifyBtn} onClick={sendVerify}>发送验证码</Button>
-                </Flex>)}
+                {/*<WhiteSpace size="xl"/>*/}
+                {/*{getFieldDecorator('registerVerify', {*/}
+                {/*rules: [*/}
+                {/*{required: true, message: '请输入验证码'}*/}
+                {/*]*/}
+                {/*// initialValue: 12345*/}
+                {/*}*/}
+                {/*)(<Flex justify="between"><InputItem*/}
+                {/*placeholder="请输入验证码"*/}
+                {/*className={style.verify}*/}
+                {/*style={{border: 'none', borderBottom: '2px solid #666'}}*/}
+                {/*type="password"*/}
+                {/*labelNumber={2}*/}
+                {/*>*/}
+                {/*<div style={{*/}
+                {/*backgroundImage: `url(${verifyIcon})`,*/}
+                {/*backgroundSize: 'cover',*/}
+                {/*height: '0.44rem',*/}
+                {/*width: '0.44rem'*/}
+                {/*}}/>*/}
+                {/*</InputItem>*/}
+                {/*<Button className={style.verifyBtn} onClick={sendVerify}>发送验证码</Button>*/}
+                {/*</Flex>)}*/}
                 <WhiteSpace size="xl"/>
                 <WhiteSpace size="lg"/>
                 <Button className="btn" type="primary" onClick={userRegister}>注册账号</Button>
@@ -235,6 +252,8 @@ class Login extends Component {
             </div>
           </TabPane>
         </Tabs>
+        <WhiteSpace size="xl"/>
+        <WhiteSpace size="xl"/>
         <WhiteSpace size="xl"/>
         <WhiteSpace size="xl"/>
       </div>

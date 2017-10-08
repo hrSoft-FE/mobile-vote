@@ -32,11 +32,11 @@ class Update extends Component {
         const errRes = toastFormMessage(error)
         console.log(errRes)
         if (errRes) return
-        if (password === confirm) {
+        if (newPassword === confirm) {
           try {
             dispatch({
               type: 'user/update',
-              payload: {}
+              payload: {oldPassword: oldPassword, newPassword: newPassword}
             })
             // dispatch(routerRedux.push('/user/login'))
           } catch (e) {}

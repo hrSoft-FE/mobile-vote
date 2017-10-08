@@ -6,6 +6,7 @@ export default {
   userInfo: apiMaker('user'),
   login: apiMakerProd('user/login'),
   register: apiMakerProd('user/register'),
+  updateInfo: apiMakerProd('user/update/password'),
   will: apiMaker('will'),
   done: apiMaker('done'),
   doing: apiMaker('doing'),
@@ -15,6 +16,5 @@ export default {
   search: apiMaker('search'),
   verify: apiMaker('verify'),
   verifyCode: apiMaker('verify-code'),
-  updateInfo: apiMaker('update-info'),
   forgetPassword: apiMaker('forget')
 }

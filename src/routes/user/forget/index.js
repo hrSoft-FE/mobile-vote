@@ -29,9 +29,9 @@ class Update extends Component {
     const userUpdate = () => {
       this.props.form.validateFields((error, value) => {
         const {password, confirm, phone} = value
-        // const errRes = toastFormMessage(error)
-        // console.log(errRes)
-        // if (errRes) return
+        const errRes = toastFormMessage(error)
+        console.log(errRes)
+        if (errRes) return
         if (password === confirm) {
           try {
             dispatch({

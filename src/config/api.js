@@ -13,5 +13,7 @@ export default {
   submit: apiMaker('submit'),
   search: apiMaker('search'),
   verify: apiMaker('verify'),
-  verifyCode: apiMaker('verify-code')
+  verifyCode: apiMaker('verify-code'),
+  updateInfo: apiMaker('update-info'),
+  forgetPassword: apiMaker('forget')
 }

@@ -1,7 +1,7 @@
 import pathToRegexp from 'path-to-regexp'
-import { verify, getUserInfo, getVerifyCode } from './service'
-import { Toast } from 'antd-mobile'
-import { routerRedux } from 'dva/router'
+import { verify, getUserInfo, getVerifyCode, updateUserInfo, forgetPassword } from './service'
+import { Toast, Modal } from 'antd-mobile'
+import { routerRedux, Link } from 'dva/router'
 
 const ERR_OK = 0
 export default {
@@ -34,7 +34,36 @@ export default {
       } catch (e) {
         console.error(e)
       }
+    },
+    * update ({payload}, {call, select, put}) {
+      try {
+        const response = yield call(updateUserInfo, payload)
+        const {code, data} = response
+        if (code === ERR_OK) {
+          yield put({type: 'saveUpdate', payload: data})
+          Modal.alert('密码修改成功', '请重新登录', [
+            {text: '确定', onPress: () => { window.location.hash = '/user/login' }}
+          ])
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    * forget ({payload}, {call, select, put}) {
+      try {
+        const response = yield call(forgetPassword, payload)
+        const {code, data} = response
+        if (code === ERR_OK) {
+          yield put({type: 'saveForget', payload: data})
+          Modal.alert('重置密码成功', '请重新登录', [
+            {text: '确定', onPress: () => { window.location.hash = '/user/login' }}
+          ])
+        }
+      } catch (e) {
+        console.log()
+      }
     }
+
   },
   reducers: {
     hi (state, {payload}) {
@@ -48,6 +77,18 @@ export default {
         ...state,
         verifyCode: payload
       }
+    },
+    saveUpdate (state, {payload}) {
+      return {
+        ...state,
+        update: payload
+      }
+    }
+  },
+  saveUpdate (state, {payload}) {
+    return {
+      ...state,
+      forget: payload
     }
   }
 }

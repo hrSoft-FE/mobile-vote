@@ -18,4 +18,20 @@ const getVerifyCode = async () => {
     token: false
   })
 }
-export { verify, getUserInfo, getVerifyCode }
+const updateUserInfo = async (data) => {
+  return request({
+    url: API.updateInfo,
+    method: 'post',
+    token: true,
+    data
+  })
+}
+const forgetPassword = async (data) => {
+  return request({
+    url: API.forgetPassword,
+    method: 'post',
+    token: true,
+    data
+  })
+}
+export { verify, getUserInfo, getVerifyCode, updateUserInfo,forgetPassword }

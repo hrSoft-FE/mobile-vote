@@ -7,11 +7,11 @@ import avatar from '../../../assets/avatar.jpeg'
 import style from './index.less'
 import { Tabs, WhiteSpace, InputItem, Icon, List, Button, Toast, Flex } from 'antd-mobile'
 import { createForm } from 'rc-form'
-import mobileIcon from './Mobile-phone.png'
-import passwordIcon from './password.png'
-import confirmIcon from './confirm.png'
-import mailIcon from './mail.png'
-import verifyIcon from './verify.png'
+import mobileIcon from '../icon/Mobile-phone.png'
+import passwordIcon from '../icon/password.png'
+import confirmIcon from '../icon/confirm.png'
+import mailIcon from '../icon/mail.png'
+import verifyIcon from '../icon/verify.png'
 
 const TabPane = Tabs.TabPane
 
@@ -33,7 +33,8 @@ class Login extends Component {
 
   render () {
     const {login, dispatch, form: {getFieldProps, getFieldError, getFieldDecorator}} = this.props
-    const forgetPassword = () => {
+    const forgetPassword = (e) => {
+      e.preventDefault()
       dispatch(routerRedux.push('/user/forget'))
     }
     const userLogin = () => {
@@ -50,8 +51,8 @@ class Login extends Component {
     }
     const userRegister = () => {
       this.props.form.validateFields((error, value) => {
-        const {registerPhone, registerPassword, registerConfirm} = value
-        const errRes = toastFormMessage(error, false, ['registerPhone', 'registerPassword', 'registerConfirm'])
+        const {registerPhone, registerPassword, registerConfirm, registerVerify} = value
+        const errRes = toastFormMessage(error, false, ['registerPhone', 'registerPassword', 'registerConfirm', 'registerVerify'])
         console.log(errRes)
         if (errRes) return
         if (registerPassword === registerConfirm) {
@@ -60,7 +61,12 @@ class Login extends Component {
           })
           dispatch({
             type: 'login/register',
-            payload: {phone: registerPhone, password: registerPassword, confirm: registerConfirm}
+            payload: {
+              phone: registerPhone,
+              password: registerPassword,
+              confirm: registerConfirm,
+              verify: registerVerify
+            }
           })
         } else {
           Toast.fail('两次密码输入不一致')
@@ -86,8 +92,8 @@ class Login extends Component {
                     rules: [
                       {len: 11, message: '手机号码应该是11位'},
                       {required: true, message: '请输入手机号码'}
-                    ],
-                    initialValue: 15033517219
+                    ]
+                    // initialValue: 15033517219
                   }
                 )(<InputItem
                   type="number"
@@ -108,8 +114,8 @@ class Login extends Component {
                     rules: [
                       {min: 6, message: '密码最少是6位'},
                       {required: true, message: '请输入密码'}
-                    ],
-                    initialValue: 15033517219
+                    ]
+                    // initialValue: 15033517219
                   }
                 )(<InputItem
                   placeholder="请输入密码"
@@ -142,8 +148,8 @@ class Login extends Component {
                     rules: [
                       {len: 11, message: '手机号码应该是11位'},
                       {required: true, message: '请输入手机号码'}
-                    ],
-                    initialValue: 15033517219
+                    ]
+                    // initialValue: 15033517219
                   }
                 )(<InputItem
                   type="number"
@@ -163,8 +169,8 @@ class Login extends Component {
                     rules: [
                       {min: 6, message: '密码最少是6位'},
                       {required: true, message: '请输入密码'}
-                    ],
-                    initialValue: 15033517219
+                    ]
+                    // initialValue: 15033517219
                   }
                 )(<InputItem
                   placeholder="请输入密码"
@@ -183,8 +189,8 @@ class Login extends Component {
                 {getFieldDecorator('registerConfirm', {
                     rules: [
                       {required: true, message: '请再次输入密码'}
-                    ],
-                    initialValue: 15033517219
+                    ]
+                    // initialValue: 15033517219
                   }
                 )(<InputItem
                   placeholder="请确认密码"
@@ -203,8 +209,8 @@ class Login extends Component {
                 {getFieldDecorator('registerVerify', {
                     rules: [
                       {required: true, message: '请输入验证码'}
-                    ],
-                    initialValue: 12345
+                    ]
+                    // initialValue: 12345
                   }
                 )(<Flex justify="between"><InputItem
                   placeholder="请输入验证码"

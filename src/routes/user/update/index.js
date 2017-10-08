@@ -5,22 +5,13 @@ import PropTypes from 'prop-types'
 import { verify, toastFormMessage } from '../../../utils'
 import avatar from '../../../assets/avatar.jpeg'
 import style from './index.less'
-import { Tabs, WhiteSpace, InputItem, Icon, List, Button, Toast } from 'antd-mobile'
+import { Tabs, WhiteSpace, InputItem, Icon, List, Button, Toast, Flex } from 'antd-mobile'
 import { createForm } from 'rc-form'
-import mobileIcon from './Mobile-phone.png'
-import passwordIcon from './password.png'
-import confirmIcon from './confirm.png'
-import mailIcon from './mail.png'
-
-const TabPane = Tabs.TabPane
-
-function callback (key) {
-  console.log('onChange', key)
-}
-
-function handleTabClick (key) {
-  console.log('onTabClick', key)
-}
+import mobileIcon from '../icon/Mobile-phone.png'
+import passwordIcon from '../icon/password.png'
+import confirmIcon from '../icon/confirm.png'
+import mailIcon from '../icon/mail.png'
+import verifyIcon from '../icon/verify.png'
 
 class Update extends Component {
   constructor (props) {
@@ -31,37 +22,24 @@ class Update extends Component {
   }
 
   render () {
-    const {login, dispatch, form: {getFieldProps, getFieldError, getFieldDecorator}} = this.props
-    let errors
-    const forgetPassword = () => {
-      dispatch(routerRedux.push('/user/forget'))
+    const {user, dispatch, form: {getFieldDecorator}} = this.props
+    const sendVerify = () => {
+      dispatch({type: 'user/getVerifyCode', payload: {}})
     }
-    const userLogin = () => {
+    const userUpdate = () => {
       this.props.form.validateFields((error, value) => {
-        const {loginPhone, loginPassword} = value
-        const errRes = toastFormMessage(error, false, ['loginPhone', 'loginPassword'])
+        const {password, confirm, phone} = value
+        const errRes = toastFormMessage(error)
         console.log(errRes)
         if (errRes) return
-        dispatch({type: 'login/login', payload: {phone: loginPhone, password: loginPassword}})
-        Toast.loading('登录中', 2, () => {
-          console.log('登录成功 !!!')
-        })
-      })
-    }
-    const userRegister = () => {
-      this.props.form.validateFields((error, value) => {
-        const {registerPhone, registerPassword, registerConfirm} = value
-        const errRes = toastFormMessage(error, false, ['registerPhone', 'registerPassword', 'registerConfirm'])
-        console.log(errRes)
-        if (errRes) return
-        if (registerPassword === registerConfirm) {
-          Toast.loading('Loading...', 1, () => {
-            console.log('Load complete !!!')
-          })
-          dispatch({
-            type: 'login/register',
-            payload: {phone: registerPhone, password: registerPassword, confirm: registerConfirm}
-          })
+        if (password === confirm) {
+          try {
+            dispatch({
+              type: 'user/update',
+              payload: value
+            })
+            // dispatch(routerRedux.push('/user/login'))
+          } catch (e) {}
         } else {
           Toast.fail('两次密码输入不一致')
         }
@@ -76,12 +54,12 @@ class Update extends Component {
           <List key='register' style={{width: '80%'}}>
             <WhiteSpace size="xl"/>
             <WhiteSpace size="xl"/>
-            {getFieldDecorator('registerPhone', {
+            {getFieldDecorator('phone', {
                 rules: [
                   {len: 11, message: '手机号码应该是11位'},
                   {required: true, message: '请输入手机号码'}
                 ],
-                initialValue: 15033517219
+                // initialValue: 15033517219
               }
             )(<InputItem
               type="number"
@@ -97,15 +75,15 @@ class Update extends Component {
               }}/>
             </InputItem>)}
             <WhiteSpace size="xl"/>
-            {getFieldDecorator('registerPassword', {
+            {getFieldDecorator('password', {
                 rules: [
                   {min: 6, message: '密码最少是6位'},
-                  {required: true, message: '请输入密码'}
+                  {required: true, message: '请输入新密码'}
                 ],
-                initialValue: 15033517219
+                // initialValue: 15033517219
               }
             )(<InputItem
-              placeholder="请输入密码"
+              placeholder="请输入新密码"
               style={{border: 'none', borderBottom: '2px solid #666'}}
               type="password"
               labelNumber={2}
@@ -118,11 +96,11 @@ class Update extends Component {
               }}/>
             </InputItem>)}
             <WhiteSpace size="xl"/>
-            {getFieldDecorator('registerConfirm', {
+            {getFieldDecorator('confirm', {
                 rules: [
                   {required: true, message: '请再次输入密码'}
                 ],
-                initialValue: 15033517219
+                // initialValue: 15033517219
               }
             )(<InputItem
               placeholder="请确认密码"
@@ -138,8 +116,31 @@ class Update extends Component {
               }}/>
             </InputItem>)}
             <WhiteSpace size="xl"/>
-            <WhiteSpace size="lg"/>
-            <Button className={style.btn} type="warning" onClick={userRegister}>确认修改</Button>
+            {/*{getFieldDecorator('registerVerify', {*/}
+            {/*rules: [*/}
+            {/*{required: true, message: '请输入验证码'}*/}
+            {/*],*/}
+            {/*initialValue: 12345*/}
+            {/*}*/}
+            {/*)(<Flex justify="between"><InputItem*/}
+            {/*placeholder="请输入验证码"*/}
+            {/*className={style.verify}*/}
+            {/*style={{border: 'none', borderBottom: '2px solid #666'}}*/}
+            {/*type="password"*/}
+            {/*labelNumber={2}*/}
+            {/*>*/}
+            {/*<div style={{*/}
+            {/*backgroundImage: `url(${verifyIcon})`,*/}
+            {/*backgroundSize: 'cover',*/}
+            {/*height: '0.44rem',*/}
+            {/*width: '0.44rem'*/}
+            {/*}}/>*/}
+            {/*</InputItem>*/}
+            {/*<Button className={style.verifyBtn} onClick={sendVerify}>发送验证码</Button>*/}
+            {/*</Flex>)}*/}
+            <WhiteSpace size="xl"/>
+            <WhiteSpace size='lg'/>
+            <Button className={style.btn} type='warning' onClick={userUpdate}>确认修改</Button>
           </List>
         </div>
         <WhiteSpace size="xl"/>

@@ -36,9 +36,10 @@ export default {
         if (code === ERR_OK) {
           yield put({type: 'saveUserInfo', payload: data})
           Toast.success('登录成功', 1)
+          yield put(routerRedux.push('/user'))
         } else {
           Modal.alert('登录失败', `大概是密码错误`, [
-            {text: 'OK', onPress: () => {}}
+            {text: '确定', onPress: () => {}}
           ])
         }
       } catch (e) {
@@ -58,7 +59,9 @@ export default {
           ])
         }
       } catch (e) {
-        Toast.fail('注册失败')
+        Modal.alert('注册失败', `我也不知道为什么`, [
+          {text: 'OK', onPress: () => {}}
+        ])
       }
     }
   },

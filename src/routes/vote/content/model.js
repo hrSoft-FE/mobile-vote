@@ -24,8 +24,7 @@ export default {
     },
     * fetchVoteContent ({payload}, {call, select, put}) {
       const data = yield call(getVoteContent)
-      console.log(data)
-      yield put({type: 'saveContent', payload: data.data.content})
+      yield put({type: 'saveContent', payload: data.data})
     }
   },
   reducers: {

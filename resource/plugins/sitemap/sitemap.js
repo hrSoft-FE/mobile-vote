@@ -301,7 +301,7 @@ function openPreviousPage() {
 
     function search_input_keyup(event) {
         var searchVal = $(this).val().toLowerCase();
-        //If empty search field, show all nodes, else grey+hide all nodes and
+        //If empty add field, show all nodes, else grey+hide all nodes and
         //ungrey+unhide all matching nodes, as well as unhide their parent nodes
         if(searchVal == '') {
             $('.sitemapPageName').removeClass('sitemapGreyedName');

@@ -2,8 +2,8 @@ import React from 'react'
 import { TabBar, Icon } from 'antd-mobile'
 import { connect } from 'dva'
 import { routerRedux } from 'dva/router'
-import searchIconActive from './search-active.png'
-import searchIcon from './search.png'
+import addIconActive from './add-active.png'
+import addIcon from './add.png'
 import voteIcon from './survey.png'
 import voteIconActive from './survey-active.png'
 import accountIcon from './account.png'
@@ -11,12 +11,13 @@ import accountIconActive from './account-active.png'
 import styles from './footer.less'
 
 function Footer ({dispatch, childrens, location}) {
-  const route = ['/vote/doing', '/vote/done', '/vote/will', '/search', '/user', '/user/login']
-  const need = ['/vote/doing', '/vote/done', '/vote/will']
+  const route = ['/vote/doing', '/vote/done', '/vote/will', '/add', '/user']
+  const need = ['/vote/doing', '/vaddition_fill (1).pngote/done', '/vote/will']
   return (
     <div>
       {
-        route.indexOf(location.pathname) !== -1 && <div className={styles.normal}>
+        route.indexOf(location.pathname) !== -1 &&
+        <div className={styles.normal}>
           <TabBar
             unselectedTintColor="#949494"
             tintColor="#33A3F4"
@@ -34,12 +35,13 @@ function Footer ({dispatch, childrens, location}) {
               {childrens}
             </TabBar.Item>
             <TabBar.Item
-              title="搜索"
-              key="搜索"
-              icon={{uri: searchIcon}}
-              selectedIcon={{uri: searchIconActive}}
-              selected={location.pathname === '/search'}
-              onPress={() => dispatch(routerRedux.push('/search'))}
+              title="创建"
+              key="创建"
+              icon={{uri: addIcon}}
+              iconStyle={{width: 48, height: 48}}
+              selectedIcon={{uri: addIconActive}}
+              selected={location.pathname === '/add'}
+              onPress={() => dispatch(routerRedux.push('/add'))}
             >
               {childrens}
             </TabBar.Item>

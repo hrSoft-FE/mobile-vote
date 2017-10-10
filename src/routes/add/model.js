@@ -1,18 +1,18 @@
 import pathToRegexp from 'path-to-regexp'
-import { searchVotes } from './service'
+import { routerRedux } from 'dva/router'
+import {} from './service'
 
 export default {
-  namespace: 'search',
+  namespace: 'add',
   state: {
     contests: [],
-    query: {}
+    query: {},
   },
   subscriptions: {
     searchSubscriber ({dispatch, history}) {
       return history.listen(({pathname, query}) => {
-        const match = pathToRegexp('/user/search')
-        if (match) {
-          dispatch({type: 'initQuery'})
+        if (pathname === '/add') {
+          dispatch(routerRedux.push('/add/radio'))
         }
       })
     }
@@ -22,11 +22,11 @@ export default {
     }
   },
   reducers: {
-    hi (state, {payload}) {
+    saveStatus (state, {payload}) {
       return {
         ...state,
-        contests: payload
+        status: payload,
       }
-    }
-  }
+    },
+  },
 }

@@ -11,7 +11,7 @@ export default {
   content: apiMaker('content'),
   voted: apiMaker('voted'),
   submit: apiMaker('submit'),
-  search: apiMaker('search'),
+  add: apiMaker('add'),
   verify: apiMaker('verify'),
   verifyCode: apiMaker('verify-code'),
   updateInfo: apiMaker('update-info'),

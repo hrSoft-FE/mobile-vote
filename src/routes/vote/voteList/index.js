@@ -3,15 +3,12 @@ import { connect } from 'dva'
 import ReactDOM from 'react-dom'
 import { routerRedux } from 'dva/router'
 import { RefreshControl, ListView } from 'antd-mobile'
-import { newDate } from '../../../utils/dateAbout'
+import { getLocalTime } from '../../../utils'
 import './index.less'
 
 const NUM_ROWS = 20
 let pageIndex = 0
 
-function getLocalTime (nS) {
-  return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ')
-}
 function genData (pIndex = 0) {
   const dataArr = []
   for (let i = 0; i < NUM_ROWS; i++) {

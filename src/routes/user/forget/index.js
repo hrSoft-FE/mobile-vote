@@ -4,7 +4,7 @@ import { routerRedux } from 'dva/router'
 import PropTypes from 'prop-types'
 import { verify, toastFormMessage } from '../../../utils'
 import avatar from '../../../assets/avatar.jpeg'
-import style from './index.less'
+import style from '../index.less'
 import { Tabs, WhiteSpace, InputItem, Icon, List, Button, Toast, Flex } from 'antd-mobile'
 import { createForm } from 'rc-form'
 import mobileIcon from '../icon/Mobile-phone.png'
@@ -29,9 +29,9 @@ class Update extends Component {
     const userUpdate = () => {
       this.props.form.validateFields((error, value) => {
         const {password, confirm, phone} = value
-        // const errRes = toastFormMessage(error)
-        // console.log(errRes)
-        // if (errRes) return
+        const errRes = toastFormMessage(error)
+        console.log(errRes)
+        if (errRes) return
         if (password === confirm) {
           try {
             dispatch({

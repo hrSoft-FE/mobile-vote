@@ -7,10 +7,11 @@
     "precommit": "npm run lint",
     "lint": "eslint --ext .js src test",
     "start": "roadhog server",
+    "dev": "roadhog server",
     "push": "git add . && git commit && git push origin master"
   },
   "dependencies": {
-    "antd-mobile": "^1.6.5",
+    "antd-mobile": "^1.6.11",
     "axios": "^0.16.2",
     "babel-polyfill": "^6.26.0",
     "dva": "^1.2.1",

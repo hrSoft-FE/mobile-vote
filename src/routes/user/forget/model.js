@@ -1,5 +1,4 @@
 import pathToRegexp from 'path-to-regexp'
-import { userLogin, register } from './service'
 
 export default {
   namespace: 'login',
@@ -11,7 +10,7 @@ export default {
     voteSubscriber ({dispatch, history}) {
       return history.listen(({pathname, query}) => {
         console.log(pathname)
-        const match = pathToRegexp('/user/login')
+        const match = pathToRegexp('/user/forget')
         if (match) {
           dispatch({type: 'initQuery'})
         }
@@ -20,7 +19,6 @@ export default {
   },
   effects: {
     * initQuery ({payload}, {call, select, put}) {
-      console.log(10086)
     }
   },
   reducers: {

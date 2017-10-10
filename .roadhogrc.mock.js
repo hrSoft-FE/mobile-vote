@@ -203,8 +203,17 @@ export default {
     'data':
       {
         'type': 0, // the type of this item.
+        'title': '我该叫什么呢？',
+        'max': 2,
+        state: '已开始',
+        'start_time': 1507123590000,
+        'end_time': 1507123635000,
         'content':
-          ['this is the test item0', '2017-09-08 12:00:00', '2018-09-11 12:00:00']
+          [
+            {key: 0, text: '请叫我小可爱'},
+            {key: 1, text: '请叫我可爱可爱可爱'},
+            {key: 2, text: '请叫我小可爱小可爱小可爱'}
+          ]
       }
   },
   'POST /api/votes/submit': (req, res) => {

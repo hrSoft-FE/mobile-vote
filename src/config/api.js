@@ -2,8 +2,9 @@ const prefix = `api/votes/`
 const apiMaker = path => `${prefix}${path}`
 const prefixProd = 'http://192.168.0.120:3000/'
 const apiMakerProd = path => `${prefixProd}${path}`
+const expressMaker = path => `http://localhost:3000/votes/${path}`
 export default {
-  userInfo: apiMaker('user'),
+  userInfo: apiMakerProd('user/info'),
   login: apiMakerProd('user/login'),
   register: apiMakerProd('user/register'),
   updateInfo: apiMakerProd('user/update/password'),

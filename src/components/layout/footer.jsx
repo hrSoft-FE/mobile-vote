@@ -11,8 +11,9 @@ import accountIconActive from './account-active.png'
 import styles from './footer.less'
 
 function Footer ({dispatch, childrens, location}) {
-  const route = ['/vote/doing', '/vote/done', '/vote/will', '/search', '/user', '/user/login']
+  const route = ['/vote/doing', '/vote/done', '/vote/will', '/search', '/user', '/user/login', '/user/profile']
   const need = ['/vote/doing', '/vote/done', '/vote/will']
+  const userNavHighLight = ['/user', '/user/login', '/user/profile']
   return (
     <div>
       {
@@ -48,7 +49,7 @@ function Footer ({dispatch, childrens, location}) {
               key="我"
               icon={{uri: accountIcon}}
               selectedIcon={{uri: accountIconActive}}
-              selected={location.pathname === '/user/login'}
+              selected={userNavHighLight.indexOf(location.pathname) !== -1}
               onPress={() => dispatch(routerRedux.push('/user'))}
             >
               {childrens}

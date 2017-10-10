@@ -7,10 +7,11 @@
     "precommit": "npm run lint",
     "lint": "eslint --ext .js src test",
     "start": "roadhog server",
+    "dev": "roadhog server",
     "push": "git add . && git commit && git push origin master"
   },
   "dependencies": {
-    "antd-mobile": "^1.6.5",
+    "antd-mobile": "^1.6.11",
     "axios": "^0.16.2",
     "babel-polyfill": "^6.26.0",
     "dva": "^1.2.1",
@@ -22,9 +23,9 @@
     "path-to-regexp": "^2.0.0",
     "prop-types": "^15.5.10",
     "qs": "^6.5.0",
+    "rc-form": "^1.4.8",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "rc-form": "^1.4.8"
+    "react-dom": "^15.6.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

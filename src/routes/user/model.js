@@ -16,7 +16,7 @@ export default {
       return history.listen(({pathname, query}) => {
         // const match = pathToRegexp('/user')
         if (pathname === '/user') {
-          dispatch(routerRedux.push('/user/login'))
+          dispatch(routerRedux.push('/user/profile'))
         }
       })
     }

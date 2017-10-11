@@ -1,7 +1,7 @@
 import { API, request } from '../../utils'
-const create = async (query) => request({
-  url: `${API.search}?keyword=${query}`,
-  method: 'get',
+const create = async () => request({
+  url: API.create,
+  method: 'post',
   token: false
 })
 export { create }

@@ -16,24 +16,38 @@ import moment from 'moment'
 import 'moment/locale/zh-cn'
 
 const Item = List.Item
-const zhNow = moment().locale('zh-cn').utcOffset(8)
-const Radio = ({app, radio, dispatch, form: {getFieldProps, getFieldValue, validateFields, setFieldsValue, getFieldDecorator, getFieldError}}) => {
+// const zhNow = moment().locale('zh-cn').utcOffset(8)
+const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getFieldDecorator, getFieldError}}) => {
   const add = () => {
     dispatch({type: 'radio/add'})
   }
   const submit = (e) => {
     e.preventDefault()
-    validateFields((error, values) => {
-      if (!error) {
+    validateFields((errors, values) => {
+      if (errors) {
+        return errors
+      } else {
         console.log('ok', values)
-        let arr = []
+
+        const {title, startAt, endAt, description, isPublic, password} = values
+        let problemList = []
         Object.keys(values).forEach(key => {
           if (+key >= 0) {
-            arr.push(values[key])
+            problemList.push(values[key])
           }
         })
-      } else {
-        console.log('error', error, values)
+        let body = {
+          title,
+          startAt: startAt.valueOf(),
+          endAt: endAt.valueOf(),
+          description,
+          type: 1,
+          isPublic,
+          password,
+          problemList,
+        }
+        dispatch({type: 'radio/create', payload: body})
+        console.log(body)
       }
     })
   }
@@ -59,7 +73,7 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, getFieldValue, valid
               {
                 required: true,
                 requiredMessage: '请输入投票名',
-              }]
+              }],
           })(<InputItem placeholder='投票标题' />)
         }
         <WhiteSpace />
@@ -69,7 +83,7 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, getFieldValue, valid
             rules: [
               {
                 required: false,
-                message: '补充描述'
+                message: '补充描述',
               }],
           })(<TextareaItem placeholder='补充描述(可选)' rows='2' />)
         }
@@ -80,55 +94,76 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, getFieldValue, valid
         <WhiteSpace />
         <Item
           thumb='http://owu5k7u5s.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%20%281%29.png'
+          onClick={add}
         >
-          <button onClick={add} style={{color: '#1296db'}}>添加选项</button>
+          <span style={{color: '#1296db'}}>添加选项</span>
         </Item>
       </List>
       <div style={{height: '0.80rem'}} />
       <List>
-        <DatePicker
-          mode='datetime'
-          value={zhNow}
-          // minDate={moment('2015-08-06 +0800', 'YYYY-MM-DD Z').utcOffset(8)}
-        >
-          {
-            getFieldDecorator('startTime', {
-              initialValue: 'zhNow',
-              rules: [
-                {
-                  required: true,
-                  requiredMessage: '请输入开始日期',
-                }]
-            })(<Item arrow='horizontal'>开始日期</Item>)
-          }
-        </DatePicker>
+        {
+          getFieldDecorator('startAt', {
+            initialValue: '',
+            rules: [
+              {
+                required: true,
+                type: 'object',
+                requiredMessage: '请输入开始日期',
+              }],
+          })(
+            <DatePicker
+              mode='datetime'
+              format={val => val.format('YYYY-MM-DD HH:mm')}
+              extra='请选择开始日期'
+            >
+              <Item arrow='horizontal'>开始日期</Item>
+            </DatePicker>)
+        }
         <WhiteSpace />
-        <DatePicker
-          mode='datetime'
-          value={zhNow}
-          // minDate={moment('2015-08-06 +0800', 'YYYY-MM-DD Z').utcOffset(8)}
-        >
-          {
-            getFieldDecorator('endTime', {
-              initialValue: '',
-              rules: [
-                {
-                  required: true,
-                  requiredMessage: '请输入截止日期',
-                }],
-            })(<Item arrow='horizontal'>截止日期</Item>)
-          }
-        </DatePicker>
+        {
+          getFieldDecorator('endAt', {
+            initialValue: '',
+            rules: [
+              {
+                required: true,
+                type: 'object',
+                requiredMessage: '请输入截止日期',
+              }],
+          })(
+            <DatePicker
+              mode='datetime'
+              format={val => val.format('YYYY-MM-DD HH:mm:ss')}
+              extra='请选择截止日期'
+            >
+              <Item arrow='horizontal'>截止日期</Item>
+            </DatePicker>)
+        }
         <WhiteSpace />
         <Item
           extra={<Switch
             {...getFieldProps('isPublic', {
               initialValue: true,
-              valuePropName: 'checked'
+              valuePropName: 'checked',
             })}
-            onClick={(checked) => { console.log(checked) }}
+            platform="android"
+            // onClick={(checked) => { console.log(checked) }}
           />}
         >是否公开</Item>
+        {
+          (getFieldProps('isPublic').value === false) &&
+          <span>
+            {
+              getFieldDecorator('password', {
+                initialValue: '',
+                rules: [
+                  {
+                    required: false,
+                    requiredMessage: '请输入投票密码',
+                  }],
+              })(<InputItem>投票密码</InputItem>)
+            }
+          </span>
+        }
       </List>
       <div style={{height: '0.30rem'}} />
       <WingBlank>

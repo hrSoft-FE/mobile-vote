@@ -1,3 +1,5 @@
+const baseURl = 'http://192.168.0.120:3000'
+const apiMakers = path => `${baseURl}/${path}`
 const prefix = `api/votes/`
 const apiMaker = path => `${prefix}${path}`
 const prefixProd = 'http://192.168.0.120:3000/'
@@ -14,7 +16,7 @@ export default {
   content: apiMaker('content'),
   voted: apiMaker('voted'),
   submit: apiMaker('submit'),
-  add: apiMaker('add'),
+  create: apiMakers('vote/create'),
   verify: apiMaker('verify'),
   verifyCode: apiMaker('verify-code'),
   forgetPassword: apiMaker('forget')

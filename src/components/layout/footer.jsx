@@ -41,7 +41,7 @@ function Footer ({dispatch, childrens, location}) {
               iconStyle={{width: 48, height: 48}}
               selectedIcon={{uri: addIconActive}}
               selected={location.pathname === '/add'}
-              onPress={() => dispatch(routerRedux.push('/add'))}
+              onPress={() => dispatch(routerRedux.push('/add/radio'))}
             >
               {childrens}
             </TabBar.Item>

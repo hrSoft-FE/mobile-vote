@@ -10,49 +10,50 @@ import {
   Button,
   DatePicker,
 } from 'antd-mobile'
-import { routerRedux } from 'dva/router'
 import { createForm } from 'rc-form'
-import moment from 'moment'
-import 'moment/locale/zh-cn'
+import { toastFormMessage } from '../../../utils'
 
 const Item = List.Item
-// const zhNow = moment().locale('zh-cn').utcOffset(8)
-const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getFieldDecorator, getFieldError}}) => {
-  const add = () => {
-    dispatch({type: 'radio/add'})
+const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getFieldDecorator}}) => {
+  const adds = () => {
+    dispatch({type: 'radio/adds'})
   }
   const submit = (e) => {
     e.preventDefault()
     validateFields((errors, values) => {
-      if (errors) {
-        return errors
-      } else {
-        console.log('ok', values)
-
-        const {title, startAt, endAt, description, isPublic, password} = values
-        let problemList = []
-        Object.keys(values).forEach(key => {
-          if (+key >= 0) {
-            problemList.push(values[key])
-          }
-        })
-        let body = {
-          title,
-          startAt: startAt.valueOf(),
-          endAt: endAt.valueOf(),
-          description,
-          type: 1,
-          isPublic,
-          password,
-          problemList,
+      const {title, startAt, endAt, description = '', isPublic, password = null} = values
+      let problemList = []
+      let maxChoose = 1
+      const errRes = toastFormMessage(errors, false,
+        ['title', 'index', 'startAt', 'endAt', 'password'])
+      if (errRes) return
+      Object.keys(values).forEach(key => {
+        if (+key >= 0) {
+          problemList.push(values[key])
         }
-        dispatch({type: 'radio/create', payload: body})
-        console.log(body)
+      })
+      let body = {
+        title,
+        startAt: startAt.valueOf(),
+        endAt: endAt.valueOf(),
+        description,
+        type: 1,
+        isPublic,
+        password,
+        maxChoose,
+        problemList,
       }
+      console.log('ok', body)
+      dispatch({type: 'radio/create', payload: body})
     })
   }
   const getInput = (config = {}, index) => getFieldDecorator('' + index, {
     initialValue: config.value,
+    rules: [
+      {
+        required: true,
+        message: '请输入选项'
+      }]
   })(<InputItem key={index} placeholder={config.placeholder}>
     <div onClick={() => dispatch({type: 'radio/remove', payload: index})}
          style={{
@@ -60,7 +61,9 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
            backgroundSize: 'cover',
            height: '0.38rem',
            width: '0.38rem',
-         }} />
+         }}
+         key={index}
+    />
   </InputItem>)
   return (
     <form className='radio-wrapper'>
@@ -72,8 +75,8 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
             rules: [
               {
                 required: true,
-                requiredMessage: '请输入投票名',
-              }],
+                message: '请输入投票标题'
+              }]
           })(<InputItem placeholder='投票标题' />)
         }
         <WhiteSpace />
@@ -83,7 +86,7 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
             rules: [
               {
                 required: false,
-                message: '补充描述',
+                message: '补充描述'
               }],
           })(<TextareaItem placeholder='补充描述(可选)' rows='2' />)
         }
@@ -94,7 +97,7 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
         <WhiteSpace />
         <Item
           thumb='http://owu5k7u5s.bkt.clouddn.com/%E6%B7%BB%E5%8A%A0%20%281%29.png'
-          onClick={add}
+          onClick={adds}
         >
           <span style={{color: '#1296db'}}>添加选项</span>
         </Item>
@@ -108,7 +111,7 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
               {
                 required: true,
                 type: 'object',
-                requiredMessage: '请输入开始日期',
+                message: '请输入开始日期',
               }],
           })(
             <DatePicker
@@ -127,8 +130,8 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
               {
                 required: true,
                 type: 'object',
-                requiredMessage: '请输入截止日期',
-              }],
+                message: '请输入截止日期',
+              }]
           })(
             <DatePicker
               mode='datetime'
@@ -143,10 +146,9 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
           extra={<Switch
             {...getFieldProps('isPublic', {
               initialValue: true,
-              valuePropName: 'checked',
+              valuePropName: 'checked'
             })}
             platform="android"
-            // onClick={(checked) => { console.log(checked) }}
           />}
         >是否公开</Item>
         {
@@ -158,14 +160,15 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
                 rules: [
                   {
                     required: false,
-                    requiredMessage: '请输入投票密码',
-                  }],
+                    message: '请输入投票密码',
+                  }]
               })(<InputItem>投票密码</InputItem>)
             }
           </span>
         }
       </List>
-      <div style={{height: '0.30rem'}} />
+      <WhiteSpace />
+      <div style={{height: '0.60rem'}} />
       <WingBlank>
         <Button type='primary' style={{
           marginRight: '0.08rem',
@@ -173,8 +176,10 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
           lineHeight: '0.80rem',
         }} onClick={submit}>完成</Button>
       </WingBlank>
+      <div style={{height: '0.60rem'}} />
     </form>
   )
 }
 
-export default connect(({app, radio}) => ({app, radio}))(createForm()(Radio))
+export default connect(({app, add, radio}) => ({app, add, radio}))(
+  createForm()(Radio))

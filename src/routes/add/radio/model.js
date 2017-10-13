@@ -1,33 +1,35 @@
-import pathToRegexp from 'path-to-regexp'
-import { create } from '../service'
+import {create} from '../service'
+import { Toast } from 'antd-mobile'
 export default {
   namespace: 'radio',
   state: {
     config: [
       {
         value: '',
-        placeholder: '选项',
+        placeholder: '选项'
       }, {
         value: '',
-        placeholder: '选项',
-      }]
+        placeholder: '选项'
+      }],
+    isKeys: false
   },
   subscriptions: {
     radioSubscriber ({dispatch, history}) {
-      return history.listen(({pathname, query}) => {
-      })
-    },
+      return history.listen(({pathname, query}) => {})
+    }
   },
   effects: {
+    * initQuery ({payload}, {call, select, put}) {
+    },
     * create ({payload}, {call, select, put}) {
       const data = yield call(create, payload)
       if (data.code === 0) {
-        console.log('创建成功')
+        Toast.success('创建成功！')
       }
-    },
+    }
   },
   reducers: {
-    add (state, {payload = {value: ''}}) {
+    adds (state, {payload = {value: ''}}) {
       let {config} = state
       return {
         ...state,
@@ -35,9 +37,9 @@ export default {
           ...config,
           {
             value: '',
-            placeholder: '选项',
-          },
-        ],
+            placeholder: '选项'
+          }
+        ]
       }
     },
     remove (state, {payload}) {
@@ -45,14 +47,8 @@ export default {
       config.splice(payload, 1)
       return {
         ...state,
-        config,
+        config
       }
-    },
-    nowDate (state, {payload}) {
-      const {date} = state
-      return {
-        ...state,
-      }
-    },
-  },
+    }
+  }
 }

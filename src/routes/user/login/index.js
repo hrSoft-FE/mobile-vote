@@ -128,9 +128,10 @@ class Login extends Component {
                   }}/>
                 </InputItem>)}
                 <WhiteSpace size="md"/>
-                <div className={style.forgetWrapper}>
-                  <div onClick={forgetPassword} className={style.forget}>忘记密码</div>
-                </div>
+                {/*因为没有修改密码的需求，所以去掉了*/}
+                {/*<div className={style.forgetWrapper}>*/}
+                {/*<div onClick={forgetPassword} className={style.forget}>忘记密码</div>*/}
+                {/*</div>*/}
                 <WhiteSpace size="lg"/>
                 <Button className="btn" type="primary" onClick={userLogin}>确认登录</Button>
               </List>

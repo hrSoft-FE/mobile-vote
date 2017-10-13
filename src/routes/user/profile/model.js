@@ -28,7 +28,7 @@ export default {
     * initQuery ({payload}, {call, select, put}) {
     },
     * getUserInfo ({payload}, {call, select, put}) {
-      // const userInfo = yield select(({login}) => login)
+      const userInfo = yield select(({login}) => login)
       const {code, data} = yield call(getUserInfo)
       if (code === ERR_OK) {
         yield put({type: 'saveUserInfo', payload: data.user})

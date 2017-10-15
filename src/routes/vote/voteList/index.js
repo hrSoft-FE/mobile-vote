@@ -6,17 +6,6 @@ import { RefreshControl, ListView } from 'antd-mobile'
 import { getLocalTime } from '../../../utils'
 import './index.less'
 
-const NUM_ROWS = 20
-let pageIndex = 0
-
-function genData (pIndex = 0) {
-  const dataArr = []
-  for (let i = 0; i < NUM_ROWS; i++) {
-    dataArr.push(`row - ${(pIndex * NUM_ROWS) + i}`)
-  }
-  return dataArr
-}
-
 class VoteList extends Component {
   constructor (props) {
     super(props)
@@ -32,6 +21,8 @@ class VoteList extends Component {
   }
 
   componentDidMount () {
+    // 初始化数据
+    this.props.dispatch({type: 'vote/savePage', payload: {page: 1}})
     // Set the appropriate height
     setTimeout(() => this.setState({
       height: this.state.height - ReactDOM.findDOMNode(this.lv).offsetTop
@@ -72,37 +63,42 @@ class VoteList extends Component {
       this.manuallyRefresh = false
     }
 
-    // simulate initial Ajax
-    setTimeout(() => {
-      this.rData = genData()
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.rData),
-        refreshing: false,
-        showFinishTxt: true
-      })
-      this.props.dispatch({type: 'vote/saveRefreshing', payload: false})
-      this.props.dispatch({type: 'vote/updateVote'})
-      if (this.domScroller) {
-        this.domScroller.scroller.options.animationDuration = 500
-      }
-    }, 600)
+    // 下拉刷新初始数据
+    this.props.dispatch({type: 'vote/upDateList', payload: {page: 1}})
+    console.log('下拉')
+    const {vote = {}} = this.props
+    const {voteList = []} = vote
+    this.rData = voteList
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(this.rData),
+      refreshing: false,
+      showFinishTxt: true
+    })
+    if (this.domScroller) {
+      this.domScroller.scroller.options.animationDuration = 500
+    }
   }
 
-  onEndReached = (event) => {
-    // load new data
-    // hasMore: from backend data, indicates whether it is the last page, here is false
+  onEndReached = () => {
+    // 加载新一页
     if (this.state.isLoading && !this.state.hasMore) {
       return
     }
     console.log('reach end')
     this.setState({isLoading: true})
-    setTimeout(() => {
-      this.rData = [...this.rData, ...genData(++pageIndex)]
+    const {vote = {}} = this.props
+    const {voteList = [], page, count} = vote
+    console.log('加载', page, count)
+    if (page > count) {
+      this.setState({isLoading: false})
+    } else {
+      this.props.dispatch({type: 'vote/fetchNextVote', payload: {page: page + 1}})
+      this.rData = [...this.rData, ...voteList]
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(this.rData),
         isLoading: false
       })
-    }, 1000)
+    }
   }
 
   scrollingComplete = () => {
@@ -124,9 +120,9 @@ class VoteList extends Component {
   }
 
   render () {
-    const {vote} = this.props
+    const {vote = {}} = this.props
     const {voteList = []} = vote
-    let index = voteList.length - 1
+    let index = voteList.length === 0 ? 0 : voteList.length - 1
     const separator = (sectionID, rowID) => (
       <div
         key={`${sectionID}-${rowID}`}
@@ -140,33 +136,34 @@ class VoteList extends Component {
     )
     const row = (rowData, sectionID, rowID) => {
       if (index < 0) {
-        this.props.dispatch({type: 'vote/fetchNextVote'})
-        index = voteList.length - 1
-      }
-      const obj = voteList[index--]
-      return (
-        <div
-          key={rowID}
-          style={{padding: '0 0.3rem', backgroundColor: 'white'}}
-          onClick={() => this.props.dispatch(routerRedux.push(`/vote/content?id=${obj.id}`))}
-        >
-          <div style={{display: '-webkit-box', display: 'flex', padding: '0.3rem'}}>
-            <div style={{display: 'inline-block'}}>
-              <div style={{
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                fontSize: '0.36rem',
-                marginBottom: '30px'
-              }}>{obj.title}</div>
-              <div style={{fontSize: '0.32rem', marginBottom: '30px'}}><span
-                style={{fontSize: '0.6rem', color: '#FF6E27'}}>{obj.id}</span>
-                元/任务
+        console.log('from row')
+      } else {
+        const obj = voteList[index--]
+        const {title = '', id = null, endAt = null} = obj
+        return (
+          <div
+            key={rowID}
+            style={{padding: '0 0.3rem', backgroundColor: 'white'}}
+            onClick={() => this.props.dispatch(routerRedux.push(`/vote/content?id=${id}`))}
+          >
+            <div style={{display: '-webkit-box', display: 'flex', padding: '0.3rem'}}>
+              <div style={{display: 'inline-block'}}>
+                <div style={{
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  fontSize: '0.36rem',
+                  marginBottom: '30px'
+                }}>{title || '加载中'}</div>
+                <div style={{fontSize: '0.32rem', marginBottom: '30px'}}><span
+                  style={{fontSize: '0.6rem', color: '#FF6E27'}}>{id}</span>
+                  元/任务
+                </div>
+                <div style={{fontSize: '0.32rem', color: '#969696'}}>结束时间：{getLocalTime(endAt)}</div>
               </div>
-              <div style={{fontSize: '0.32rem', color: '#969696'}}>结束时间：{getLocalTime(obj.end_time / 1000)}</div>
             </div>
           </div>
-        </div>
-      )
+        )
+      }
     }
     return (
       <ListView

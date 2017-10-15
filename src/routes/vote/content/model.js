@@ -20,18 +20,17 @@ export default {
     }
   },
   effects: {
-    * initQuery ({payload}, {call, select, put}) {
-    },
     * fetchVoteContent ({payload}, {call, select, put}) {
-      const data = yield call(getVoteContent)
-      yield put({type: 'saveContent', payload: data.data})
+      const data = yield call(getVoteContent, payload)
+      console.log('data', data)
+      yield put({type: 'saveContent', payload: {vote: data.data}})
     }
   },
   reducers: {
     saveContent (state, {payload}) {
       return {
         ...state,
-        vote: payload
+        ...payload
       }
     }
   }

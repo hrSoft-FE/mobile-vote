@@ -30,7 +30,7 @@ function Footer ({dispatch, childrens, location}) {
               icon={{uri: voteIcon}}
               selectedIcon={{uri: voteIconActive}}
               selected={need.indexOf(location.pathname) !== -1}
-              onPress={() => dispatch(routerRedux.push('/vote/doing'))}
+              onPress={() => dispatch(routerRedux.push('/vote/will'))}
             >
               {childrens}
             </TabBar.Item>

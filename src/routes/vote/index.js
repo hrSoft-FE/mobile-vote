@@ -1,33 +1,40 @@
 import React, { Component } from 'react'
 import { connect } from 'dva'
 import { routerRedux } from 'dva/router'
-import { Tabs, WhiteSpace, Badge, SegmentedControl, WingBlank } from 'antd-mobile'
-import './index.less'
+import { Tabs, WhiteSpace, Badge, WingBlank, Icon } from 'antd-mobile'
 
 const TabPane = Tabs.TabPane
 
 class Vote extends Component {
   handleTabClick = (key) => {
-    console.log('onTabClick', key)
     this.props.dispatch(routerRedux.push(`/vote/${key}`))
-    this.props.dispatch({type: 'saveStatus', payload: key})
   }
 
   render () {
     const {app, vote, children, location} = this.props
-    const route = ['/vote/doing', '/vote/done', '/vote/will']
+    const route = ['/vote/doing', '/vote/will']
     return (
-      <div>
+      <div style={{backgroundColor: '#F5F5F9'}}>
         <WhiteSpace />
         <WingBlank>
           {
             route.indexOf(location.pathname) !== -1 &&
             <div>
-              <Tabs defaultActiveKey="doing" onTabClick={this.handleTabClick}>
-                <TabPane tab={<Badge>进行中</Badge>} key="doing" />
+              <Tabs defaultActiveKey="will" onTabClick={this.handleTabClick}>
                 <TabPane tab={<Badge>未开始</Badge>} key="will" />
-                <TabPane tab={<Badge>已结束</Badge>} key="done" />
+                <TabPane tab={<Badge>进行中</Badge>} key="doing" />
+                {/*<TabPane tab={<Badge>已结束</Badge>} key="done" />*/}
               </Tabs>
+              <div>
+                <Icon type='up' onClick={() => { window.scrollTo(0, 0) }} style={{
+                  width: '80px',
+                  height: '80px',
+                  backgroundColor: '#F5F5F9',
+                  position: 'fixed',
+                  bottom: '150px',
+                  right: '40px'
+                }} />
+              </div>
             </div>
           }
           {

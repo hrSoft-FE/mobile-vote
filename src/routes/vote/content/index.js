@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'dva'
 import { createForm } from 'rc-form'
-import { List, Radio, Toast, WhiteSpace, Button, WingBlank, Checkbox } from 'antd-mobile'
+import { Modal, List, Radio, Toast, WhiteSpace, Button, WingBlank, Checkbox } from 'antd-mobile'
 import { getLocalTime } from '../../../utils'
 import './index.less'
 
 const RadioItem = Radio.RadioItem
 const CheckboxItem = Checkbox.CheckboxItem
+const prompt = Modal.prompt
 
 class Content extends Component {
   state = {
@@ -48,15 +49,30 @@ class Content extends Component {
     const {vote} = content
     const {value} = this.state
     return (
-      <div>
+      <div style={{marginTop: 10}}>
+        {/*<Button onClick={() => prompt(*/}
+        {/*'输入密码',*/}
+        {/*'该投票需要密码',*/}
+        {/*password => console.log(`password: ${password}`),*/}
+        {/*'secure-text'*/}
+        {/*)}*/}
+        {/*>输入框密码形式</Button>*/}
         <WingBlank>
-          <p style={{fontSize: '0.36rem'}}>{vote.title}</p>
+          <span style={{fontSize: '0.36rem', lineHeight: '0.3rem'}}>{vote.title}</span>
+          <span style={{
+            fontSize: '0.28rem',
+            backgroundColor: '#108ee9',
+            color: vote.state === '已开始' ? '#FFFFFF' : '#E9AA38',
+            padding: '0.1rem',
+            lineHeight: '0.3rem',
+            borderBottomLeftRadius: '10px',
+            borderBottomRightRadius: '10px',
+            borderTopLeftRadius: '10px',
+            borderTopRightRadius: '10px'
+          }}>{vote.state}</span>
         </WingBlank>
         <WingBlank>
-          <p style={{fontSize: '0.28rem'}}>{vote.state}</p>
-        </WingBlank>
-        <WingBlank>
-          <p style={{color: '#108ee9', fontSize: '0.28rem'}}>结束时间：{getLocalTime(vote.end_time / 1000)}</p>
+          <p style={{color: '#108ee9', fontSize: '0.28rem'}}>结束时间：{getLocalTime(vote.end_time)}</p>
         </WingBlank>
         <List renderHeader={() => vote.type === 0 ? '单选' : '多选'}>
           {vote.type === 0 && vote.content.map(i => (

@@ -1,19 +1,18 @@
-const baseURl = 'http://vote.helloyz.cn/'
-const apiMakers = path => `${baseURl}/${path}`
-
+const prefix = `http://vote.helloyz.cn/`
+const apiMaker = path => `${prefix}${path}`
 export default {
-  userInfo: apiMakers('user/info'),
-  login: apiMakers('user/login'),
-  register: apiMakers('user/register'),
-  updateInfo: apiMakers('user/update/password'),
-  will: apiMakers('will'),
-  done: apiMakers('done'),
-  doing: apiMakers('doing'),
-  content: apiMakers('content'),
-  voted: apiMakers('voted'),
-  submit: apiMakers('submit'),
-  create: apiMakers('vote/create'),
-  verify: apiMakers('verify'),
-  verifyCode: apiMakers('verify-code'),
-  forgetPassword: apiMakers('forget')
+  userInfo: apiMaker('user/info'),
+  login: apiMaker('user/login'),
+  register: apiMaker('user/register'),
+  updateInfo: apiMaker('user/update/password'),
+  will: apiMaker('vote/list'),
+  done: apiMaker('vote/list'),
+  doing: apiMaker('vote/list'),
+  content: apiMaker('vote/detail'),
+  voted: apiMaker('voted'),
+  submit: apiMaker('submit'),
+  search: apiMaker('create'),
+  verify: apiMaker('verify'),
+  verifyCode: apiMaker('verify-code'),
+  forgetPassword: apiMaker('forget')
 }

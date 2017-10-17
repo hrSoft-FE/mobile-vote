@@ -14,7 +14,6 @@ export default {
   subscriptions: {
     voteSubscriber ({dispatch, history}) {
       return history.listen(({pathname, query}) => {
-        console.log(query)
         // const match = pathToRegexp('/user/login')
         if (pathname === '/user/login') {
           dispatch({type: 'initQuery'})
@@ -29,7 +28,6 @@ export default {
       yield put(routerRedux.push(`/user/${payload}`))
     },
     * login ({payload}, {call, select, put}) {
-      console.log(window.location.hash)
       try {
         const response = yield call(userLogin, payload)
         const {code, data} = response
@@ -49,10 +47,10 @@ export default {
         Modal.alert('登录失败', `未知原因`, [
           {text: '确定', onPress: () => {}}
         ])
+        throw e
       }
     },
     * register ({payload}, {call, select, put}) {
-      console.log(payload)
       try {
         const response = yield call(register, payload)
         const {code, data} = response
@@ -69,6 +67,7 @@ export default {
         Modal.alert('注册失败', `我也不知道为什么`, [
           {text: 'OK', onPress: () => {}}
         ])
+        throw e
       }
     }
   },

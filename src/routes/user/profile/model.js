@@ -15,7 +15,6 @@ export default {
   subscriptions: {
     voteSubscriber ({dispatch, history}) {
       return history.listen(({pathname, query}) => {
-        console.log(pathname)
         // const match = pathToRegexp('/user/login')
         if (pathname === '/user/profile') {
           dispatch({type: 'initQuery'})
@@ -28,14 +27,19 @@ export default {
     * initQuery ({payload}, {call, select, put}) {
     },
     * getUserInfo ({payload}, {call, select, put}) {
-      const userInfo = yield select(({login}) => login)
-      const {code, data} = yield call(getUserInfo)
-      if (code === ERR_OK) {
-        yield put({type: 'saveUserInfo', payload: data.user})
-      } else {
-        window.location.hash = '/user/login'
+      try {
+        const response = yield call(getUserInfo)
+        const {code, data} = response
+        if (code === ERR_OK) {
+          yield put({type: 'saveUserInfo', payload: data.user})
+        } else {
+          window.location.href = '/user/login'
+          Toast.info('请重新登录')
+          console.error(code, data)
+        }
+      } catch (e) {
+        window.location.href = '/user/login'
         Toast.info('请重新登录')
-        console.error(code, data)
       }
     }
   },

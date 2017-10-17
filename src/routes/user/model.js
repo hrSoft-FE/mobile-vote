@@ -34,6 +34,7 @@ export default {
         }
       } catch (e) {
         console.error(e)
+        throw e
       }
     },
     * update ({payload}, {call, select, put}) {
@@ -43,11 +44,12 @@ export default {
         if (code === ERR_OK) {
           yield put({type: 'saveUpdate', payload: data})
           Modal.alert('密码修改成功', '请重新登录', [
-            {text: '确定', onPress: () => { window.location.hash = '/user/login' }}
+            {text: '确定', onPress: () => { window.location.href = '/user/login' }}
           ])
         }
       } catch (e) {
         console.error(e)
+        throw e
       }
     },
     * forget ({payload}, {call, select, put}) {
@@ -57,11 +59,12 @@ export default {
         if (code === ERR_OK) {
           yield put({type: 'saveForget', payload: data})
           Modal.alert('重置密码成功', '请重新登录', [
-            {text: '确定', onPress: () => { window.location.hash = '/user/login' }}
+            {text: '确定', onPress: () => { window.location.href = '/user/login' }}
           ])
         }
       } catch (e) {
-        console.log()
+        console.log(e)
+        throw e
       }
     }
 

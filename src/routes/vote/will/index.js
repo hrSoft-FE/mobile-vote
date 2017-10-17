@@ -26,7 +26,8 @@ class Will extends Component {
           voteList.map((item, index) => {
             return (
               <div key={index}>
-                <Card onClick={() => this.props.dispatch(routerRedux.push(`/vote/content?id=${item.id}`))}>
+                <Card
+                  onClick={() => this.props.dispatch(routerRedux.push(`/vote/content?id=${item.id}&isPublic=${item.isPublic}`))}>
                   <div style={{padding: '0 0.3rem', backgroundColor: 'white'}}>
                     <div style={{
                       height: '1rem',

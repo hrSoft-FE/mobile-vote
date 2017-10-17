@@ -1,11 +1,20 @@
 import 'babel-polyfill'
 import dva from 'dva'
+import { browserHistory } from 'dva/router'
 import Loading from 'dva-loading'
+import { Toast } from 'antd-mobile'
 
 import './index.less'
 
 // 1. Initialize
-const app = dva()
+const app = dva(
+  {
+    history: browserHistory,
+    onError (error) {
+      Toast.offline(error.message)
+    }
+  }
+)
 
 // 2. Plugins
 app.use(Loading({

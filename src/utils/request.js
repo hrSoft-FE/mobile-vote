@@ -58,26 +58,23 @@ const downFile = (blob, fileName) => {
 export default async options => {
   try {
     const res = await fetch(options)
-
     if (options.method === 'export') {
       downFile(res.data, options.filename)
       return {
         code: 0
       }
     }
-
     const {data} = res
-
     if (data.code === 20004) {
       return data
     } else if (data.code !== 0) {
       codeHelper(data.code)
     }
     return data
-
   } catch (e) {
-    if (options.url === API.tokenVerify) {
-      Toast.offline('网络错误，请刷新页面重试', 1)
+    console.log()
+    if (e.message.match(/400/)[0] === '400') {
+      codeHelper(50004)
     }
     return {
       code: -1,

@@ -10,7 +10,7 @@ export default {
   doing: apiMaker('vote/list'),
   content: apiMaker('vote/detail'),
   voted: apiMaker('voted'),
-  submit: apiMaker('submit'),
+  submit: apiMaker('vote/part'),
   search: apiMaker('create'),
   verify: apiMaker('verify'),
   verifyCode: apiMaker('verify-code'),

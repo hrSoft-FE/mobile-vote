@@ -4,7 +4,8 @@ module.exports = {
     require('./content/route'),
     require('./doing/route'),
     require('./will/route'),
-    require('./done/route')
+    require('./done/route'),
+    require('./voted/route')
   ],
   getComponents (nextState, callback) {
     require.ensure([], () => {

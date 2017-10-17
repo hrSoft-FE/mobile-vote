@@ -8,7 +8,6 @@ const App = (props) => {
   NProgress.start()
   !loading.global && NProgress.done()
   return (
-
     <Layout children={children} location={location}>
       {children}
     </Layout>

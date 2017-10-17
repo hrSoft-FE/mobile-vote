@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'dva'
 import { createForm } from 'rc-form'
+import { routerRedux } from 'dva/router'
 import { Modal, List, Radio, Toast, WhiteSpace, Button, WingBlank, Checkbox } from 'antd-mobile'
 import { getLocalTime } from '../../../utils'
 import './index.less'
@@ -15,25 +16,25 @@ class Content extends Component {
     moneyfocused: false
   }
   onChange = (value) => {
-    this.setState({
+    setTimeout(this.setState({
       value
-    })
+    }), 0)
   }
   submit = (max) => {
+    const {location} = this.props
+    const {id} = location.query
     this.props.form.validateFields((error, value) => {
-      console.log(error, value, max)
       let selectOption = []
       Object.keys(value).forEach(key => {
         if (value[key] === true) {
           selectOption.push(key)
         }
       })
+      let options = selectOption.length === 0 ? [this.state.value] : selectOption
       let length = selectOption.length
-      console.log(length)
       if ((length && length <= max) || this.state.value || this.state.value === 0) {
-        console.log('success') // 这里写提交函数
+        this.props.dispatch({type: 'content/submitVote', payload: {body: {options: options}, id: id}})
       } else {
-        console.log(this.state.value)
         if (max) {
           Toast.fail(`最多选${max}项`, 2)
         } else {
@@ -44,45 +45,34 @@ class Content extends Component {
   }
 
   render () {
-    const {app, content, children, location} = this.props
+    const {content, location} = this.props
     const {getFieldProps} = this.props.form
-    const {vote} = content
+    const {vote, isPublic} = content
+    const {id} = location.query
     const {value} = this.state
     return (
       <div style={{marginTop: 10}}>
-        {/*<Button onClick={() => prompt(*/}
-        {/*'输入密码',*/}
-        {/*'该投票需要密码',*/}
-        {/*password => console.log(`password: ${password}`),*/}
-        {/*'secure-text'*/}
-        {/*)}*/}
-        {/*>输入框密码形式</Button>*/}
+        {!isPublic && prompt(
+          '输入密码',
+          '该投票需要密码',
+          password => this.props.dispatch({type: 'content/fetchVoteContent', payload: {id: id, password: password}}),
+          'secure-text'
+        )}
         <WingBlank>
           <span style={{fontSize: '0.36rem', lineHeight: '0.3rem'}}>{vote.title}</span>
-          <span style={{
-            fontSize: '0.28rem',
-            backgroundColor: '#108ee9',
-            color: vote.state === '已开始' ? '#FFFFFF' : '#E9AA38',
-            padding: '0.1rem',
-            lineHeight: '0.3rem',
-            borderBottomLeftRadius: '10px',
-            borderBottomRightRadius: '10px',
-            borderTopLeftRadius: '10px',
-            borderTopRightRadius: '10px'
-          }}>{vote.state}</span>
         </WingBlank>
         <WingBlank>
-          <p style={{color: '#108ee9', fontSize: '0.28rem'}}>结束时间：{getLocalTime(vote.end_time)}</p>
+          <p style={{color: '#108ee9', fontSize: '0.28rem'}}>结束时间：{getLocalTime(vote.endAt / 1000)}</p>
         </WingBlank>
-        <List renderHeader={() => vote.type === 0 ? '单选' : '多选'}>
-          {vote.type === 0 && vote.content.map(i => (
-            <RadioItem key={i.key} checked={value === i.key} onChange={() => this.onChange(i.key)}>
-              {i.text}
+        <List renderHeader={() => vote.type === 1 ? '单选' : '多选'}>
+          {vote.type === 1 && vote.options.map(i => (
+            <RadioItem key={i.id} checked={value === i.id} onChange={() => this.onChange(i.id)}>
+              {i.title}
             </RadioItem>
           ))}
-          {vote.type === 1 && vote.content.map(i => (
-            <CheckboxItem key={i.key} {...getFieldProps(`${i.key}`)}>
-              {i.text}
+          {vote.type === 2 && vote.options.map(i => (
+            <CheckboxItem key={i.id} {...getFieldProps(`${i.id}`)}>
+              {i.title}
             </CheckboxItem>
           ))}
         </List>

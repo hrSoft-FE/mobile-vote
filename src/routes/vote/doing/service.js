@@ -14,8 +14,8 @@ const getDoingVotes = async (page, size) => request({
   method: 'get',
   token: false
 })
-const getVotesDetail = async (id) => request({
-  url: API.content.replace(':id', id),
+const getVotesDetail = async (id, password) => request({
+  url: password ? API.content.replace(':id', id) + '?' + urlEncode({'password': password}) : API.content.replace(':id', id),
   method: 'get',
   token: false
 })

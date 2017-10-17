@@ -73,12 +73,13 @@ export default async options => {
     return data
   } catch (e) {
     console.log()
-    if (e.message.match(/400/)[0] === '400') {
-      codeHelper(50004)
-    }
-    return {
-      code: -1,
-      data: {}
-    }
+    // if (e.message.match(/400/)[0] === '400') {
+    //   codeHelper(50004)
+    // }
+    // return {
+    //   code: -1,
+    //   data: {}
+    // }
+    throw e
   }
 }

@@ -24,8 +24,22 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
       const {title, startAt, endAt, description = '', isPublic, password = null} = values
       let problemList = []
       let maxChoose = 1
-      const errRes = toastFormMessage(errors, false,
-        ['title', 'index', 'startAt', 'endAt', 'password'])
+      const errRes = toastFormMessage(errors, false, [
+        'title',
+        'index',
+        'startAt',
+        'endAt',
+        'password',
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9'])
       if (errRes) return
       Object.keys(values).forEach(key => {
         if (+key >= 0) {
@@ -52,8 +66,8 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
     rules: [
       {
         required: true,
-        message: '请输入选项'
-      }]
+        message: `请输入选项${index + 1}`,
+      }],
   })(<InputItem key={index} placeholder={config.placeholder}>
     <div onClick={() => dispatch({type: 'radio/remove', payload: index})}
          style={{
@@ -75,8 +89,8 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
             rules: [
               {
                 required: true,
-                message: '请输入投票标题'
-              }]
+                message: '请输入投票标题',
+              }],
           })(<InputItem placeholder='投票标题' />)
         }
         <WhiteSpace />
@@ -86,12 +100,12 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
             rules: [
               {
                 required: false,
-                message: '补充描述'
+                message: '补充描述',
               }],
           })(<TextareaItem placeholder='补充描述(可选)' rows='2' />)
         }
-        <WhiteSpace />
       </List>
+      <WhiteSpace />
       <List>
         {radio.config.map((config, index) => getInput(config, index))}
         <WhiteSpace />
@@ -131,7 +145,7 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
                 required: true,
                 type: 'object',
                 message: '请输入截止日期',
-              }]
+              }],
           })(
             <DatePicker
               mode='datetime'
@@ -146,7 +160,7 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
           extra={<Switch
             {...getFieldProps('isPublic', {
               initialValue: true,
-              valuePropName: 'checked'
+              valuePropName: 'checked',
             })}
             platform="android"
           />}
@@ -159,7 +173,7 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
                 initialValue: '',
                 rules: [
                   {
-                    required: false,
+                    required: true,
                     message: '请输入投票密码',
                   }]
               })(<InputItem>投票密码</InputItem>)
@@ -174,9 +188,9 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
           marginRight: '0.08rem',
           height: '0.80rem',
           lineHeight: '0.80rem',
-        }} onClick={submit}>完成</Button>
+        }} onClick={submit}>创建完成</Button>
       </WingBlank>
-      <div style={{height: '0.60rem'}} />
+      <div style={{height: '1.40rem'}} />
     </form>
   )
 }

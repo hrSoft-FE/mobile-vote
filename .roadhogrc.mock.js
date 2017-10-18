@@ -221,7 +221,7 @@ export default {
       req
     })
   },
-  'GET /api/votes/voted': {
+  'GET /api/add/radio': {
     'code': 0,
     'data': [{
       'id': 90,
@@ -245,7 +245,7 @@ export default {
       'updatedAt': '2017-08-28 19:18:28'
     }]
   },
-  'GET /api/votes/search': (req, res) => {
+  'GET /api/add/radio': (req, res) => {
     res.json(
       {
         'code': 0,

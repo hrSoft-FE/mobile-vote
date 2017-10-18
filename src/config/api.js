@@ -11,7 +11,7 @@ export default {
   content: apiMaker('vote/detail'),
   voted: apiMaker('voted'),
   submit: apiMaker('vote/part'),
-  search: apiMaker('create'),
+  create: apiMaker('vote/create'),
   verify: apiMaker('verify'),
   verifyCode: apiMaker('verify-code'),
   forgetPassword: apiMaker('forget')

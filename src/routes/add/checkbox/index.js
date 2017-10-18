@@ -21,7 +21,24 @@ const Checkbox = ({app, checkbox, dispatch, form: {getFieldProps, validateFields
   const submit = (e) => {
     e.preventDefault()
     validateFields((errors, values) => {
-      const errRes = toastFormMessage(errors, false, ['title', 'problemList', 'startAt', 'endAt', 'maxChoose', 'index'])
+      const errRes = toastFormMessage(errors, false,
+        [
+          'title',
+          'problemList',
+          'startAt',
+          'endAt',
+          'maxChoose',
+          'password',
+          '0',
+          '1',
+          '2',
+          '3',
+          '4',
+          '5',
+          '6',
+          '7',
+          '8',
+          '9'])
       if (errRes) return
       const {title, startAt, endAt, description, isPublic, password, maxChoose} = values
       let problemList = []
@@ -49,7 +66,7 @@ const Checkbox = ({app, checkbox, dispatch, form: {getFieldProps, validateFields
     rules: [
       {
         required: true,
-        message: '请输入选项',
+        message: `请输入选项${index + 1}`
       }],
   })(<InputItem key={index} placeholder={config.placeholder}>
     <div onClick={() => dispatch({type: 'checkbox/remove', payload: index})}
@@ -89,8 +106,8 @@ const Checkbox = ({app, checkbox, dispatch, form: {getFieldProps, validateFields
               }],
           })(<TextareaItem placeholder='补充描述(可选)' rows='2' />)
         }
-        <WhiteSpace />
       </List>
+      <WhiteSpace />
       <List>
         {checkbox.config.map((config, index) => getInput(config, index))}
         <WhiteSpace />
@@ -176,7 +193,7 @@ const Checkbox = ({app, checkbox, dispatch, form: {getFieldProps, validateFields
                 initialValue: '',
                 rules: [
                   {
-                    required: false,
+                    required: true,
                     message: '请输入投票密码',
                   }],
               })(<InputItem>投票密码</InputItem>)
@@ -191,9 +208,9 @@ const Checkbox = ({app, checkbox, dispatch, form: {getFieldProps, validateFields
           marginRight: '0.08rem',
           height: '0.80rem',
           lineHeight: '0.80rem',
-        }} onClick={submit}>完成</Button>
+        }} onClick={submit}>创建完成</Button>
       </WingBlank>
-      <div style={{height: '0.60rem'}} />
+      <div style={{height: '1.40rem'}} />
     </form>
   )
 

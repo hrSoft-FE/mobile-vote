@@ -9,13 +9,13 @@ import voteIconActive from './survey-active.png'
 import accountIcon from './account.png'
 import accountIconActive from './account-active.png'
 import styles from './footer.less'
-
 function Footer ({dispatch, childrens, location}) {
-  const route = ['/vote/doing', '/vote/done', '/vote/will', '/add', '/user', '/user/login', '/user/profile']
+  const route = ['/vote/doing', '/vote/done', '/vote/will', '/add', '/user', '/user/login', '/user/profile', '/add/radio', '/add/checkbox']
   const need = ['/vote/doing', '/vote/done', '/vote/will']
   const userNavHighLight = ['/user', '/user/login', '/user/profile']
+  const add = ['/add/radio', '/add/checkbox']
   return (
-    <div>
+    <div className='normal'>
       {
         route.indexOf(location.pathname) !== -1 && <div className={styles.normal}>
           <TabBar
@@ -40,7 +40,7 @@ function Footer ({dispatch, childrens, location}) {
               icon={{uri: addIcon}}
               iconStyle={{width: 48, height: 48}}
               selectedIcon={{uri: addIconActive}}
-              selected={location.pathname === '/add'}
+              selected={add.indexOf(location.pathname) !== -1}
               onPress={() => dispatch(routerRedux.push('/add/radio'))}
             >
               {childrens}

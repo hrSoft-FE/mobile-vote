@@ -1,7 +1,8 @@
 import { Toast } from 'antd-mobile'
 
 const codeMap = {
-  50004: '您已投过票'
+  50004: '您已投过票',
+  50003: '非公开投票需要密码'
 }
 
 export default (code) => {

@@ -12,6 +12,7 @@ const app = dva(
     history: browserHistory,
     onError (error) {
       Toast.offline(error.message)
+      console.log(error.message)
     }
   }
 )

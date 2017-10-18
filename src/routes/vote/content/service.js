@@ -1,7 +1,7 @@
 import { API, request } from '../../../utils'
 
-const getVoteContent = async (id) => request({
-  url: API.content + '/' + id,
+const getVoteContent = async (id, password) => request({
+  url: API.content + '/' + id + '?' + `password=${password}`,
   method: 'get',
   token: false
 })

@@ -3,7 +3,7 @@ import { connect } from 'dva'
 import { createForm } from 'rc-form'
 import { routerRedux } from 'dva/router'
 import { Modal, List, Radio, Toast, WhiteSpace, Button, WingBlank, Checkbox } from 'antd-mobile'
-import { getLocalTime } from '../../../utils'
+import { getLocalTime, goto } from '../../../utils'
 import './index.less'
 
 const RadioItem = Radio.RadioItem
@@ -15,6 +15,26 @@ class Content extends Component {
     value: null,
     moneyfocused: false
   }
+
+  componentWillMount () {
+    const {location, content} = this.props
+    const {query} = location
+    const {password, isPublic} = content
+    if (query.status === 'will') {
+      Toast.offline('投票未开始')
+      goto(`/vote/will`)
+    }
+    if (isPublic === '1' && query.status !== 'will') {
+      this.props.dispatch({type: 'content/fetchVoteContent', payload: {id: query.id}})
+    } else if (isPublic === '0' && query.status !== 'will') {
+      if (password) {
+        this.props.dispatch({type: 'content/fetchVoteContent', payload: {id: query.id, password: password}})
+      } else {
+        this.props.dispatch(routerRedux.push(`/vote/password?id=${query.id}`))
+      }
+    }
+  }
+
   onChange = (value) => {
     setTimeout(this.setState({
       value
@@ -34,6 +54,7 @@ class Content extends Component {
       let length = selectOption.length
       if ((length && length <= max) || this.state.value || this.state.value === 0) {
         this.props.dispatch({type: 'content/submitVote', payload: {body: {options: options}, id: id}})
+        this.props.dispatch({type: 'content/savePassword', payload: {password: null}})
       } else {
         if (max) {
           Toast.fail(`最多选${max}项`, 2)
@@ -45,19 +66,12 @@ class Content extends Component {
   }
 
   render () {
-    const {content, location} = this.props
+    const {content} = this.props
     const {getFieldProps} = this.props.form
-    const {vote, isPublic} = content
-    const {id} = location.query
+    const {vote} = content
     const {value} = this.state
     return (
       <div style={{marginTop: 10}}>
-        {!isPublic && prompt(
-          '输入密码',
-          '该投票需要密码',
-          password => this.props.dispatch({type: 'content/fetchVoteContent', payload: {id: id, password: password}}),
-          'secure-text'
-        )}
         <WingBlank>
           <span style={{fontSize: '0.36rem', lineHeight: '0.3rem'}}>{vote.title}</span>
         </WingBlank>
@@ -80,7 +94,7 @@ class Content extends Component {
         <WingBlank>
           <Button className="btn" type="primary"
                   style={{position: 'absolute', bottom: 0, left: 0, right: 0, margin: 20}}
-                  onClick={() => this.submit(vote.max)}>提交</Button>
+                  onClick={() => this.submit(vote.maxChoose)}>提交</Button>
         </WingBlank>
       </div>
     )

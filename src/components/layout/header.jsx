@@ -1,7 +1,6 @@
 import React from 'react'
-import {
-  NavBar, Icon
-} from 'antd-mobile'
+import { NavBar, Icon } from 'antd-mobile'
+import { goto } from '../../utils'
 
 import styles from './header.less'
 
@@ -11,7 +10,11 @@ function Header ({location}) {
     if (ref !== '' && ref !== 'undefined') {
       location.href = ref
     } else {
-      location.href = window.history.back(-1)
+      if (location.pathname === '/vote/password') {
+        goto('/vote/doing')
+      } else {
+        location.href = window.history.back(-1)
+      }
     }
   }
   return (

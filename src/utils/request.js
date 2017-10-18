@@ -39,47 +39,14 @@ const fetch = options => {
   }
 }
 
-const downFile = (blob, fileName) => {
-  if (window.navigator.msSaveOrOpenBlob) {
-    console.log(1)
-    window.navigator.msSaveBlob(blob, fileName)
-  } else {
-    console.log(2)
-
-    let link = document.createElement('a')
-    link.href = window.URL.createObjectURL(blob)
-    link.download = fileName
-    link.target = '_blank'
-    link.click()
-    window.URL.revokeObjectURL(link.href)
-  }
-}
-
 export default async options => {
-  // try {
-  const res = await fetch(options)
-  if (options.method === 'export') {
-    downFile(res.data, options.filename)
-    return {
-      code: 0
+  try {
+    const res = await fetch(options)
+    const {data} = res
+    if (data.code !== 0) {
     }
-  }
-  const {data} = res
-  if (data.code === 20004) {
     return data
-  } else if (data.code !== 0) {
-    codeHelper(data.code)
+  } catch (e) {
+    throw (e)
   }
-  console.log(data)
-  return data
-  // } catch (e) {
-  // if (e.message.match(/400/)[0] === '400') {
-  //   codeHelper(50004)
-  // }
-  // return {
-  //   code: -1,
-  //   data: {}
-  // }
-  //   throw e
-  // }
 }

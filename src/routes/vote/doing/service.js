@@ -5,12 +5,12 @@ const verify = async () => request({
   method: 'get'
 })
 const getWillVotes = async (page, size) => request({
-  url: API.will + '?' + urlEncode({'page': page, 'size': size, 'time': '2'}),
+  url: API.will + '?' + urlEncode({'page': page, 'size': size, 'time': '0'}),
   method: 'get',
   token: false
 })
 const getDoingVotes = async (page, size) => request({
-  url: API.doing + '?' + urlEncode({'page': page, 'size': size, 'time': '2'}),
+  url: API.doing + '?' + urlEncode({'page': page, 'size': size, 'time': '1'}),
   method: 'get',
   token: false
 })

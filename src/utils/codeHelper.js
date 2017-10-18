@@ -8,8 +8,8 @@ const codeMap = {
 
 export default (code) => {
   if (codeMap[code]) {
-    Toast.offline(codeMap[code], 2)
+    Toast.offline(codeMap[code], 1)
   } else {
-    Toast.offline('未知错误', 2)
+    Toast.offline('未知错误', 1)
   }
 }

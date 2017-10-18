@@ -5,7 +5,7 @@ module.exports = {
     require('./doing/route'),
     require('./will/route'),
     require('./done/route'),
-    require('./voted/route')
+    require('./password/route')
   ],
   getComponents (nextState, callback) {
     require.ensure([], () => {

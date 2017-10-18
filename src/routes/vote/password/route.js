@@ -1,5 +1,5 @@
 module.exports = {
-  path: 'voted',
+  path: 'password',
   getComponents (nextState, callback) {
     require.ensure([], () => {
       callback(null, require('./index'))

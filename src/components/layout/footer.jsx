@@ -2,8 +2,8 @@ import React from 'react'
 import { TabBar, Icon } from 'antd-mobile'
 import { connect } from 'dva'
 import { routerRedux } from 'dva/router'
-import addIconActive from './add-active.png'
-import addIcon from './add.png'
+import addIconActive from './adds-active.png'
+import addIcon from './adds.png'
 import voteIcon from './survey.png'
 import voteIconActive from './survey-active.png'
 import accountIcon from './account.png'
@@ -38,7 +38,7 @@ function Footer ({dispatch, childrens, location}) {
               title="创建"
               key="创建"
               icon={{uri: addIcon}}
-              iconStyle={{width: 48, height: 48}}
+              iconStyle={{width: 68, height: 68}}
               selectedIcon={{uri: addIconActive}}
               selected={add.indexOf(location.pathname) !== -1}
               onPress={() => dispatch(routerRedux.push('/add/radio'))}

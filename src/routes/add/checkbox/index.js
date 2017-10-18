@@ -136,7 +136,7 @@ const Checkbox = ({app, checkbox, dispatch, form: {getFieldProps, validateFields
           </InputItem>)
         }
       </List>
-      <div style={{height: '0.80rem'}} />
+      <WhiteSpace />
       <List>
         {
           getFieldDecorator('startAt', {

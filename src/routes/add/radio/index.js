@@ -116,7 +116,7 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
           <span style={{color: '#1296db'}}>添加选项</span>
         </Item>
       </List>
-      <div style={{height: '0.80rem'}} />
+      <WhiteSpace />
       <List>
         {
           getFieldDecorator('startAt', {

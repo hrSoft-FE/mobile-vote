@@ -52,7 +52,7 @@ const Checkbox = ({app, checkbox, dispatch, form: {getFieldProps, validateFields
         startAt: startAt.valueOf(),
         endAt: endAt.valueOf(),
         description,
-        type: 1,
+        type: 2,
         isPublic,
         password,
         problemList,
@@ -68,7 +68,7 @@ const Checkbox = ({app, checkbox, dispatch, form: {getFieldProps, validateFields
         required: true,
         message: `请输入选项${index + 1}`
       }],
-  })(<InputItem key={index} placeholder={config.placeholder}>
+  })(<InputItem key={index} placeholder={config.placeholder} labelNumber={2}>
     <div onClick={() => dispatch({type: 'checkbox/remove', payload: index})}
          style={{
            backgroundImage: 'url(http://owu5k7u5s.bkt.clouddn.com/delete.png)',

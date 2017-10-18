@@ -68,7 +68,7 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
         required: true,
         message: `请输入选项${index + 1}`,
       }],
-  })(<InputItem key={index} placeholder={config.placeholder}>
+  })(<InputItem key={index} placeholder={config.placeholder} labelNumber={2}>
     <div onClick={() => dispatch({type: 'radio/remove', payload: index})}
          style={{
            backgroundImage: 'url(http://owu5k7u5s.bkt.clouddn.com/delete.png)',
@@ -175,7 +175,7 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
                   {
                     required: true,
                     message: '请输入投票密码',
-                  }]
+                  }],
               })(<InputItem>投票密码</InputItem>)
             }
           </span>

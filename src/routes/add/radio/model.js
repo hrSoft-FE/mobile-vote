@@ -1,32 +1,38 @@
-import {create} from '../service'
+import { create } from '../service'
 import { Toast } from 'antd-mobile'
+
 export default {
   namespace: 'radio',
   state: {
     config: [
       {
         value: '',
-        placeholder: '选项'
+        placeholder: '选项',
       }, {
         value: '',
-        placeholder: '选项'
+        placeholder: '选项',
       }],
-    isKeys: false
+    isKeys: false,
   },
   subscriptions: {
     radioSubscriber ({dispatch, history}) {
       return history.listen(({pathname, query}) => {})
-    }
+    },
   },
   effects: {
     * initQuery ({payload}, {call, select, put}) {
     },
     * create ({payload}, {call, select, put}) {
-      const data = yield call(create, payload)
-      if (data.code === 0) {
-        Toast.success('创建成功！')
+      const token = window.localStorage.getItem('token')
+      if (token) {
+        const data = yield call(create, payload)
+        if (data.code === 0) {
+          Toast.success('创建成功！')
+        }
+      } else {
+        Toast.fail('请提前登陆！')
       }
-    }
+    },
   },
   reducers: {
     adds (state, {payload = {value: ''}}) {
@@ -37,9 +43,9 @@ export default {
           ...config,
           {
             value: '',
-            placeholder: '选项'
-          }
-        ]
+            placeholder: '选项',
+          },
+        ],
       }
     },
     remove (state, {payload}) {

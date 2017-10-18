@@ -38,7 +38,8 @@ const Checkbox = ({app, checkbox, dispatch, form: {getFieldProps, validateFields
           '6',
           '7',
           '8',
-          '9'])
+          '9',
+          10])
       if (errRes) return
       const {title, startAt, endAt, description, isPublic, password, maxChoose} = values
       let problemList = []
@@ -66,7 +67,7 @@ const Checkbox = ({app, checkbox, dispatch, form: {getFieldProps, validateFields
     rules: [
       {
         required: true,
-        message: `请输入选项${index + 1}`
+        message: `请输入选项${index + 1}`,
       }],
   })(<InputItem key={index} placeholder={config.placeholder} labelNumber={2}>
     <div onClick={() => dispatch({type: 'checkbox/remove', payload: index})}

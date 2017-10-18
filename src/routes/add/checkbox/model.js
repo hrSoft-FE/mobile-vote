@@ -40,15 +40,21 @@ export default {
   reducers: {
     adds (state, {payload = {value: ''}}) {
       let {config} = state
-      return {
-        ...state,
-        config: [
-          ...config,
-          {
-            value: '',
-            placeholder: '选项',
-          },
-        ],
+      let len = config.length
+      if (len < 10) {
+        return {
+          ...state,
+          config: [
+            ...config,
+            {
+              value: '',
+              placeholder: '选项',
+            },
+          ],
+        }
+      } else {
+        Toast.info('最多只能添加10项！')
+        return {...state}
       }
     },
     remove (state, {payload}) {

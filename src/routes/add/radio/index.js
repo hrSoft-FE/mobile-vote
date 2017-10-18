@@ -39,7 +39,8 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
         '6',
         '7',
         '8',
-        '9'])
+        '9',
+        10])
       if (errRes) return
       Object.keys(values).forEach(key => {
         if (+key >= 0) {

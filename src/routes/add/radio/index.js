@@ -15,6 +15,7 @@ import { toastFormMessage } from '../../../utils'
 
 const Item = List.Item
 const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getFieldDecorator}}) => {
+  console.log('radio')
   const adds = () => {
     dispatch({type: 'radio/adds'})
   }

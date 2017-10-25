@@ -6,6 +6,7 @@ import './index.less'
 
 const TabPage = Tabs.TabPane
 const Add = ({add, children, dispatch}) => {
+  console.log('add')
   const route = ['/add/radio', '/add/checkbox']
   const handleTabClick = (key) => {
     dispatch(routerRedux.push(`/add/${key}`))

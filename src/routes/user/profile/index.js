@@ -5,61 +5,28 @@ import PropTypes from 'prop-types'
 import { verify, toastFormMessage } from '../../../utils'
 import avatar from '../../../assets/avatar.jpeg'
 import style from '../index.less'
-import { Tabs, WhiteSpace, InputItem, Icon, List, Button, Toast, Flex, Card } from 'antd-mobile'
+import { Tabs, WhiteSpace, WingBlank, InputItem, Icon, List, Button, Toast, Flex, Card } from 'antd-mobile'
 import { createForm } from 'rc-form'
-import ListItem from './Item'
-import mobileIcon from '../icon/Mobile-phone.png'
-import passwordIcon from '../icon/password.png'
-import confirmIcon from '../icon/confirm.png'
-import mailIcon from '../icon/mail.png'
-import verifyIcon from '../icon/verify.png'
-import nameIcon from '../icon/name.png'
+const Item = List.Item
+const Brief = Item.Brief
 
 class Profile extends Component {
   render () {
-    const {profile, dispatch, form: {getFieldDecorator}} = this.props
+    const {profile, dispatch, form: {getFieldDecorator}, children} = this.props
     const {userInfo: {mobile, name, gender}} = profile
+
+    const turnTo = (path) => {
+      dispatch(routerRedux.push(`profile/${path}`))
+    }
+
     return (
       <div>
-        <WhiteSpace size="sm"/>
-        <Card full>
-          <Card.Header
-            title={
-              <div style={{marginLeft: '.5rem'}}>
-                <div className={style.nickName}>{name}</div>
-                <div className={style.userMobile}>{mobile}</div>
-              </div>
-            }
-            thumb={<div className={style.profileLogo}>
-              <img src={avatar} alt="" className={style.img}/>
-            </div>}
-          />
-        </Card>
-        <WhiteSpace size="lg"/>
-        <WhiteSpace size="lg"/>
-        <WhiteSpace size="lg"/>
-        <Card>
-          <Card.Header
-            title="我创建的投票"
-            extra={<span>&gt;</span>}
-          />
-          <Card.Body>
-            <ListItem/>
-          </Card.Body>
-        </Card><WhiteSpace size="lg"/>
-        <Card>
-          <Card.Header
-            title="我参加的投票"
-            extra={<span>&gt;</span>}
-          />
-          <Card.Body>
-            <ListItem/>
-          </Card.Body>
-        </Card>
-
-        <WhiteSpace size="xl"/>
-        <WhiteSpace size="xl"/>
-        <WhiteSpace size="xl"/>
+        <WingBlank>
+          <WhiteSpace size="sm"/>
+          {children}
+          <WhiteSpace size="xl"/>
+          <WhiteSpace size="xl"/>
+        </WingBlank>
       </div>
     )
   }
@@ -71,4 +38,4 @@ Profile.propTypes = {
   dispatch: PropTypes.func
 }
 
-export default connect(({app, user, profile, login}) => ({app, user, profile, login}))(createForm()(Profile))
+export default connect(({app, user, profile, login, doing}) => ({app, user, profile, login, doing}))(createForm()(Profile))

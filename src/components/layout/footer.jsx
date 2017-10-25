@@ -10,9 +10,13 @@ import accountIcon from './account.png'
 import accountIconActive from './account-active.png'
 import styles from './footer.less'
 function Footer ({dispatch, childrens, location}) {
-  const route = ['/vote/doing', '/vote/done', '/vote/will', '/add', '/user', '/user/login', '/user/profile', '/add/radio', '/add/checkbox']
+  const route = [
+    '/vote/doing', '/vote/done', '/vote/will',
+    '/add', '/add/radio', '/add/checkbox',
+    '/user', '/user/login', '/user/profile', '/user/profile/panel', '/user/profile/created', '/user/profile/joined'
+  ]
   const need = ['/vote/doing', '/vote/done', '/vote/will']
-  const userNavHighLight = ['/user', '/user/login', '/user/profile']
+  const userNavHighLight = ['/user', '/user/login', '/user/profile', '/user/profile/panel', '/user/profile/created', '/user/profile/joined']
   const add = ['/add/radio', '/add/checkbox']
   return (
     <div className='normal'>
@@ -51,7 +55,7 @@ function Footer ({dispatch, childrens, location}) {
               icon={{uri: accountIcon}}
               selectedIcon={{uri: accountIconActive}}
               selected={userNavHighLight.indexOf(location.pathname) !== -1}
-              onPress={() => dispatch(routerRedux.push('/user'))}
+              onPress={() => dispatch(routerRedux.push('/user/profile/panel'))}
             >
               {childrens}
             </TabBar.Item>

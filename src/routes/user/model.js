@@ -14,6 +14,7 @@ export default {
   subscriptions: {
     infoSubscriber ({dispatch, history}) {
       return history.listen(({pathname, query}) => {
+        // token ? user/info : user/login
         // const match = pathToRegexp('/user')
         if (pathname === '/user') {
           dispatch(routerRedux.push('/user/profile'))

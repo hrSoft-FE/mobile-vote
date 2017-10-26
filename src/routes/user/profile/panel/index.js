@@ -12,9 +12,11 @@ const Brief = Item.Brief
 
 class Panel extends Component {
   render () {
-    console.log('Panel')
-    const {dispatch, form: {getFieldDecorator}, children} = this.props
-
+    const {dispatch, panel: {userInfo}, form: {getFieldDecorator}, children} = this.props
+    console.log(userInfo)
+    const {name, mobile} = userInfo
+    console.log(name)
+    console.log(mobile)
     const turnTo = (path) => {
       dispatch(routerRedux.push(`/user/profile/${path}`))
     }
@@ -29,7 +31,7 @@ class Panel extends Component {
             title={
               <div style={{marginLeft: '.5rem'}}>
                 <div className={style.nickName}>{name}</div>
-                {/*<div className={style.userMobile}>{mobile}</div>*/}
+                <div className={style.userMobile}>{mobile}</div>
               </div>
             }
             thumb={<div className={style.profileLogo}>
@@ -78,4 +80,4 @@ Panel.propTypes = {
   dispatch: PropTypes.func
 }
 
-export default connect(({panel}) => ({panel}))(createForm()(Panel))
+export default connect(({panel, user}) => ({panel, user}))(createForm()(Panel))

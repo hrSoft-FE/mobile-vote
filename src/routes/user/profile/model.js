@@ -18,5 +18,23 @@ export default {
   effects: {
   },
   reducers: {
+    hi (state, {payload}) {
+      return {
+        ...state,
+        contests: payload
+      }
+    },
+    saveToken (state, {payload}) {
+      return {
+        ...state,
+        token: payload
+      }
+    },
+    saveRegisterField (state, {payload}) {
+      return {
+        ...state,
+        registerField: payload
+      }
+    }
   }
 }

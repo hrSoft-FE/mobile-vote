@@ -45,12 +45,12 @@ class Panel extends Component {
             title="我创建的投票"
             extra={<span>&gt;</span>}
           />
-          <Card.Body>
-            <Item extra="" align="middle" thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
-                  multipleLine>
-              Title <Brief>subtitle</Brief>
-            </Item>
-          </Card.Body>
+          {/*<Card.Body>*/}
+            {/*<Item extra="" align="middle" thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"*/}
+                  {/*multipleLine>*/}
+              {/*Title <Brief>subtitle</Brief>*/}
+            {/*</Item>*/}
+          {/*</Card.Body>*/}
         </Card>
         <WhiteSpace size="lg"/>
         <Card onClick={() => turnTo('joined')}>
@@ -58,12 +58,12 @@ class Panel extends Component {
             title="我参加的投票"
             extra={<span>&gt;</span>}
           />
-          <Card.Body>
-            <Item extra="" align="middle" thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
-                  multipleLine>
-              Title <Brief>subtitle</Brief>
-            </Item>
-          </Card.Body>
+          {/*<Card.Body>*/}
+            {/*<Item extra="" align="middle" thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"*/}
+                  {/*multipleLine>*/}
+              {/*Title <Brief>subtitle</Brief>*/}
+            {/*</Item>*/}
+          {/*</Card.Body>*/}
         </Card>
         <WhiteSpace size="xl"/>
         <WhiteSpace size="xl"/>

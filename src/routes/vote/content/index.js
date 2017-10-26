@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'dva'
 import { createForm } from 'rc-form'
 import { routerRedux } from 'dva/router'
-import { Modal, List, Radio, Toast, WhiteSpace, Button, WingBlank, Checkbox } from 'antd-mobile'
+import { List, Radio, Toast, WhiteSpace, Button, WingBlank, Checkbox } from 'antd-mobile'
 import { getLocalTime, goto } from '../../../utils'
 import './index.less'
 
 const RadioItem = Radio.RadioItem
 const CheckboxItem = Checkbox.CheckboxItem
-const prompt = Modal.prompt
 
 class Content extends Component {
   state = {

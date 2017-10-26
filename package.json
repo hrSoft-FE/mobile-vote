@@ -25,7 +25,8 @@
     "qs": "^6.5.0",
     "rc-form": "^1.4.8",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "copy-to-clipboard": "^3.0.5"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

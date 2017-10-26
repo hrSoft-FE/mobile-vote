@@ -14,7 +14,6 @@ export default {
   subscriptions: {
     panelSubscriber ({dispatch, history}) {
       return history.listen(({pathname, query}) => {
-        console.log(pathname)
         // const match = pathToRegexp('/user/login')
         if (pathname === '/user/profile/panel') {
           dispatch({type: 'initQuery'})

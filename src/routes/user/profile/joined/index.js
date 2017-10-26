@@ -68,9 +68,9 @@ class Joined extends Component {
             )
           })
         }
-        <div className={style.loadNextPage} onClick={this.loadMore}>
-          {isLastPage ? '已加载完毕' : '点击可以刷新'}
-        </div>
+        {/*<div className={style.loadNextPage} onClick={this.loadMore}>*/}
+          {/*{isLastPage ? '已加载完毕' : '点击可以刷新'}*/}
+        {/*</div>*/}
       </div>
     )
   }

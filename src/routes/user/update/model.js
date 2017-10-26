@@ -9,7 +9,6 @@ export default {
   subscriptions: {
     voteSubscriber ({dispatch, history}) {
       return history.listen(({pathname, query}) => {
-        console.log(pathname)
         const match = pathToRegexp('/user/update')
         if (match) {
           dispatch({type: 'initQuery'})

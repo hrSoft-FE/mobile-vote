@@ -62,8 +62,8 @@ export default {
       config.splice(payload, 1)
       return {
         ...state,
-        config,
+        config
       }
-    },
-  },
+    }
+  }
 }

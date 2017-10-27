@@ -9,7 +9,11 @@ export default {
   namespace: 'panel',
   state: {
     contests: [],
-    query: {}
+    query: {},
+    userInfo: {
+      name: '',
+      mobile: ''
+    }
   },
   subscriptions: {
     panelSubscriber ({dispatch, history}) {

@@ -6,7 +6,6 @@ export default {
   subscriptions: {
     addSubscriber ({dispatch, history}) {
       return history.listen(({pathname, query}) => {
-        console.log(pathname)
         if (pathname === '/add') {
           dispatch(routerRedux.push('/add/radio'))
         }

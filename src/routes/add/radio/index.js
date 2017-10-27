@@ -15,7 +15,6 @@ import { toastFormMessage } from '../../../utils'
 
 const Item = List.Item
 const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getFieldDecorator}}) => {
-  console.log('radio')
   const adds = () => {
     dispatch({type: 'radio/adds'})
   }
@@ -76,7 +75,7 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
            backgroundImage: 'url(http://owu5k7u5s.bkt.clouddn.com/delete.png)',
            backgroundSize: 'cover',
            height: '0.38rem',
-           width: '0.38rem',
+           width: '0.38rem'
          }}
          key={index}
     />
@@ -91,9 +90,9 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
             rules: [
               {
                 required: true,
-                message: '请输入投票标题',
+                message: '请输入投票标题'
               }],
-          })(<InputItem placeholder='投票标题' />)
+          })(<InputItem placeholder='投票标题'/>)
         }
         <WhiteSpace />
         {

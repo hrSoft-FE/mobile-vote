@@ -2,16 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'dva'
 import { routerRedux } from 'dva/router'
 import PropTypes from 'prop-types'
-import { verify, toastFormMessage } from '../../../utils'
+import { toastFormMessage } from '../../../utils'
 import avatar from '../../../assets/avatar.jpeg'
 import style from '../index.less'
-import { Tabs, WhiteSpace, InputItem, Icon, List, Button, Toast, Flex, Card } from 'antd-mobile'
+import { Tabs, WhiteSpace, InputItem, List, Button, Toast } from 'antd-mobile'
 import { createForm } from 'rc-form'
 import mobileIcon from '../icon/Mobile-phone.png'
 import passwordIcon from '../icon/password.png'
 import confirmIcon from '../icon/confirm.png'
-import mailIcon from '../icon/mail.png'
-import verifyIcon from '../icon/verify.png'
 import nameIcon from '../icon/name.png'
 
 const TabPane = Tabs.TabPane
@@ -84,7 +82,6 @@ class Login extends Component {
             <div className={style.login}>
               <List key="login" style={{width: '80%'}}>
                 <WhiteSpace size="xl"/>
-                <WhiteSpace size="xl"/>
                 {getFieldDecorator('identifier', {
                     rules: [
                       {len: 11, message: '手机号码应该是11位'},
@@ -95,7 +92,7 @@ class Login extends Component {
                 )(<InputItem
                   type="number"
                   labelNumber={2}
-                  style={{marginTop: '0rem', border: 'none', borderBottom: '2px solid #666'}}
+                  style={{marginTop: '0rem', border: 'none'}}
                   placeholder="请输入手机号"
                 >
                   <div style={{
@@ -106,7 +103,6 @@ class Login extends Component {
                   }}/>
                 </InputItem>)}
                 <WhiteSpace size="xl"/>
-                <WhiteSpace size="xl"/>
                 {getFieldDecorator('loginPassword', {
                     rules: [
                       {min: 6, message: '密码最少是6位'},
@@ -116,7 +112,7 @@ class Login extends Component {
                   }
                 )(<InputItem
                   placeholder="请输入密码"
-                  style={{border: 'none', borderBottom: '2px solid #666'}}
+                  style={{border: 'none'}}
                   type="password"
                   labelNumber={2}
                 >
@@ -133,14 +129,13 @@ class Login extends Component {
                 {/*<div onClick={forgetPassword} className={style.forget}>忘记密码</div>*/}
                 {/*</div>*/}
                 <WhiteSpace size="lg"/>
-                <Button className="btn" type="primary" onClick={userLogin}>确认登录</Button>
+                <Button className="btn" type="primary" style={{marginBottom: '50px'}} onClick={userLogin}>确认登录</Button>
               </List>
             </div>
           </TabPane>
           <TabPane tab="注册" key="2">
             <div className={style.register}>
               <List key='register' style={{width: '80%'}}>
-                <WhiteSpace size="xl"/>
                 <WhiteSpace size="xl"/>
                 {getFieldDecorator('name', {
                     rules: [
@@ -151,7 +146,7 @@ class Login extends Component {
                 )(<InputItem
                   type="string"
                   labelNumber={2}
-                  style={{marginTop: '0rem', border: 'none', borderBottom: '2px solid #666'}}
+                  style={{marginTop: '0rem', border: 'none'}}
                   placeholder="请输入用户名"
                 >
                   <div style={{
@@ -172,7 +167,7 @@ class Login extends Component {
                 )(<InputItem
                   type="number"
                   labelNumber={2}
-                  style={{marginTop: '0rem', border: 'none', borderBottom: '2px solid #666'}}
+                  style={{marginTop: '0rem', border: 'none'}}
                   placeholder="请输入手机号"
                 >
                   <div style={{
@@ -192,7 +187,7 @@ class Login extends Component {
                   }
                 )(<InputItem
                   placeholder="请输入密码"
-                  style={{border: 'none', borderBottom: '2px solid #666'}}
+                  style={{border: 'none'}}
                   type="password"
                   labelNumber={2}
                 >
@@ -212,7 +207,7 @@ class Login extends Component {
                   }
                 )(<InputItem
                   placeholder="请确认密码"
-                  style={{border: 'none', borderBottom: '2px solid #666'}}
+                  style={{border: 'none'}}
                   type="password"
                   labelNumber={2}
                 >
@@ -247,14 +242,11 @@ class Login extends Component {
                 {/*<Button className={style.verifyBtn} onClick={sendVerify}>发送验证码</Button>*/}
                 {/*</Flex>)}*/}
                 <WhiteSpace size="xl"/>
-                <WhiteSpace size="lg"/>
-                <Button className="btn" type="primary" onClick={userRegister}>注册账号</Button>
+                <Button className="btn" type="primary" style={{marginBottom: '50px'}} onClick={userRegister}>注册账号</Button>
               </List>
             </div>
           </TabPane>
         </Tabs>
-        <WhiteSpace size="xl"/>
-        <WhiteSpace size="xl"/>
         <WhiteSpace size="xl"/>
         <WhiteSpace size="xl"/>
       </div>

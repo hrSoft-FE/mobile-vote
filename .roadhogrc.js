@@ -31,7 +31,7 @@ export default {
   env: {
     production: {
       multipage: true,
-      publicPath: '/mobile-vote/'
+      // publicPath: '/mobile-vote/'
     },
     development: {
       multipage: false,

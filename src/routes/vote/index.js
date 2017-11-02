@@ -32,7 +32,8 @@ class Vote extends Component {
                   backgroundColor: '#F5F5F9',
                   position: 'fixed',
                   bottom: '150px',
-                  right: '40px'
+                  right: '40px',
+                  border: '4px solid #FFF'
                 }} />
               </div>
             </div>

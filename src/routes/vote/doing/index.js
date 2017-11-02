@@ -28,11 +28,11 @@ class Doing extends Component {
               <div key={index}>
                 <Card
                   onClick={() => this.props.dispatch(routerRedux.push(`/vote/content?id=${item.id}&isPublic=${item.isPublic}`))}>
-                  <div style={{padding: '0 0.3rem', backgroundColor: 'white'}}>
+                  <div style={{padding: '0 0.5rem', backgroundColor: 'white'}}>
                     <div style={{
                       height: '1rem',
                       lineHeight: '1rem',
-                      color: '#888',
+                      color: '#000000',
                       fontSize: '0.36rem',
                       borderBottom: '1px solid #ddd',
                       overflow: 'hidden',
@@ -41,14 +41,13 @@ class Doing extends Component {
                     }}>
                       {item.title}
                     </div>
-                    <div style={{display: '-webkit-box', display: 'flex', padding: '0.3rem'}}>
-                      <div style={{display: 'inline-block'}}>
-                        <div style={{fontSize: '0.32rem'}}><span
-                          style={{fontSize: '0.4rem', color: '#FF6E27'}}>{item.type === 1 ? '单选' : '多选'}</span></div>
-                        <div style={{fontSize: '0.32rem', color: '#969696'}}>
-                          结束时间：{getLocalTime(item.endAt / 1000)}</div>
-                      </div>
+                    <div style={{display: 'inline-block', paddingTop: '20px'}}>
+                        <span
+                          style={{fontSize: '0.4rem', color: '#FF6E27'}}>{item.type === 1 ? '单选' : '多选'}
+                        </span>
                     </div>
+                    <div style={{color: '#969696'}}>
+                      结束时间：{getLocalTime(item.endAt / 1000)}</div>
                   </div>
                 </Card>
                 <div

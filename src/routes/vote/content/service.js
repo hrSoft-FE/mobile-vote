@@ -9,7 +9,7 @@ const submitVotes = async (payload) => request({
   url: API.submit + '/' + payload.id,
   method: 'post',
   data: payload.body,
-  token: false
+  token: !!window.localStorage.getItem('token')
 })
 
 export {

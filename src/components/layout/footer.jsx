@@ -13,10 +13,10 @@ function Footer ({dispatch, childrens, location}) {
   const route = [
     '/vote/doing', '/vote/done', '/vote/will',
     '/add', '/add/radio', '/add/checkbox',
-    '/user', '/user/login', '/user/profile', '/user/profile/panel', '/user/profile/created', '/user/profile/joined'
+    '/user', '/user/login', '/user/profile', '/user/profile/panel', '/user/profile/created', '/user/profile/joined', '/user/profile/result'
   ]
   const need = ['/vote/doing', '/vote/done', '/vote/will']
-  const userNavHighLight = ['/user', '/user/login', '/user/profile', '/user/profile/panel', '/user/profile/created', '/user/profile/joined']
+  const userNavHighLight = ['/user', '/user/login', '/user/profile', '/user/profile/panel', '/user/profile/created', '/user/profile/joined', '/user/profile/result']
   const add = ['/add/radio', '/add/checkbox']
   return (
     <div className='normal'>

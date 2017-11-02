@@ -3,7 +3,8 @@ module.exports = {
   childRoutes: [
     require('./panel/route'),
     require('./joined/route'),
-    require('./created/route')
+    require('./created/route'),
+    require('./result/route')
   ],
   getComponents (nextState, callback) {
     require.ensure([], () => {

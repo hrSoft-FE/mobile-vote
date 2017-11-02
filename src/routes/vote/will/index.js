@@ -44,7 +44,7 @@ class Will extends Component {
                     <div style={{display: '-webkit-box', display: 'flex', padding: '0.3rem'}}>
                       <div style={{display: 'inline-block'}}>
                         <div style={{fontSize: '0.32rem'}}><span
-                          style={{fontSize: '0.6rem', color: '#FF6E27'}}>id:{item.id}</span></div>
+                          style={{fontSize: '0.4rem', color: '#FF6E27'}}>{item.type === 1 ? '单选' : '多选'}</span></div>
                         <div style={{fontSize: '0.32rem', color: '#969696'}}>
                           结束时间：{getLocalTime(item.endAt / 1000)}</div>
                       </div>

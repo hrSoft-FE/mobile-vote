@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'dva'
-import { routerRedux } from 'dva/router'
 import { List, InputItem, Button, WhiteSpace } from 'antd-mobile'
 import { createForm } from 'rc-form'
 import './index.less'
@@ -11,8 +10,8 @@ class Password extends Component {
     const {id} = location.query
     this.props.form.validateFields((error, value) => {
       const {password} = value
-      this.props.dispatch({type: 'content/savePassword', payload: {password: password}})
-      this.props.dispatch({type: 'content/fetchVoteContent', payload: {id: id, password: password}})
+      this.props.dispatch({type: 'vote/savePassword', payload: {password: password}})
+      this.props.dispatch({type: 'vote/fetchVoteContent', payload: {id: id, password: password}})
     })
   }
 
@@ -35,4 +34,4 @@ class Password extends Component {
   }
 }
 
-export default connect(({content}) => ({content}))(createForm()(Password))
+export default connect(({vote, password}) => ({vote, password}))(createForm()(Password))

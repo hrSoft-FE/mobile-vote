@@ -27,7 +27,7 @@ class Doing extends Component {
             return (
               <div key={index}>
                 <Card
-                  onClick={() => this.props.dispatch(routerRedux.push(`/vote/content?id=${item.id}&isPublic=${item.isPublic}`))}>
+                  onClick={() => this.props.dispatch(routerRedux.push(item.isPublic ? `/vote/content?id=${item.id}&isPublic=${item.isPublic}` : `/vote/password?id=${item.id}`))}>
                   <div style={{padding: '0 0.5rem', backgroundColor: 'white'}}>
                     <div style={{
                       height: '1rem',

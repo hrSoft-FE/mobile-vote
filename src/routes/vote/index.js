@@ -20,7 +20,8 @@ class Vote extends Component {
           {
             route.indexOf(location.pathname) !== -1 &&
             <div>
-              <Tabs defaultActiveKey="will" onTabClick={this.handleTabClick}>
+              <Tabs defaultActiveKey={location.pathname === '/vote/doing' ? 'doing' : 'will'}
+                    onTabClick={this.handleTabClick}>
                 <TabPane tab={<Badge>未开始</Badge>} key="will" />
                 <TabPane tab={<Badge>进行中</Badge>} key="doing" />
                 {/*<TabPane tab={<Badge>已结束</Badge>} key="done" />*/}

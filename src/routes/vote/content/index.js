@@ -16,21 +16,18 @@ class Content extends Component {
   }
 
   componentWillMount () {
-    const {location, content} = this.props
+    const {location, content, vote} = this.props
     const {query} = location
-    const {password, isPublic} = content
+    const {isPublic} = content
+    const {password = null} = vote
     if (query.status === 'will') {
       Toast.offline('投票未开始')
       goto(`/vote/will`)
     }
     if (isPublic === '1' && query.status !== 'will') {
-      this.props.dispatch({type: 'content/fetchVoteContent', payload: {id: query.id}})
+      this.props.dispatch({type: 'vote/fetchVoteContent', payload: {id: query.id}})
     } else if (isPublic === '0' && query.status !== 'will') {
-      if (password) {
-        this.props.dispatch({type: 'content/fetchVoteContent', payload: {id: query.id, password: password}})
-      } else {
-        this.props.dispatch(routerRedux.push(`/vote/password?id=${query.id}`))
-      }
+      this.props.dispatch({type: 'vote/fetchVoteContent', payload: {id: query.id, password: password}})
     }
   }
 
@@ -52,8 +49,8 @@ class Content extends Component {
       let options = selectOption.length === 0 ? [this.state.value] : selectOption
       let length = selectOption.length
       if ((length && length <= max) || this.state.value || this.state.value === 0) {
-        this.props.dispatch({type: 'content/submitVote', payload: {body: {options: options}, id: id}})
-        this.props.dispatch({type: 'content/savePassword', payload: {password: null}})
+        this.props.dispatch({type: 'vote/submitVote', payload: {body: {options: options}, id: id}})
+        this.props.dispatch({type: 'vote/savePassword', payload: {password: null}})
       } else {
         if (max) {
           Toast.fail(`最多选${max}项`, 2)
@@ -65,25 +62,25 @@ class Content extends Component {
   }
 
   render () {
-    const {content} = this.props
+    const {vote} = this.props
     const {getFieldProps} = this.props.form
-    const {vote} = content
+    const {votes} = vote
     const {value} = this.state
     return (
       <div style={{marginTop: 10}}>
         <WingBlank>
-          <span style={{fontSize: '0.36rem', lineHeight: '0.3rem'}}>{vote.title}</span>
+          <span style={{fontSize: '0.36rem', lineHeight: '0.3rem'}}>{votes.title}</span>
         </WingBlank>
         <WingBlank>
-          <p style={{color: '#108ee9', fontSize: '0.28rem'}}>结束时间：{getLocalTime(vote.endAt / 1000)}</p>
+          <p style={{color: '#108ee9', fontSize: '0.28rem'}}>结束时间：{getLocalTime(votes.endAt / 1000)}</p>
         </WingBlank>
-        <List renderHeader={() => vote.type === 1 ? '单选' : '多选'}>
-          {vote.type === 1 && vote.options.map(i => (
+        <List renderHeader={() => votes.type === 1 ? '单选' : '多选'}>
+          {votes.type === 1 && votes.options.map(i => (
             <RadioItem key={i.id} checked={value === i.id} onChange={() => this.onChange(i.id)}>
               {i.title}
             </RadioItem>
           ))}
-          {vote.type === 2 && vote.options.map(i => (
+          {votes.type === 2 && votes.options.map(i => (
             <CheckboxItem key={i.id} {...getFieldProps(`${i.id}`)}>
               {i.title}
             </CheckboxItem>
@@ -100,4 +97,4 @@ class Content extends Component {
   }
 }
 
-export default connect(({app, content}) => ({app, content}))(createForm()(Content))
+export default connect(({vote, content}) => ({vote, content}))(createForm()(Content))

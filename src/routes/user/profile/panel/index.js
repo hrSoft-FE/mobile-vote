@@ -13,18 +13,13 @@ const Brief = Item.Brief
 class Panel extends Component {
   render () {
     const {dispatch, panel: {userInfo}, form: {getFieldDecorator}, children} = this.props
-    console.log(userInfo)
     const {name, mobile} = userInfo
-    console.log(name)
-    console.log(mobile)
     const turnTo = (path) => {
       dispatch(routerRedux.push(`/user/profile/${path}`))
     }
 
     return (
       <div>
-        <WhiteSpace size="sm"/>
-        <WhiteSpace size="xl"/>
         <WhiteSpace size="sm"/>
         <Card full>
           <Card.Header
@@ -40,35 +35,23 @@ class Panel extends Component {
           />
         </Card>
         <WhiteSpace size="lg"/>
-        <WhiteSpace size="lg"/>
-        <WhiteSpace size="lg"/>
         <Card onClick={() => turnTo('created')}>
-          <Card.Header
-            title="我创建的投票"
-            extra={<span>&gt;</span>}
-          />
-          {/*<Card.Body>*/}
-            {/*<Item extra="" align="middle" thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"*/}
-                  {/*multipleLine>*/}
-              {/*Title <Brief>subtitle</Brief>*/}
-            {/*</Item>*/}
-          {/*</Card.Body>*/}
+          <Card.Body>
+            <Item extra={<span>&gt;</span>} align="middle" thumb="https://zos.alipayobjects.com/rmsportal/UmbJMbWOejVOpxe.png"
+                  multipleLine>
+              我创建的投票
+          </Item>
+          </Card.Body>
         </Card>
         <WhiteSpace size="lg"/>
         <Card onClick={() => turnTo('joined')}>
-          <Card.Header
-            title="我参加的投票"
-            extra={<span>&gt;</span>}
-          />
-          {/*<Card.Body>*/}
-            {/*<Item extra="" align="middle" thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"*/}
-                  {/*multipleLine>*/}
-              {/*Title <Brief>subtitle</Brief>*/}
-            {/*</Item>*/}
-          {/*</Card.Body>*/}
+          <Card.Body>
+            <Item extra={<span>&gt;</span>} align="middle" thumb="https://zos.alipayobjects.com/rmsportal/UmbJMbWOejVOpxe.png"
+                  multipleLine>
+              我参加的投票
+            </Item>
+          </Card.Body>
         </Card>
-        <WhiteSpace size="xl"/>
-        <WhiteSpace size="xl"/>
       </div>
     )
   }

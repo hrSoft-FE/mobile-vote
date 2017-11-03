@@ -8,20 +8,9 @@ import style from './index.less'
 const TabPane = Tabs.TabPane
 
 class Joined extends Component {
-  loadMore = () => {
-    const {joined} = this.props
-    const {page, count} = joined
-    if (page < count) {
-      this.props.dispatch({type: 'doing/fetchNextDoingVote', payload: {page: page + 1}})
-      this.props.dispatch({type: 'doing/savePage', payload: {page: page + 1}})
-    } else {
-      this.props.dispatch({type: 'doing/saveLastPage', payload: {isLastPage: true}})
-    }
-  }
-
   render () {
     const {joined = {}} = this.props
-    const {voteList = [], isLastPage} = joined
+    const {voteList = []} = joined
     return (
       <div className={style.doingWrapper} key='doing'>
         <Tabs style={{marginBottom: '20px'}}>
@@ -80,12 +69,9 @@ class Joined extends Component {
             )
           })
         }
-        {/*<div className={style.loadNextPage} onClick={this.loadMore}>*/}
-          {/*{isLastPage ? '已加载完毕' : '点击可以刷新'}*/}
-        {/*</div>*/}
       </div>
     )
   }
 }
 
-export default connect(({app, doing, joined}) => ({app, doing, joined}))(Joined)
+export default connect(({joined}) => ({joined}))(Joined)

@@ -15,11 +15,9 @@ import nameIcon from '../icon/name.png'
 const TabPane = Tabs.TabPane
 
 function callback (key) {
-  console.log('onChange', key)
 }
 
 function handleTabClick (key) {
-  console.log('onTabClick', key)
 }
 
 class Login extends Component {
@@ -40,7 +38,6 @@ class Login extends Component {
       this.props.form.validateFields((error, value) => {
         const {identifier, loginPassword} = value
         const errRes = toastFormMessage(error, false, ['identifier', 'loginPassword'])
-        console.log(errRes)
         if (errRes) return
         // use the default client
         dispatch({type: 'login/login', payload: {identifier: identifier, password: loginPassword, client: 1}})
@@ -51,7 +48,6 @@ class Login extends Component {
         // const {registerPhone, registerPassword, registerConfirm, registerVerify} = value
         const {registerPhone, registerPassword, registerConfirm, name} = value
         const errRes = toastFormMessage(error, false, ['registerPhone', 'registerPassword', 'registerConfirm', 'name'])
-        console.log(errRes)
         if (errRes) return
         if (registerPassword === registerConfirm) {
           dispatch({

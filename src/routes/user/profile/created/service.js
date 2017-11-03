@@ -1,33 +1,17 @@
-import { API, request, urlEncode } from '../../../../utils'
+import { API, request } from '../../../../utils'
 
-const verify = async () => request({
-  url: API.verify,
-  method: 'get'
-})
-const getWillVotes = async (page, size) => request({
-  url: API.will + '?' + urlEncode({'page': page, 'size': size, 'time': '0'}),
+const getCreatedVotes = (page, size) => request({
+  url: API.createdVote,
   method: 'get',
-  token: false
+  token: true
 })
-const getDoingVotes = async (page, size) => request({
-  url: API.doing + '?' + urlEncode({'page': page, 'size': size, 'time': '1'}),
-  method: 'get',
-  token: false
-})
-const getVotesDetail = async (id, password) => request({
-  url: password ? API.content.replace(':id', id) + '?' + urlEncode({'password': password}) : API.content.replace(':id', id),
-  method: 'get',
-  token: false
-})
-const submitVoteRes = async (data) => request({
-  url: API.submit,
+
+const deleteVoteRes = (id) => request({
+  url: API.delVote + `/${id}`,
   method: 'post',
-  data
+  token: true
 })
 export {
-  verify,
-  getWillVotes,
-  getDoingVotes,
-  getVotesDetail,
-  submitVoteRes
+  getCreatedVotes,
+  deleteVoteRes
 }

@@ -90,7 +90,7 @@ class Content extends Component {
         <WingBlank>
           <Button className="btn" type="primary"
                   style={{position: 'absolute', bottom: 0, left: 0, right: 0, margin: 20}}
-                  onClick={() => this.submit(vote.maxChoose)}>提交</Button>
+                  onClick={() => this.submit(votes.maxChoose)}>提交</Button>
         </WingBlank>
       </div>
     )

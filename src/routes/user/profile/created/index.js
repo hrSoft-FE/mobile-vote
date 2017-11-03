@@ -1,27 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'dva'
 import { routerRedux } from 'dva/router'
-import { Card, Tabs, WhiteSpace, Badge, WingBlank, Icon } from 'antd-mobile'
-import { getLocalTime } from '../../../../utils'
+import { Card, Tabs, Modal, Badge } from 'antd-mobile'
 import style from './index.less'
 
 const TabPane = Tabs.TabPane
+const alert = Modal.alert
 
 class Created extends Component {
-  loadMore = () => {
-    const {created} = this.props
-    const {page, count} = created
-    if (page < count) {
-      this.props.dispatch({type: 'doing/fetchNextDoingVote', payload: {page: page + 1}})
-      this.props.dispatch({type: 'doing/savePage', payload: {page: page + 1}})
-    } else {
-      this.props.dispatch({type: 'doing/saveLastPage', payload: {isLastPage: true}})
-    }
-  }
-
   render () {
     const {created = {}} = this.props
-    const {voteList = [], isLastPage} = created
+    const {voteList = []} = created
     return (
       <div className={style.doingWrapper} key='doing'>
         <Tabs style={{marginBottom: '20px'}}>
@@ -65,7 +54,14 @@ class Created extends Component {
                       justifyContent: 'space-around'
                     }}>
                       <div onClick={() => this.props.dispatch(routerRedux.push(`/user/profile/result?id=${item.id}`))}>查看</div>
-                      <div onClick={() => console.log('删除')}>删除</div>
+                      <div onClick={() => alert('删除', '你确定吗???', [
+                      { text: '取消', onPress: () => console.log('cancel') },
+                      {
+                        text: '确认',
+                        onPress: () => this.props.dispatch({type: 'created/delCreatedVote', payload: item.id})
+                      }
+                        ])}
+                      >删除</div>
                     </div>
                   </div>
                 </Card>
@@ -81,9 +77,6 @@ class Created extends Component {
             )
           })
         }
-        <div className={style.loadNextPage} onClick={this.loadMore}>
-          {isLastPage ? '已加载完毕' : '点击可以刷新'}
-        </div>
       </div>
     )
   }

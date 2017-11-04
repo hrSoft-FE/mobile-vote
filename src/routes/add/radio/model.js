@@ -13,7 +13,7 @@ export default {
         value: '',
         placeholder: '选项',
       }],
-    isKeys: false,
+    isKeys: false
   },
   subscriptions: {
     radioSubscriber ({dispatch, history}) {

@@ -6,6 +6,7 @@ export default {
   register: apiMaker('user/register'),
   updateInfo: apiMaker('user/update/password'),
   createdVote: apiMaker('user/create'),
+  createdStatistics: apiMaker('user/statistics'),
   delVote: apiMaker('user/drop'),
   joinVote: apiMaker('user/part'),
   will: apiMaker('vote/list'),

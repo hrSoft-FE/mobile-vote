@@ -15,8 +15,7 @@ export default {
       })
     }
   },
-  effects: {
-  },
+  effects: {},
   reducers: {
     hi (state, {payload}) {
       return {

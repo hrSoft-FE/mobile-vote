@@ -1,30 +1,39 @@
 import pathToRegexp from 'path-to-regexp'
-import {
-  verify,
-  getWillVotes,
-  getDoneVotes,
-  getDoingVotes,
-  getVotedVotes,
-  getVotesDetail,
-  submitVoteRes
-} from './service'
+import { getCreatedStatistics } from './service'
+import {routerRedux} from 'dva/router'
 
 export default {
   namespace: 'result',
   state: {
+    resultList: []
   },
   subscriptions: {
     voteSubscriber ({dispatch, history}) {
-      return history.listen(({pathname, query}) => {
-        // const match = pathToRegexp('/user/profile/created')
-        // if (match) {
-        //   dispatch({type: 'upDateDoingList'})
-        // }
+      return history.listen(({query}) => {
+        const {id} = query
+        if (id) {
+          dispatch({type: 'fetchResultContent', payload: id})
+        }
       })
     }
   },
   effects: {
+    * fetchResultContent ({payload}, {put, call}) {
+      const list = yield call(getCreatedStatistics, payload)
+      console.log(list)
+      if (list.code === 0) {
+        yield put({type: 'saveContent', payload: {resultList: list.data}})
+      } else {
+        // yield put(routerRedux.push('/user/profile/created'))
+      }
+    }
   },
   reducers: {
+    saveContent (state, {payload}) {
+      return {
+        ...state,
+        ...payload
+      }
+    }
   }
 }

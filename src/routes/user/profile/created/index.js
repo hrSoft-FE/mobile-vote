@@ -53,7 +53,7 @@ class Created extends Component {
                       display: '-webkit-flex',
                       justifyContent: 'space-around'
                     }}>
-                      <div onClick={() => this.props.dispatch(routerRedux.push(`/user/profile/result?id=${item.id}`))}>查看</div>
+                      <div onClick={() => this.props.dispatch(routerRedux.push(`/user/profile/result?id=${item.id}&title=${item.title}&time=${item.end_at}`))}>查看</div>
                       <div onClick={() => alert('删除', '你确定吗???', [
                       { text: '取消', onPress: () => console.log('cancel') },
                       {

@@ -58,7 +58,6 @@ const Radio = ({app, radio, dispatch, form: {getFieldProps, validateFields, getF
         maxChoose,
         problemList,
       }
-      console.log('ok', body)
       dispatch({type: 'radio/create', payload: body})
     })
   }

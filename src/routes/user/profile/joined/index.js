@@ -30,14 +30,21 @@ class Joined extends Component {
                       borderBottom: '1px solid #ddd',
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap'
+                      whiteSpace: 'nowrap',
                     }}>
                       {item.title}
                     </div>
-                    <div style={{display: '-webkit-box', display: 'flex', padding: '0.3rem'}}>
+                    <div style={{
+                      display: '-webkit-box',
+                      display: 'flex',
+                      padding: '0.3rem',
+                    }}>
                       <div style={{display: 'inline-block'}}>
                         <div style={{fontSize: '0.32rem'}}><span
-                          style={{fontSize: '0.4rem', color: '#FF6E27'}}>{item.type === 1 ? '单选' : '多选'}</span></div>
+                          style={{
+                            fontSize: '0.4rem',
+                            color: '#FF6E27',
+                          }}>{item.type === 1 ? '单选' : '多选'}</span></div>
                       </div>
                     </div>
                     <div style={{
@@ -51,9 +58,12 @@ class Joined extends Component {
                       whiteSpace: 'nowrap',
                       display: 'flex',
                       display: '-webkit-flex',
-                      justifyContent: 'space-around'
+                      justifyContent: 'space-around',
                     }}>
-                      <div onClick={() => this.props.dispatch(routerRedux.push(`/user/profile/result?id=${item.id}`))}>查看</div>
+                      <div onClick={() => this.props.dispatch(routerRedux.push(
+                        `/user/profile/result?id=${item.id}&title=${item.title}&time=${item.end_at}`))}>
+                        查看
+                      </div>
                     </div>
                   </div>
                 </Card>
@@ -62,7 +72,7 @@ class Joined extends Component {
                     backgroundColor: '#F5F5F9',
                     height: 8,
                     borderTop: '1px solid #ECECED',
-                    borderBottom: '1px solid #ECECED'
+                    borderBottom: '1px solid #ECECED',
                   }}
                 />
               </div>

@@ -23,7 +23,7 @@ export default {
   effects: {
     * upDateCreatedList ({}, {call, put}) {
       const data = yield call(getCreatedVotes)
-      const list = data.data
+      const list = data.data.reverse()
       yield put({type: 'saveList', payload: {voteList: list}})
     },
     * delCreatedVote ({payload}, {call, select, put}) {

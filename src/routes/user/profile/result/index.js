@@ -22,25 +22,24 @@ const Result = ({app, result, dispatch, location}) => {
         <WingBlank className={style.title}>{query.title}</WingBlank>
         <WhiteSpace />
         <WhiteSpace />
-        <WingBlank className={style.time}>截止时间：{getLocalTime(query.time / 1000)}</WingBlank>
+        <WingBlank className={style.time}>截止时间：{getLocalTime(query.time /
+          1000)}</WingBlank>
       </div>
       <div style={{height: '0.50rem'}} />
       {resultList.length > 0 && resultList.map((item, index) => {
         return (
           <WingBlank size="lg" key={index}>
             <WingBlank size="lg" />
-            <Card>
-              <Header
-                title={item.title}
-                extra={
-                  <span>{item.count}票{' '}{all > 0 ? (Math.round(item.count / all * 100)) : 0}%</span>
-                }
-              />
-              <div className={style.showInfo}>
-                <div className={style.progress}><Progress
-                  percent={all > 0 ? (item.count / all) * 100 : 0}
-                  position="normal" /></div>
+            <Card className={style.showInfo}>
+              <div className={style.header}>
+                <Header
+                  title={item.title}
+                  extra={<span>{item.count}票{' '}{all > 0 ? (Math.round(item.count / all * 100)) : 0}%</span>}
+                />
               </div>
+              <div className={style.progress}><Progress
+                percent={all > 0 ? (item.count / all) * 100 : 0}
+                position="normal" /></div>
             </Card>
             <div style={{height: '0.50rem'}} />
           </WingBlank>

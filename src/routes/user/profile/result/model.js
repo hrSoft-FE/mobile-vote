@@ -9,7 +9,7 @@ export default {
   },
   subscriptions: {
     voteSubscriber ({dispatch, history}) {
-      return history.listen(({query}) => {
+      return history.listen(({query,pathname}) => {
         const {id} = query
         if (id) {
           dispatch({type: 'fetchResultContent', payload: id})

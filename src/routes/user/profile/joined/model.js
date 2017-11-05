@@ -21,7 +21,7 @@ export default {
   effects: {
     * upDateJoinedList ({payload}, {call, select, put}) {
       const data = yield call(getJoinedVotes)
-      const list = data.data
+      const list = data.data.reverse()
       yield put({type: 'saveList', payload: {voteList: list}})
     }
   },

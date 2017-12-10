@@ -55,7 +55,7 @@ function Footer ({dispatch, childrens, location}) {
               icon={{uri: accountIcon}}
               selectedIcon={{uri: accountIconActive}}
               selected={userNavHighLight.indexOf(location.pathname) !== -1}
-              onPress={() => dispatch(routerRedux.push('/user/profile/panel'))}
+              onPress={() => dispatch(routerRedux.push('/user'))}
             >
               {childrens}
             </TabBar.Item>

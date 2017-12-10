@@ -5,4 +5,11 @@ const create = async (data) => request({
   token: true,
   data
 })
-export { create }
+const getUserInfo = async () => {
+  return request({
+    url: API.userInfo,
+    method: 'get',
+    token: true
+  })
+}
+export { create, getUserInfo }

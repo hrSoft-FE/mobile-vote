@@ -11,19 +11,7 @@ export default {
     contests: [],
     query: {}
   },
-  subscriptions: {
-    voteSubscriber ({dispatch, history}) {
-      return history.listen(({pathname, query}) => {
-        // const match = pathToRegexp('/user/login')
-        if (pathname === '/user/login') {
-          dispatch({type: 'initQuery'})
-        }
-      })
-    }
-  },
   effects: {
-    * initQuery ({payload}, {call, select, put}) {
-    },
     * changePage ({payload}, {call, select, put}) {
       yield put(routerRedux.push(`/user/${payload}`))
     },

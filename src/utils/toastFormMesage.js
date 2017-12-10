@@ -18,12 +18,9 @@ export const toastFormMessage = (error, all = true, itemArr = [], singleModel = 
     }
     let message = []
     errorKeyArr.forEach((item) => {
-      console.log(item)
       if (error[item.toString()]) {
         const errorItem = error[item.toString()]['errors']
-        console.log(errorItem)
         errorItem.forEach(item => {
-          console.log(item)
           message.push(item['message'])
         })
       }
@@ -44,12 +41,11 @@ export const toastFormMessage = (error, all = true, itemArr = [], singleModel = 
     return false
   }
 }
-// TODO: 函数式编程？
+
 const getErrorMessage = (error, item) => {
   let message = []
   if (error[item.toString()]) {
     const errorItem = error[item.toString()]['errors']
-    console.log(errorItem)
     errorItem.forEach(item => {
       message.push(item['message'])
     })

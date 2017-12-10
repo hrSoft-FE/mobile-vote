@@ -9,11 +9,7 @@ import './index.less'
 // 1. Initialize
 const app = dva(
   {
-    history: browserHistory,
-    onError (error) {
-      Toast.offline(error.message)
-      console.log(error.message)
-    }
+    history: browserHistory
   }
 )
 

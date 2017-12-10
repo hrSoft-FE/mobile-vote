@@ -1,4 +1,4 @@
-import { create } from '../service'
+import { create, getUserInfo } from '../service'
 import { Toast } from 'antd-mobile'
 import { goto } from '../../../utils'
 
@@ -17,11 +17,27 @@ export default {
   },
   subscriptions: {
     radioSubscriber ({dispatch, history}) {
-      return history.listen(({pathname, query}) => {})
-    },
+      return history.listen(({pathname, query}) => {
+        if (pathname === '/add/radio') {
+          dispatch({type: 'isLogin'})
+        }
+      })
+    }
   },
   effects: {
-    * initQuery ({payload}, {call, select, put}) {
+    * isLogin ({payload}, {call, put, select}) {
+      let token = window.localStorage.getItem('token')
+      if (token !== null) {
+        const data = yield call(getUserInfo)
+        if (data.code === 0) {
+          return 0
+        } else {
+          goto('/user/login')
+          Toast.fail('登录失效，请重新登录。')
+        }
+      } else {
+        Toast.fail('登录后才可创建投票！')
+      }
     },
     * create ({payload}, {call, select, put}) {
       const token = window.localStorage.getItem('token')

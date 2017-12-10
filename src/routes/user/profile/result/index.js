@@ -14,7 +14,6 @@ const Result = ({app, result, dispatch, location}) => {
   resultList.forEach((val) => {
     all += val.count
   })
-  console.log(query)
   return (
     <div>
       <div style={{height: '0.50rem'}} />

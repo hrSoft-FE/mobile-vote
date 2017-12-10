@@ -13,8 +13,6 @@ export default {
     }
   },
   effects: {
-    * initQuery ({payload}, {call, select, put}) {
-    }
   },
   reducers: {}
 }

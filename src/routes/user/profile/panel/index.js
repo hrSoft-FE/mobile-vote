@@ -9,8 +9,6 @@ import {Tabs, WhiteSpace, InputItem, Icon, List, Button, Toast, Flex, Modal, Car
 import {createForm} from 'rc-form'
 
 const Item = List.Item
-const Brief = Item.Brief
-const alert = Modal.alert
 
 class Panel extends Component {
   render() {
@@ -18,11 +16,6 @@ class Panel extends Component {
     const {name, mobile} = userInfo
     const turnTo = (path) => {
       dispatch(routerRedux.push(`/user/profile/${path}`))
-    }
-    const cleanUserInfo = () => {
-      window.localStorage.clear()
-      Toast.info('登出成功')
-      dispatch(routerRedux.push(`/user/login`))
     }
     return (
       <div>
@@ -34,13 +27,6 @@ class Panel extends Component {
                 <div style={{marginLeft: '.5rem'}} className={style.flexL}>
                   <div className={style.nickName}>{name}</div>
                   <div className={style.userMobile}>{mobile}</div>
-                </div>
-                <div className={style.flexR}>
-                  <Button type="warning" className={style.logoutBtn}
-                          onClick={() => alert('登出', '你要登出么', [
-                            {text: '取消', onPress: () => console.log('cancel')},
-                            {text: '确定', onPress: () => cleanUserInfo()}
-                          ])}>下线</Button>
                 </div>
               </div>
             }

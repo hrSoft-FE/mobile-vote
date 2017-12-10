@@ -20,7 +20,6 @@ export default {
   effects: {
     * fetchResultContent ({payload}, {put, call}) {
       const list = yield call(getCreatedStatistics, payload)
-      console.log(list)
       if (list.code === 0) {
         yield put({type: 'saveContent', payload: {resultList: list.data}})
       } else {

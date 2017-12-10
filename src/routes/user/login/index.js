@@ -39,13 +39,11 @@ class Login extends Component {
         const {identifier, loginPassword} = value
         const errRes = toastFormMessage(error, false, ['identifier', 'loginPassword'])
         if (errRes) return
-        // use the default client
         dispatch({type: 'login/login', payload: {identifier: identifier, password: loginPassword, client: 1}})
       })
     }
     const userRegister = () => {
       this.props.form.validateFields((error, value) => {
-        // const {registerPhone, registerPassword, registerConfirm, registerVerify} = value
         const {registerPhone, registerPassword, registerConfirm, name} = value
         const errRes = toastFormMessage(error, false, ['registerPhone', 'registerPassword', 'registerConfirm', 'name'])
         if (errRes) return
@@ -55,7 +53,6 @@ class Login extends Component {
             payload: {
               mobile: registerPhone,
               password: registerPassword,
-              // confirm: registerConfirm,
               name: name
             }
           })
@@ -83,7 +80,6 @@ class Login extends Component {
                       {len: 11, message: '手机号码应该是11位'},
                       {required: true, message: '请输入手机号码'}
                     ]
-                    // initialValue: 15033517219
                   }
                 )(<InputItem
                   type="number"
@@ -104,7 +100,6 @@ class Login extends Component {
                       {min: 6, message: '密码最少是6位'},
                       {required: true, message: '请输入密码'}
                     ]
-                    // initialValue: 15033517219
                   }
                 )(<InputItem
                   placeholder="请输入密码"
@@ -120,10 +115,6 @@ class Login extends Component {
                   }}/>
                 </InputItem>)}
                 <WhiteSpace size="md"/>
-                {/*因为没有修改密码的需求，所以去掉了*/}
-                {/*<div className={style.forgetWrapper}>*/}
-                {/*<div onClick={forgetPassword} className={style.forget}>忘记密码</div>*/}
-                {/*</div>*/}
                 <WhiteSpace size="lg"/>
                 <Button className="btn" type="primary" style={{marginBottom: '50px'}} onClick={userLogin}>确认登录</Button>
               </List>
@@ -137,7 +128,6 @@ class Login extends Component {
                     rules: [
                       {required: true, message: '请输入用户名称'}
                     ]
-                    // initialValue: 15033517219
                   }
                 )(<InputItem
                   type="string"
@@ -158,7 +148,6 @@ class Login extends Component {
                       {len: 11, message: '手机号码应该是11位'},
                       {required: true, message: '请输入手机号码'}
                     ]
-                    // initialValue: 15033517219
                   }
                 )(<InputItem
                   type="number"
@@ -179,7 +168,6 @@ class Login extends Component {
                       {min: 6, message: '密码最少是6位'},
                       {required: true, message: '请输入密码'}
                     ]
-                    // initialValue: 15033517219
                   }
                 )(<InputItem
                   placeholder="请输入密码"
@@ -199,7 +187,6 @@ class Login extends Component {
                     rules: [
                       {required: true, message: '请再次输入密码'}
                     ]
-                    // initialValue: 15033517219
                   }
                 )(<InputItem
                   placeholder="请确认密码"
@@ -214,29 +201,6 @@ class Login extends Component {
                     width: '0.44rem'
                   }}/>
                 </InputItem>)}
-                {/*<WhiteSpace size="xl"/>*/}
-                {/*{getFieldDecorator('registerVerify', {*/}
-                {/*rules: [*/}
-                {/*{required: true, message: '请输入验证码'}*/}
-                {/*]*/}
-                {/*// initialValue: 12345*/}
-                {/*}*/}
-                {/*)(<Flex justify="between"><InputItem*/}
-                {/*placeholder="请输入验证码"*/}
-                {/*className={style.verify}*/}
-                {/*style={{border: 'none', borderBottom: '2px solid #666'}}*/}
-                {/*type="password"*/}
-                {/*labelNumber={2}*/}
-                {/*>*/}
-                {/*<div style={{*/}
-                {/*backgroundImage: `url(${verifyIcon})`,*/}
-                {/*backgroundSize: 'cover',*/}
-                {/*height: '0.44rem',*/}
-                {/*width: '0.44rem'*/}
-                {/*}}/>*/}
-                {/*</InputItem>*/}
-                {/*<Button className={style.verifyBtn} onClick={sendVerify}>发送验证码</Button>*/}
-                {/*</Flex>)}*/}
                 <WhiteSpace size="xl"/>
                 <Button className="btn" type="primary" style={{marginBottom: '50px'}} onClick={userRegister}>注册账号</Button>
               </List>

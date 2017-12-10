@@ -1,7 +1,7 @@
-import pathToRegexp from 'path-to-regexp'
-import { verify, getUserInfo, getVerifyCode, updateUserInfo, forgetPassword } from './service'
+import { getUserInfo, getVerifyCode, updateUserInfo, forgetPassword } from './service'
 import { Toast, Modal } from 'antd-mobile'
-import { routerRedux, Link } from 'dva/router'
+import { routerRedux } from 'dva/router'
+import { goto } from '../../utils'
 
 const ERR_OK = 0
 export default {
@@ -14,16 +14,26 @@ export default {
   subscriptions: {
     infoSubscriber ({dispatch, history}) {
       return history.listen(({pathname, query}) => {
-        // token ? user/info : user/login
-        // const match = pathToRegexp('/user')
         if (pathname === '/user') {
-          dispatch(routerRedux.push('/user/profile'))
+          dispatch({type: 'isLogin'})
         }
       })
     }
   },
   effects: {
-    * initQuery ({payload}, {call, select, put}) {
+    * isLogin ({payload}, {call, put}) {
+      let token = window.localStorage.getItem('token')
+      if (token !== null) {
+        const data = yield call(getUserInfo)
+        if (data.code === 0) {
+          goto('/user/profile')
+        } else {
+          goto('/user/login')
+          Toast.fail('登录失效，请重新登录。')
+        }
+      } else {
+        goto('/user/login')
+      }
     },
     * getVerifyCode ({payload}, {call, put}) {
       try {

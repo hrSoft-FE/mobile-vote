@@ -28,13 +28,13 @@ class Vote extends Component {
               </Tabs>
               <div>
                 <Icon type='up' onClick={() => { window.scrollTo(0, 0) }} style={{
-                  width: '80px',
-                  height: '80px',
+                  width: '10vw',
+                  height: '10vw',
                   backgroundColor: '#F5F5F9',
                   position: 'fixed',
-                  bottom: '150px',
-                  right: '40px',
-                  border: '4px solid #FFF'
+                  bottom: '20vw',
+                  right: '5vw',
+                  border: '1vw solid #FFF'
                 }} />
               </div>
             </div>

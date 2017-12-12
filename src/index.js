@@ -1,15 +1,14 @@
 import 'babel-polyfill'
 import dva from 'dva'
-import { browserHistory, hashHistory } from 'dva/router'
+import { browserHistory } from 'dva/router'
 import Loading from 'dva-loading'
-import { Toast } from 'antd-mobile'
 
 import './index.less'
 
 // 1. Initialize
 const app = dva(
   {
-    history: hashHistory
+    history: browserHistory
   }
 )
 

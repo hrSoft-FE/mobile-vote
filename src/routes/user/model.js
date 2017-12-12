@@ -26,7 +26,7 @@ export default {
       if (token !== null) {
         const data = yield call(getUserInfo)
         if (data.code === 0) {
-          goto('/user/profile')
+          goto('/user/profile/panel')
         } else {
           goto('/user/login')
           Toast.fail('登录失效，请重新登录。')

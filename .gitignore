@@ -9,6 +9,7 @@
 # misc
 .DS_Store
 npm-debug.log*
+fjpublish.config.js
 
 # system files && editor file
 .idea/
